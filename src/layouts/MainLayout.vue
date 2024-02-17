@@ -354,6 +354,24 @@
               <q-item-label>Stock Card</q-item-label>
             </q-item-section>
           </q-item>
+          <q-item
+            to="/ListToolsEquipmentFacilities"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section>
+              <q-item-label>List Tools/Equipment/Facilities</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/DeliveryReceipt"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section>
+              <q-item-label>Delivery Receipt</q-item-label>
+            </q-item-section>
+          </q-item>
         </q-expansion-item>
       </q-list>
     </q-drawer>
