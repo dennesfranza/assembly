@@ -21,6 +21,10 @@ const routes = [
       {path: '/Directory', component: () => import('pages/Directory.vue')},
       {path: '/Footer', component: () => import('pages/Footer.vue')},
       {path: '/CardHeader', component: () => import('pages/CardHeader.vue')},
+      {path: '/RequisitionForm', component: () => import('pages/ybc/RequisitionForm.vue')},
+      {path: '/ReceivingReport', component: () => import('pages/ybc/ReceivingReport.vue')},
+      {path: '/WithdrawalSlip', component: () => import('pages/ybc/WithdrawalSlip.vue')},
+      {path: '/StockCard', component: () => import('pages/ybc/StockCard.vue')}
 
       // Not completed yet
       // {path: '/Taskboard', component: () => import('pages/TaskBoard.vue')},
