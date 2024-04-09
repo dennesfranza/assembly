@@ -1,17 +1,24 @@
 <template>
   <q-page class="q-pa-sm">
-    <form-header-vue :headers="xxx.headers" :name="xxx.name" />
-    {{ xxx }}
-    lllll
+    <form-header-vue :headers="formHeader.headers" :name="formHeader.name" />
     <div class="row items-center">
       <div class="col q-pa-sm">
-        <q-input v-model="rsNumber" label="RS Number" readonly />
+        <q-input
+          v-model="projectAssignment"
+          label="Project Assignment"
+          readonly
+        />
       </div>
       <div class="col q-pa-sm">
-        <q-input v-model="dateRequested" label="Date Requested" readonly />
+        <q-input v-model="tetsNumber" label="TETS Number" readonly />
+      </div>
+    </div>
+    <div class="row items-center">
+      <div class="col q-pa-sm">
+        <q-input v-model="location" label="Location" readonly />
       </div>
       <div class="col q-pa-sm">
-        <q-input class="fit" v-model="dateNeeded" label="Date Needed">
+        <q-input class="fit" v-model="date" label="Date">
           <template v-slot:prepend>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy
@@ -19,7 +26,7 @@
                 transition-show="scale"
                 transition-hide="scale"
               >
-                <q-date v-model="dateNeeded" :mask="dateFormat" today-btn>
+                <q-date v-model="date" :mask="dateFormat" today-btn>
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="primary" flat />
                   </div>
@@ -39,23 +46,30 @@
         auto-width
         flat
         bordered
-      >
-        <template v-slot:top>
-          <q-btn
-            color="primary"
-            :disable="loading"
-            label="Add row"
-            @click="addRow"
-          />
-        </template>
-      </q-table>
+      />
     </div>
     <div class="row q-pa-md">
       <div class="col q-pa-sm">
-        <q-input v-model="requestor" label="Requested By" readonly />
+        <q-input v-model="preparedBy" label="Prepared By" readonly />
       </div>
       <div class="col q-pa-sm">
-        <q-input v-model="approver" label="Approved By" readonly>
+        <q-input v-model="notedBy" label="Noted By" readonly>
+          <template v-slot:prepend>
+            <q-icon name="fact_check" color="orange" />
+          </template>
+        </q-input>
+      </div>
+    </div>
+    <div class="row q-pa-md">
+      <div class="col q-pa-sm">
+        <q-input v-model="notedBy" label="Deliverd By" readonly>
+          <template v-slot:prepend>
+            <q-icon name="fact_check" color="orange" />
+          </template>
+        </q-input>
+      </div>
+      <div class="col q-pa-sm">
+        <q-input v-model="notedBy" label="Received By" readonly>
           <template v-slot:prepend>
             <q-icon name="fact_check" color="orange" />
           </template>
@@ -72,30 +86,26 @@ import FormHeaderVue from "src/components/forms/FormHeader.vue";
 import { date } from "quasar";
 
 export default defineComponent({
-  name: "requisitionslip",
+  name: "toolsequiptransferslip",
   setup() {
     const formheaders = useFormHeadersStore();
     const formHeader = formheaders[getCurrentInstance().type.name];
 
-    const xxx = formheaders.getFormHeaderValues(getCurrentInstance().type.name);
-
     return {
-      xxx,
       formHeader,
-      dateRequested: ref(date.formatDate(new Date(), "MMMM DD, YYYY HH:mm:ss")),
-      dateNeeded: ref(date.formatDate(new Date(), "MMMM DD, YYYY HH:mm:ss")),
-      rsNumber: ref("7901"),
-      requestor: ref("Dennes Franza"),
-      approver: ref("Marc Gino Osmeña"),
-      date: ref(""),
+      tetsNumber: ref('23413'),
+      date: ref(date.formatDate(new Date(), "MMMM DD, YYYY HH:mm:ss")),
+      projectAssignment: ref("7901"),
+      location: ref("Umapad Mandaue City"),
+      preparedBy: ref("Dennes Franza"),
+      notedBy: ref("Marc Gino Osmeña"),
       dateFormat: "MMMM DD, YYYY HH:mm:ss",
       formattedDate: ref(date.formatDate(new Date(), "MMMM DD, YYYY HH:mm:ss")),
-      loading: ref(false),
       columns: [
         {
-          name: "item_number",
+          name: "item",
           label: "Item No",
-          field: "item_number",
+          field: "item",
           align: "left",
         },
         {
@@ -104,43 +114,58 @@ export default defineComponent({
           field: "quantity",
           align: "left",
         },
-        { name: "unit", label: "Unit", field: "unit", align: "left" },
         {
           name: "item_description",
           label: "Item Description",
           field: "item_description",
           align: "left",
         },
-        { name: "purpose", label: "Purpose", field: "purpose", align: "left" },
+        { name: "id", label: "ID", field: "id", align: "left" },
+        {
+          name: "rs_number",
+          label: "RS Number",
+          field: "rs_number",
+          align: "left",
+        },
+        { name: "return", label: "Return", field: "return", align: "left" },
+        { name: "remarks", label: "Remarks", field: "remarks", align: "left" },
       ],
       rows: [
         {
-          item_number: "1",
+          item: "1",
           quantity: "2",
-          unit: "DRUM",
           item_description: "Form Oil",
-          purpose: "",
+          id: "DRUM",
+          rs_number: "DRUM",
+          return: "DRUM",
+          remarks: "",
         },
         {
-          item_number: "2",
+          item: "2",
           quantity: "100",
-          unit: "PCS",
           item_description: "Cutting Disk",
-          purpose: "",
+          id: "PCS",
+          rs_number: "PCS",
+          return: "PCS",
+          remarks: "",
         },
         {
-          item_number: "3",
+          item: "3",
           quantity: "100",
-          unit: "PCS",
           item_description: "Hacksaw Blade",
-          purpose: "",
+          id: "PCS",
+          rs_number: "PCS",
+          return: "PCS",
+          remarks: "",
         },
         {
-          item_number: "4",
+          item: "4",
           quantity: "10",
-          unit: "SHEETS",
           item_description: "Plywood 1/4 x 4 x 8",
-          purpose: "",
+          id: "SHEETS",
+          rs_number: "SHEETS",
+          return: "SHEETS",
+          remarks: "",
         },
       ],
     };

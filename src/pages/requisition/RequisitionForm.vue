@@ -1,8 +1,6 @@
 <template>
   <q-page class="q-pa-sm">
-    <form-header-vue :headers="xxx.headers" :name="xxx.name" />
-    {{ xxx }}
-    lllll
+    <form-header-vue :headers="formHeader.headers" :name="formHeader.name" />
     <div class="row items-center">
       <div class="col q-pa-sm">
         <q-input v-model="rsNumber" label="RS Number" readonly />
@@ -41,12 +39,7 @@
         bordered
       >
         <template v-slot:top>
-          <q-btn
-            color="primary"
-            :disable="loading"
-            label="Add row"
-            @click="addRow"
-          />
+          <q-btn color="primary" :disable="loading" label="Add row" @click="addRow" />
         </template>
       </q-table>
     </div>
@@ -77,10 +70,7 @@ export default defineComponent({
     const formheaders = useFormHeadersStore();
     const formHeader = formheaders[getCurrentInstance().type.name];
 
-    const xxx = formheaders.getFormHeaderValues(getCurrentInstance().type.name);
-
     return {
-      xxx,
       formHeader,
       dateRequested: ref(date.formatDate(new Date(), "MMMM DD, YYYY HH:mm:ss")),
       dateNeeded: ref(date.formatDate(new Date(), "MMMM DD, YYYY HH:mm:ss")),

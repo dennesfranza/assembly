@@ -48,6 +48,17 @@ const routes = [
         path: "/DeliveryReceipt",
         component: () => import("pages/ybc/DeliveryReceipt.vue"),
       },
+      {
+        path: "/ToolsEquipmentTransferSlip",
+        component: () => import("pages/ybc/ToolsEquipmentTransferSlip.vue"),
+      },
+      {
+        path: "/InventoryReport",
+        component: () => import("pages/ybc/InventoryReport.vue"),
+      },
+      { path: '/GatePass', component: () => import('pages/ybc/GatePass.vue')},
+      // Vehicle Management
+      { path: '/VehicleIndexPage', component: () => import('pages/vehiclemanagement/IndexPage.vue')}
       // Not completed yet
       // {path: '/Taskboard', component: () => import('pages/TaskBoard.vue')},
     ],
