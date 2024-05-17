@@ -54,7 +54,13 @@
 </template>
 
 <script>
-import { defineComponent, ref, getCurrentInstance, computed, onMounted } from "vue";
+import {
+  defineComponent,
+  ref,
+  getCurrentInstance,
+  computed,
+  onMounted,
+} from "vue";
 import { useVehicleManagementStore } from "src/stores/vehiclemanagement/index";
 import AddVehicleDialog from "./AddVehicleDialog.vue";
 
@@ -81,7 +87,7 @@ export default defineComponent({
       console.log(event, row);
     }
 
-    onMounted(() => vehiclestore.getVehicles())
+    onMounted(() => vehiclestore.getVehicles());
 
     return {
       vehiclestore,

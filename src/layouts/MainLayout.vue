@@ -65,7 +65,7 @@
             <q-item-label>CRM Dashboard</q-item-label>
           </q-item-section>
         </q-item>
-        <q-expansion-item icon="pages" label="Pages">
+        <!-- <q-expansion-item icon="pages" label="Pages">
           <q-list class="q-pl-lg">
             <q-item to="/Login-1" active-class="q-item-no-link-highlighting">
               <q-item-section avatar>
@@ -251,7 +251,7 @@
           <q-item-section>
             <q-item-label>Calendar</q-item-label>
           </q-item-section>
-        </q-item>
+        </q-item> -->
 
         <!--        not completed-->
         <!--        <q-item to="/Taskboard" active-class="q-item-no-link-highlighting">-->
@@ -263,7 +263,7 @@
         <!--          </q-item-section>-->
         <!--        </q-item>-->
 
-        <q-item to="/Pagination" active-class="q-item-no-link-highlighting">
+        <!-- <q-item to="/Pagination" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
             <q-icon name="date_range" />
           </q-item-section>
@@ -278,7 +278,7 @@
           <q-item-section>
             <q-item-label>Product Catalogues</q-item-label>
           </q-item-section>
-        </q-item>
+        </q-item> -->
         <!-- <q-expansion-item icon="menu_open" label="Menu Levels">
           <q-item class="q-ml-xl" active-class="q-item-no-link-highlighting">
             <q-item-section>
@@ -376,29 +376,29 @@
           </q-item>
         </q-expansion-item>
 
-        <q-expansion-item icon="folder" label="Requisition">
+        <q-expansion-item icon="task" label="Requisition Slip">
           <q-item
             to="/RequisitionIndexPage"
             class="q-ml-xl"
             active-class="q-item-no-link-highlighting"
           >
             <q-item-section avatar>
-              <q-icon color="white" name="shopping_bag" />
+              <q-icon color="white" name="list" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>Requests List</q-item-label>
+              <q-item-label>Requisitions List</q-item-label>
             </q-item-section>
           </q-item>
           <q-item
-            to="/RequisitionAddPage"
+            to="/AddRequisitionPage"
             class="q-ml-xl"
             active-class="q-item-no-link-highlighting"
           >
             <q-item-section avatar>
-              <q-icon color="white" name="shopping_bag" />
+              <q-icon color="white" name="edit" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>Add Request</q-item-label>
+              <q-item-label>Create Request</q-item-label>
             </q-item-section>
           </q-item>
         </q-expansion-item>

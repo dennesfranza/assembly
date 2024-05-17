@@ -6,15 +6,15 @@ import {
   actionOpenAddVehicleDialog,
   updateTableIndexRowsToFirst,
   setDefaultVehicleDetails,
-  getAllVehicles
+  getAllVehicles,
 } from "./actions";
 
 export const useVehicleManagementStore = defineStore("vehiclemanagement", {
   state: () => state,
   getters: { getters },
   actions: {
-    getVehicles () {
-      getAllVehicles(this)
+    getVehicles() {
+      getAllVehicles(this);
     },
     openAddVehicleDialog() {
       actionOpenAddVehicleDialog(this);

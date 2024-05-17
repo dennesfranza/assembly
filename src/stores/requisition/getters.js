@@ -1,8 +1,5 @@
+import { date } from "quasar";
+
 export default {
-  // rsNumber: () => rsNumber,
-  // dateRequested: () => dateRequested,
-  // dateNeeded: () => dateNeeded,
-  // requisitionItems: () => requisitionItems,
-  // item: () => item,
-  // requestor: () => requestor
+  // dateNeeded: () => date.formatDate(new Date(), this.dateFormat)
 }

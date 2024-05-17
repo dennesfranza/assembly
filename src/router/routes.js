@@ -58,7 +58,10 @@ const routes = [
       },
       { path: '/GatePass', component: () => import('pages/ybc/GatePass.vue')},
       // Vehicle Management
-      { path: '/VehicleIndexPage', component: () => import('pages/vehiclemanagement/IndexPage.vue')}
+      { path: '/VehicleIndexPage', component: () => import('pages/vehiclemanagement/IndexPage.vue') },
+      // Requisition
+      { path: '/RequisitionIndexPage', component: () => import('pages/requisition/IndexPage.vue') },
+      { path: '/AddRequisitionPage', component: () => import('pages/requisition/AddRequisitionPage.vue') }
       // Not completed yet
       // {path: '/Taskboard', component: () => import('pages/TaskBoard.vue')},
     ],
