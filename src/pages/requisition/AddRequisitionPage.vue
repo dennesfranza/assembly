@@ -1,7 +1,6 @@
 <template>
   <q-page class="q-pa-sm">
     <form-header-vue :headers="formHeader.headers" :name="`Create ${formHeader.name}`" />
-    {{ requisitionRequestItem }}
     <div class="row items-center">
       <div class="col q-pa-sm">
         <q-input v-model="requisitionRequestItem.rs_number" label="RS Number">
@@ -79,7 +78,7 @@
           <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="restart_alt">
             <q-tooltip class="bg-accent">Reset</q-tooltip>
           </q-btn>
-          <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="save">
+          <q-btn class="q-mr-sm" color="primary" :loading="requeststore.postrequisitionrequestitemloading" icon="save" @click="requeststore.postItem(requisitionRequestItem)">
             <q-tooltip class="bg-accent">Save</q-tooltip>
           </q-btn>
         </template>

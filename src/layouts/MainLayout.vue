@@ -49,7 +49,7 @@
       class="bg-primary text-white"
     >
       <q-list>
-        <q-item to="/" active-class="q-item-no-link-highlighting">
+        <q-item to="/Dashboard" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
             <q-icon name="dashboard" />
           </q-item-section>
@@ -63,6 +63,14 @@
           </q-item-section>
           <q-item-section>
             <q-item-label>CRM Dashboard</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item to="/Consumables" active-class="q-item-no-link-highlighting">
+          <q-item-section avatar>
+            <q-icon name="category" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Consumables List</q-item-label>
           </q-item-section>
         </q-item>
         <!-- <q-expansion-item icon="pages" label="Pages">
@@ -403,6 +411,33 @@
           </q-item>
         </q-expansion-item>
 
+        <q-expansion-item icon="local_shipping" label="Delivery Receipts">
+          <q-item
+            to="/DeliveryReceiptIndexPage"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="list" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Delivery Receipts List</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddDeliveryReceiptPage"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="edit" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Delivery Receipt</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+
         <q-expansion-item icon="menu_open" label="Forms">
           <q-item
             to="/RequisitionForm"
@@ -489,6 +524,16 @@
             </q-item-section>
           </q-item>
         </q-expansion-item>
+
+        <!--  -->
+        <q-item @click="loginstore.userLogout()" :clickable="true" active-class="q-item-no-link-highlighting">
+          <q-item-section avatar>
+            <q-icon name="logout" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Logout</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
@@ -503,6 +548,7 @@ import Messages from "./Messages.vue";
 
 import { defineComponent, ref } from "vue";
 import { useQuasar } from "quasar";
+import { useLoginStore } from "src/stores/login/index";
 
 export default defineComponent({
   name: "MainLayout",
@@ -512,6 +558,7 @@ export default defineComponent({
   },
 
   setup() {
+    const loginstore = useLoginStore();
     const leftDrawerOpen = ref(false);
     const $q = useQuasar();
 
@@ -521,8 +568,9 @@ export default defineComponent({
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
+      loginstore
     };
-  },
+  }
 });
 </script>
 

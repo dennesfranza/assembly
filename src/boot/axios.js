@@ -47,12 +47,26 @@
 //   request,
 // };
 
-import axios from 'axios'
+import axios from "axios";
+import { LocalStorage } from "quasar";
+
+let token =
+  LocalStorage.getItem("user") === null
+    ? "X"
+    : LocalStorage.getItem("user").token;
+
+console.log(token)
+
 const axiosInstance = axios.create({
-  // baseURL: 'https://www.thunderclient.com/'
-  baseURL: 'http://localhost:8000'
-})
-// export default ({ Vue }) => {
-//   Vue.prototype.$axios = axiosInstance
-// }
-export { axiosInstance }
+  baseURL: "http://localhost:8000",
+  headers: {
+    Accept: "*/*",
+    Authorization: `Bearer ${token}`,
+  },
+});
+
+const axiosLogin = axios.create({
+  baseURL: "http://localhost:8000",
+});
+
+export { axiosInstance, axiosLogin };
