@@ -1,17 +1,9 @@
 import { axiosInstance } from "boot/axios";
 
-let b = {
-  headers: {
-    Accept: "*/*",
-    Authorization:
-      "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE1ODQwMzY0LCJpYXQiOjE3MTU4MTc2MTcsImp0aSI6IjczNmFiZDlmMTM5ZTQzZjE4OTMzYjRiMjdjNTUwMmIxIiwidXNlcl9pZCI6MSwiZW1haWwiOiJkZW5uZXNmcmFuemFAZ21haWwuY29tIiwibW9iaWxlIjpudWxsLCJuYW1lIjoiRGVubmVzIEZyYW56YSJ9.nkRWj9bQCJo3CVWrUosE1YZRRY3kIhSAnjT9wR0nZjw"
-  },
-};
-
 const actionGetAllRequisitionItems = (state) => {
   state.listallitemstableloading = true;
   axiosInstance
-    .get(`requisition/`, b)
+    .get(`requisition/`)
     .then((response) => {
       if (response.status === 200) {
         state.tableindexrows = response.data;
@@ -29,17 +21,18 @@ const actionGetAllRequisitionItems = (state) => {
 
 const actionRetrieveRequisitionItem = (state, id) => {
   axiosInstance
-    .get(`requisition/${id}/`, b)
+    .get(`requisition/${id}/`)
     .then((response) => {
       if (response.status === 200) {
         console.log(response)
+        console.log(response.data)
         state.requisitiondetails.location = response.data.location.name
         state.requisitiondetails.requested_by = response.data.requested_by.name
-        state.requisitiondetails.approved_by = response.data.approved_by.name
         state.requisitiondetails.rs_number = response.data.rs_number
         state.requisitiondetails.date_requested = response.data.date_requested
         state.requisitiondetails.date_needed = response.data.date_needed
-        state.requisitiondetailsitems = response.data.requisition_request_items;
+        state.requisitiondetailsitems = response.data.requisition_request_items
+        state.requisitiondetails.approved_by = response.data.approved_by.name
       }
     })
     .catch(() => {
@@ -54,6 +47,25 @@ const actionRetrieveRequisitionItem = (state, id) => {
 
 const postRequisitionItem = (state, payload) => {
   console.log(payload);
+  state.postrequisitionrequestitemloading = true
+  axiosInstance.post(`requisition/`, payload).then(response => {
+    console.log(response)
+  }).catch(() => {
+    // pass
+  }).finally(() => {
+    setTimeout(() => {
+      state.postrequisitionrequestitemloading = false
+      state.createrequisitionrequest = {
+        location: null,
+        requested_by: null,
+        approved_by: null,
+        rs_number: "",
+        date_requested: "",
+        date_needed: "",
+        requisition_request_items: [],
+      }
+    }, 3000);
+  })
 };
 
 const actionOpenRequestItemDialog = (state) => {

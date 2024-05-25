@@ -12,7 +12,7 @@ import {
   removeItemFromCreateRequest,
   rearrageItemNumberCreateRequest,
   actionOpenRequestDetailsDialog,
-  actionCloseRequestDetailsDialog
+  actionCloseRequestDetailsDialog,
 } from "./actions";
 
 export const useRequisitionStore = defineStore("requisitionslip", {
@@ -41,14 +41,14 @@ export const useRequisitionStore = defineStore("requisitionslip", {
       setDefaultRequestItems(this);
     },
     removeRequesItem(item) {
-      removeItemFromCreateRequest(this, item)
-      rearrageItemNumberCreateRequest(this)
+      removeItemFromCreateRequest(this, item);
+      rearrageItemNumberCreateRequest(this);
     },
     openRequisitionDetailsDialog() {
-      actionOpenRequestDetailsDialog(this)
+      actionOpenRequestDetailsDialog(this);
     },
     closeRequisitionDetailsDialog() {
-      actionCloseRequestDetailsDialog(this)
-    }
+      actionCloseRequestDetailsDialog(this);
+    },
   },
 });

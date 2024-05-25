@@ -84,12 +84,12 @@ export default {
       field: row => row.requested_by.name,
       align: "left",
     },
-    {
-      name: "approved_by",
-      label: "Approved By",
-      field: row => row.approved_by.name,
-      align: "left",
-    },
+    // {
+    //   name: "approved_by",
+    //   label: "Approved By",
+    //   field: row => row.approved_by.name,
+    //   align: "left",
+    // },
     {
       name: "rs_number",
       label: "RS Number",
@@ -150,7 +150,7 @@ export default {
   tablecreaterows: [],
   createrequisitionrequest: {
     location: null,
-    requested_by: null,
+    requested_by: 3,
     approved_by: null,
     rs_number: "",
     date_requested: "",
