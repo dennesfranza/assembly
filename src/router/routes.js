@@ -1,101 +1,115 @@
 const routes = [
   {
+    name: 'MainLayout',
     path: "/",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "", component: () => import("pages/Dashboard.vue") },
-      { path: "/Dashboard2", component: () => import("pages/Dashboard2.vue") },
-      { path: "/Profile", component: () => import("pages/UserProfile.vue") },
-      { path: "/Map", component: () => import("pages/Map.vue") },
-      { path: "/MapMarker", component: () => import("pages/MapMarker.vue") },
-      { path: "/TreeTable", component: () => import("pages/TreeTable.vue") },
-      { path: "/StreetView", component: () => import("pages/StreetView.vue") },
-      { path: "/Cards", component: () => import("pages/Cards.vue") },
-      { path: "/Tables", component: () => import("pages/Tables.vue") },
-      { path: "/Contact", component: () => import("pages/Contact.vue") },
-      { path: "/Checkout", component: () => import("pages/Checkout.vue") },
       {
-        path: "/Ecommerce",
-        component: () => import("pages/ProductCatalogues.vue"),
+        name: "Dashboard",
+        path: "/Dashboard",
+        component: () => import("pages/Dashboard.vue"),
+        meta: { requiresAuth: true }
       },
-      { path: "/Pagination", component: () => import("pages/Pagination.vue") },
-      { path: "/Charts", component: () => import("pages/Charts.vue") },
-      { path: "/Calendar", component: () => import("pages/Calendar.vue") },
-      { path: "/Directory", component: () => import("pages/Directory.vue") },
-      { path: "/Footer", component: () => import("pages/Footer.vue") },
-      { path: "/CardHeader", component: () => import("pages/CardHeader.vue") },
       {
+        name: "Dashboard2",
+        path: "/Dashboard2",
+        component: () => import("pages/Dashboard2.vue"),
+        meta: { requiresAuth: true }
+      },
+      {
+        name: "RequisitionForm",
         path: "/RequisitionForm",
         component: () => import("pages/ybc/RequisitionForm.vue"),
+        meta: { requiresAuth: true }
       },
       {
+        name: "ReceivingReport",
         path: "/ReceivingReport",
         component: () => import("pages/ybc/ReceivingReport.vue"),
+        meta: { requiresAuth: true }
       },
       {
+        name: "WithdrawalSlip",
         path: "/WithdrawalSlip",
         component: () => import("pages/ybc/WithdrawalSlip.vue"),
+        meta: { requiresAuth: true }
       },
       {
+        name: "StockCard",
         path: "/StockCard",
         component: () => import("pages/ybc/StockCard.vue"),
+        meta: { requiresAuth: true }
       },
       {
+        name: "ListToolsEquipmentFacilities",
         path: "/ListToolsEquipmentFacilities",
         component: () => import("pages/ybc/ListToolsEquipmentFacilities.vue"),
+        meta: { requiresAuth: true }
       },
       {
+        name: "DeliveryReceipt",
         path: "/DeliveryReceipt",
         component: () => import("pages/ybc/DeliveryReceipt.vue"),
+        meta: { requiresAuth: true }
       },
       {
+        name: "ToolsEquipmentTransferSlip",
         path: "/ToolsEquipmentTransferSlip",
         component: () => import("pages/ybc/ToolsEquipmentTransferSlip.vue"),
+        meta: { requiresAuth: true }
       },
       {
+        name: "InventoryReport",
         path: "/InventoryReport",
         component: () => import("pages/ybc/InventoryReport.vue"),
+        meta: { requiresAuth: true }
       },
-      { path: '/GatePass', component: () => import('pages/ybc/GatePass.vue')},
+      {
+        name: "GatePass",
+        path: "/GatePass",
+        component: () => import("pages/ybc/GatePass.vue"),
+        meta: { requiresAuth: true }
+      },
       // Vehicle Management
-      { path: '/VehicleIndexPage', component: () => import('pages/vehiclemanagement/IndexPage.vue') },
+      {
+        name: "VehicleIndexPage",
+        path: "/VehicleIndexPage",
+        component: () => import("pages/vehiclemanagement/IndexPage.vue"),
+        meta: { requiresAuth: true }
+      },
       // Requisition
-      { path: '/RequisitionIndexPage', component: () => import('pages/requisition/IndexPage.vue') },
-      { path: '/AddRequisitionPage', component: () => import('pages/requisition/AddRequisitionPage.vue') }
-      // Not completed yet
-      // {path: '/Taskboard', component: () => import('pages/TaskBoard.vue')},
+      {
+        name: "RequisitionIndexPage",
+        path: "/RequisitionIndexPage",
+        component: () => import("pages/requisition/IndexPage.vue"),
+        meta: { requiresAuth: true }
+      },
+      {
+        name: "AddRequisitionPage",
+        path: "/AddRequisitionPage",
+        component: () => import("pages/requisition/AddRequisitionPage.vue"),
+        meta: { requiresAuth: true }
+      },
+      // Delivery Receipts
+      {
+        name: 'DeliveryReceiptIndexPage',
+        path: '/DeliveryReceiptIndexPage',
+        component: () => import('pages/deliveryreceipt/IndexPage.vue'),
+        meta: { requiresAuth: true }
+      },
+      {
+        name: 'AddDeliveryReceiptPage',
+        path: '/AddDeliveryReceiptPage',
+        component: () => import('pages/deliveryreceipt/AddDeliveryReceiptPage.vue'),
+        meta: { requiresAuth: true }
+      }
     ],
-  },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: "/:catchAll(.*)*",
-    component: () => import("pages/Error404.vue"),
+    meta: { requiresAuth: true }
   },
   {
-    path: "/Mail",
-    component: () => import("layouts/Mail.vue"),
-  },
-  {
-    path: "/Maintenance",
-    component: () => import("pages/Maintenance.vue"),
-  },
-  {
-    path: "/Pricing",
-    component: () => import("pages/Pricing.vue"),
-  },
-  {
-    path: "/Login-1",
-    component: () => import("pages/Login-1.vue"),
-  },
-  {
-    path: "/Lock",
-    component: () => import("pages/LockScreen.vue"),
-  },
-  {
-    path: "/Lock-2",
-    component: () => import("pages/LockScreen-2.vue"),
+    name: "Login",
+    path: "/Login",
+    component: () => import("pages/login/Login.vue"),
   },
 ];
 
