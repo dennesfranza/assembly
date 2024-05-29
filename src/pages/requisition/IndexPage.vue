@@ -21,7 +21,7 @@
       @row-click="onRowClick"
     >
       <template v-slot:top-right>
-        <q-btn class="q-mr-sm" color="primary" icon="sync">
+        <q-btn class="q-mr-sm" color="primary" icon="sync" @click="requeststore.getAllItems()">
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>
       </template>

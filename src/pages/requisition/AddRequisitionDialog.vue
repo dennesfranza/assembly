@@ -22,7 +22,7 @@
           </q-row>
         </q-card-section>
         <q-separator />
-        <q-card-actions align="right">
+        <q-card-actions align="left">
           <q-btn
             outline
             label="Close"

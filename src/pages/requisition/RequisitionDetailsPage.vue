@@ -69,6 +69,7 @@
             </div>
           </div>
         </q-card-section>
+        <q-separator></q-separator>
         <q-card-actions>
           <q-btn
             outline
