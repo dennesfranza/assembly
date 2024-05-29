@@ -49,16 +49,15 @@
 
 import axios from "axios";
 import { LocalStorage } from "quasar";
+import baseUrl from "../config/index";
 
 let token =
   LocalStorage.getItem("user") === null
     ? "X"
     : LocalStorage.getItem("user").token;
 
-console.log(token)
-
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: baseUrl.baseUrl,
   headers: {
     Accept: "*/*",
     Authorization: `Bearer ${token}`,
@@ -66,7 +65,7 @@ const axiosInstance = axios.create({
 });
 
 const axiosLogin = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: baseUrl.baseUrl,
 });
 
 export { axiosInstance, axiosLogin };
