@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import state from "./state";
-import locationOptions from "./getters";
 import {
   getAllLocations
 } from './actions'
@@ -16,5 +15,6 @@ export const useLocationStore = defineStore("locationstore", {
     loadLocations () {
       getAllLocations(this)
     }
-  }
+  },
+  persist: true
 })

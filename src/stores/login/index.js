@@ -12,4 +12,5 @@ export const useLoginStore = defineStore("login", {
       actionLogout(this)
     }
   },
+  persist: true
 });
