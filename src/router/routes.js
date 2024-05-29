@@ -19,7 +19,7 @@ const routes = [
       {
         name: "Consumables",
         path: "/Consumables",
-        component: () => import("pages/Consumables.vue"),
+        component: () => import("pages/consumables/ConsumablesIndexPage.vue"),
         meta: { requiresAuth: true },
       },
       {
