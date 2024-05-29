@@ -1,4 +1,8 @@
 export default {
+  listallitemstableloading: false,
+  retrievedetailspageloading: false,
+  deleteconsumableitemloading: false,
+  updateconsumableitemloading: false,
   tableindexrows: [],
   tableindexcolumns: [
     {
@@ -21,6 +25,37 @@ export default {
     },
   ],
   consumablesinput: [
-
-  ]
+    {
+      name: 'name',
+      label: 'Name',
+      icon: '',
+      type: 'input'
+    },
+    {
+      name: 'description',
+      label: 'Description',
+      icon: '',
+      type: 'input'
+    },
+    {
+      name: 'image',
+      label: 'Image',
+      icon: '',
+      type: 'file'
+    }
+  ],
+  createconsumableitem: {
+    name: null,
+    description: '',
+    image: null
+  },
+  consumabledetailsitem: {
+    id: null,
+    name: null,
+    description: null,
+    image: null,
+    created_at: null
+  },
+  consumabledetailsdialog: false,
+  consumabledetailsloadingpage: false
 };
