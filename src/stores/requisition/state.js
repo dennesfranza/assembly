@@ -28,18 +28,6 @@ export default {
     purpose: "",
   },
   requestdetailsinput: [
-    // {
-    //   name: "id",
-    //   label: "ID",
-    //   icon: "",
-    //   type: "input",
-    // },
-    // {
-    //   name: "item_number",
-    //   label: "Item Number",
-    //   icon: "",
-    //   type: "input",
-    // },
     {
       name: "quantity",
       label: "Quantity",
