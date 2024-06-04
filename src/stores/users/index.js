@@ -1,17 +1,21 @@
-import { defineStore } from "pinia"
-import state from "./state"
-import getters from "./getters"
-import {
-  getAllUsers
-} from "./actions"
+import { defineStore } from "pinia";
+import state from "./state";
+import { getAllUsers } from "./actions";
 
-export const useUserStore = defineStore('users', {
+export const useUserStore = defineStore("users", {
   state: () => state,
-  getters: getters,
-  actions: {
-    loadAllUsers () {
-      getAllUsers(this)
-    }
+  getters: {
+    approverOptions: (state) => {
+      return state.users.map((a) => ({ label: a.name, value: a.id }));
+    },
+    usersOptions: (state) => {
+      return state.users.map((a) => ({ label: a.name, value: a.id }));
+    },
   },
-  persist: true
-})
+  actions: {
+    loadAllUsers() {
+      getAllUsers(this);
+    },
+  },
+  persist: true,
+});
