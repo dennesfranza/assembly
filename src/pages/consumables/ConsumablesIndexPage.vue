@@ -22,10 +22,10 @@
       @row-click="onRowClick"
     >
       <template v-slot:top-right>
-        <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="add">
+        <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="add" @click="consumablesstore.openAddConsumableItemDialog()">
             <q-tooltip class="bg-accent">Add Item</q-tooltip>
           </q-btn>
-          <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="remove">
+          <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="remove" @click="clickRemoveItem()">
             <q-tooltip class="bg-accent">Remove Item</q-tooltip>
           </q-btn>
         <q-btn class="q-mr-sm" color="primary" icon="sync" @click="consumablesstore.getAllItems()">
@@ -34,6 +34,7 @@
       </template>
     </q-table>
     <ConsumableDetailsDialogPage />
+    <AddConsumableDialog />
   </q-page>
 </template>
 
@@ -47,6 +48,7 @@ import {
 } from "vue";
 import { useConsumablesStore } from "src/stores/consumables/index";
 import ConsumableDetailsDialogPage from './ConsumableDetailsDialogPage.vue'
+import AddConsumableDialog from './AddConsumableDialog.vue'
 
 export default defineComponent({
   name: "consumables",
@@ -57,6 +59,10 @@ export default defineComponent({
     );
     const tableindexrows = computed(() => consumablesstore.consumableItems);
     const listallitemstableloading = computed(() => consumablesstore.listallitemstableloading)
+    const selected = computed({
+      get: () => consumablesstore.selected,
+      set: (value) =>  (consumablesstore.selected = value)
+    })
 
     onMounted(() => consumablesstore.getAllItems())
 
@@ -64,19 +70,22 @@ export default defineComponent({
       consumablesstore,
       tableindexcolumns,
       tableindexrows,
-      selected: ref([]),
+      selected,
       listallitemstableloading
     };
   },
   methods: {
     onRowClick(event, row, index) {
-      console.log(row)
-      console.log(row.image)
       this.consumablesstore.openConsumableDetailsDialog(row)
+    },
+    clickRemoveItem() {
+      console.log(this.selected[0])
+      this.consumablesstore.deleteConsumableItem(this.selected[0])
     }
   },
   components: {
-    ConsumableDetailsDialogPage
+    ConsumableDetailsDialogPage,
+    AddConsumableDialog
   }
 });
 </script>
