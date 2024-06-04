@@ -84,6 +84,28 @@
         </template>
       </q-table>
     </div>
+    <div class="row items-center">
+      <div class="col q-pa-sm">
+        <q-select
+          label="Requested By"
+          :options="preparedByOptions"
+          map-options
+          emit-value
+          v-model="requisitionRequestItem.requested_by"
+        >
+          <template v-slot:prepend>
+            <q-icon name="fact_check" color="green" />
+          </template>
+        </q-select>
+      </div>
+      <div class="col q-pa-sm">
+        <q-select label="Approved By" :options="approverOptions" map-options emit-value v-model="requisitionRequestItem.approved_by">
+          <template v-slot:prepend>
+            <q-icon name="fact_check" color="green" />
+          </template>
+        </q-select>
+      </div>
+    </div>
     <AddRequisitionDialog />
   </q-page>
 </template>
@@ -96,7 +118,7 @@ import { useUserStore } from "src/stores/users/index";
 import { useRequisitionStore } from "src/stores/requisition/index";
 import FormHeaderVue from "src/components/forms/FormHeader.vue";
 import AddRequisitionDialog from "./AddRequisitionDialog.vue";
-import { date } from "quasar";
+import { useLoginStore } from "src/stores/login/index";
 
 export default defineComponent({
   name: 'requisitionslip',
@@ -104,11 +126,13 @@ export default defineComponent({
     const formheaders = useFormHeadersStore();
     const locationstore = useLocationStore();
     const userstore = useUserStore();
+    const loginstore = useLoginStore();
     const requeststore = useRequisitionStore()
     const formHeader = formheaders[getCurrentInstance().type.name];
-
     const requisitionRequestItem = computed(() => requeststore.createrequisitionrequest)
     const dateNeeded = computed(() => requeststore.dateNeeded)
+    const preparedByOptions = computed(() => loginstore.preparedByOptions);
+    const approverOptions = computed(() => userstore.approverOptions);
 
     return {
       formheaders,
@@ -118,7 +142,9 @@ export default defineComponent({
       requeststore,
       requisitionRequestItem,
       dateNeeded,
-      selected: ref([])
+      selected: ref([]),
+      preparedByOptions,
+      approverOptions
     }
   },
   components: {

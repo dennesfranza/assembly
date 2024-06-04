@@ -19,8 +19,16 @@
       bordered
       :loading="listallitemstableloading"
       @row-click="onRowClick"
+      selection="single"
+      v-model:selected="selected"
     >
       <template v-slot:top-right>
+        <q-btn class="q-mr-sm" color="primary" icon="thumb_up" v-if="hasSelection">
+          <q-tooltip class="bg-accent">Approve Request</q-tooltip>
+        </q-btn>
+        <q-btn class="q-mr-sm" color="primary" icon="thumb_down" v-if="hasSelection">
+          <q-tooltip class="bg-accent">Disapprove Request</q-tooltip>
+        </q-btn>
         <q-btn class="q-mr-sm" color="primary" icon="sync" @click="requeststore.getAllItems()">
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>
@@ -59,6 +67,12 @@ export default defineComponent({
     const openrequisitionrequestdialog = computed(
       () => requeststore.openrequisitionrequestdialog
     );
+    const selected = computed({
+      get: () => requeststore.selected,
+      set: (value) => (requeststore.selected = value)
+    })
+
+    const hasSelection = computed(() => requeststore.hasSelection)
 
     onMounted(() => requeststore.getAllItems())
 
@@ -69,7 +83,9 @@ export default defineComponent({
       tableindexrows,
       listallitemstableloading,
       postrequisitionrequestitemloading,
-      openrequisitionrequestdialog
+      openrequisitionrequestdialog,
+      selected,
+      hasSelection
     }
   },
   methods: {
