@@ -25,31 +25,32 @@ export default {
     quantity: null,
     unit: "",
     description: "",
+    description_label: "",
     purpose: "",
   },
   requestdetailsinput: [
     {
       name: "quantity",
       label: "Quantity",
-      icon: "",
+      icon: "123",
       type: "input",
     },
     {
       name: "unit",
       label: "Unit",
-      icon: "",
+      icon: "ad_units",
       type: "input",
     },
     {
       name: "description",
       label: "Description",
-      icon: "",
-      type: "input",
+      icon: "search",
+      type: "select",
     },
     {
       name: "purpose",
       label: "Purpose",
-      icon: "",
+      icon: "sunny",
       type: "input",
     },
   ],
@@ -72,12 +73,6 @@ export default {
       field: row => row.requested_by.name,
       align: "left",
     },
-    // {
-    //   name: "approved_by",
-    //   label: "Approved By",
-    //   field: row => row.approved_by.name,
-    //   align: "left",
-    // },
     {
       name: "rs_number",
       label: "RS Number",
@@ -123,9 +118,9 @@ export default {
       align: "left",
     },
     {
-      name: "description",
+      name: "description_label",
       label: "Description",
-      field: "description",
+      field: "description_label",
       align: "left",
     },
     {
@@ -138,11 +133,13 @@ export default {
   tablecreaterows: [],
   createrequisitionrequest: {
     location: null,
-    requested_by: 3,
+    requested_by: null,
     approved_by: null,
     rs_number: "",
     date_requested: "",
     date_needed: "",
     requisition_request_items: [],
   },
+  selected: [],
+  rsnumbersearchresults: []
 };

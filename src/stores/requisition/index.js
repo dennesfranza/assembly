@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import state from "./state";
-import getters from "./getters";
 import {
   actionGetAllRequisitionItems,
   actionRetrieveRequisitionItem,
@@ -13,11 +12,26 @@ import {
   rearrageItemNumberCreateRequest,
   actionOpenRequestDetailsDialog,
   actionCloseRequestDetailsDialog,
+  actionSearchRsNumber
 } from "./actions";
 
 export const useRequisitionStore = defineStore("requisitionslip", {
   state: () => state,
-  getters: getters,
+  getters: {
+    hasSelection: (state) => {
+      if (state.selected.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    rsNumberOptions: (state) => {
+      return state.rsnumbersearchresults.map((a) => ({
+        label: a.rs_number,
+        value: a.id,
+      }));
+    },
+  },
   actions: {
     getAllItems() {
       actionGetAllRequisitionItems(this);
@@ -50,5 +64,8 @@ export const useRequisitionStore = defineStore("requisitionslip", {
     closeRequisitionDetailsDialog() {
       actionCloseRequestDetailsDialog(this);
     },
+    searchRsNumber(payload) {
+      actionSearchRsNumber(this, payload)
+    }
   },
 });

@@ -99,14 +99,12 @@ const removeItemFromCreateRequest = (state, data) => {
     state.createrequisitionrequest.requisition_request_items.findIndex(
       (item) => item.item_number === data.item_number
     );
-  console.log("INDEX", objindex);
   state.createrequisitionrequest.requisition_request_items.splice(objindex, 1);
 };
 
 const rearrageItemNumberCreateRequest = (state) => {
   state.createrequisitionrequest.requisition_request_items.forEach(
     (item, index) => {
-      console.log(item, index);
       item.item_number = index + 1;
     }
   );
@@ -123,6 +121,15 @@ const actionCloseRequestDetailsDialog = (state) => {
   state.requisitiondetailsitems = [];
 };
 
+const actionSearchRsNumber = (state, rs_number) => {
+  axiosInstance.get(`requisition_search/?rs_number=${rs_number}`).then(response => {
+    if (response.status === 200) {
+      console.log(response)
+      state.rsnumbersearchresults = response.data
+    }
+  })
+}
+
 export {
   actionGetAllRequisitionItems,
   actionRetrieveRequisitionItem,
@@ -135,4 +142,5 @@ export {
   rearrageItemNumberCreateRequest,
   actionOpenRequestDetailsDialog,
   actionCloseRequestDetailsDialog,
+  actionSearchRsNumber
 };
