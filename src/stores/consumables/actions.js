@@ -1,4 +1,4 @@
-import { axiosInstance } from "boot/axios";
+import { axiosInstance, axiosFormPost } from "boot/axios";
 
 const actionGetAllConsumables = (state) => {
   state.listallitemstableloading = true;
@@ -6,21 +6,21 @@ const actionGetAllConsumables = (state) => {
     .get(`consumables/`)
     .then((response) => {
       if (response.status === 200) {
-        state.tableindexrows = response.data
+        state.tableindexrows = response.data;
       }
     })
     .catch((error) => {})
     .finally(() => {
       setTimeout(() => {
         state.listallitemstableloading = false;
-      }, 2000)
+      }, 2000);
     });
 };
 
 const actionRetrieveConsumableItem = (state, id) => {
   state.retrievedetailspageloading = true;
   axiosInstance
-    .get(`/${id}/`)
+    .get(`consumables/${id}/`)
     .then((response) => {
       if (response.status === 200) {
       }
@@ -34,9 +34,14 @@ const actionRetrieveConsumableItem = (state, id) => {
 const actionDestroyConsumableItem = (state, id) => {
   state.deleteconsumableitemloading = true;
   axiosInstance
-    .delete(`/${id}/`)
+    .delete(`consumables/${id}/`)
     .then((response) => {
-      if (response.status === 200) {
+      if (response.status === 204) {
+        let objindex = state.tableindexrows.findIndex(
+          (item) => item.id === id
+        )
+        state.tableindexrows.splice(objindex, 1)
+        state.selected = []
       }
     })
     .catch((error) => {})
@@ -48,7 +53,7 @@ const actionDestroyConsumableItem = (state, id) => {
 const actionUpdateConsumableItem = (state, payload) => {
   state.updateconsumableitemloading = true;
   axiosInstance
-    .put(`/${payload.id}/`, payload)
+    .put(`consumables/${payload.id}/`, payload)
     .then((response) => {
       if (response.status === 200) {
       }
@@ -60,14 +65,14 @@ const actionUpdateConsumableItem = (state, payload) => {
 };
 
 const actionOpenConsumableDetailsPage = (state, payload) => {
-  state.consumabledetailsdialog = true
-  state.consumabledetailsloadingpage = true
-  state.consumabledetailsitem.id = payload.id
-  state.consumabledetailsitem.name = payload.name
-  state.consumabledetailsitem.description = payload.description
-  state.consumabledetailsitem.image = payload.image
-  state.consumabledetailsitem.created_at = payload.created_at
-}
+  state.consumabledetailsdialog = true;
+  state.consumabledetailsloadingpage = true;
+  state.consumabledetailsitem.id = payload.id;
+  state.consumabledetailsitem.name = payload.name;
+  state.consumabledetailsitem.description = payload.description;
+  state.consumabledetailsitem.image = payload.image;
+  state.consumabledetailsitem.created_at = payload.created_at;
+};
 
 const actionCloseConsumableDetailsPage = (state) => {
   state.consumabledetailsitem = {
@@ -75,9 +80,57 @@ const actionCloseConsumableDetailsPage = (state) => {
     name: null,
     description: null,
     image: null,
-    created_at: null
-  }
-  state.consumabledetailsdialog = false
+    created_at: null,
+  };
+  state.consumabledetailsdialog = false;
+};
+
+const actionOpenAddConsumableItemDialog = (state) => {
+  state.addconsumableitemdialog = true;
+};
+
+const actionCloseAddConsumableItemDialog = (state) => {
+  state.createconsumableitem = {
+    name: "",
+    description: "",
+    image: null,
+    imageurl: ""
+  };
+  state.addconsumableitemdialog = false;
+};
+
+const actionPostConsumableItem = (state) => {
+  state.postconsumableitemloading = true
+  let formdata = new FormData()
+  formdata.append('name', state.createconsumableitem.name)
+  formdata.append('description', state.createconsumableitem.description)
+  formdata.append('image', state.createconsumableitem.image)
+  axiosFormPost.post(`/consumables/`, formdata).then(response => {
+    if (response.status === 201) {
+      console.log(response.data)
+      state.tableindexrows.unshift(response.data)
+    }
+  }).catch(error => {
+    console.log(error)
+  }).finally(() => {
+    state.createconsumableitem = {
+      name: "",
+      description: "",
+      image: null,
+      imageurl: ""
+    };
+    state.postconsumableitemloading = false
+    state.addconsumableitemdialog = false;
+  })
+};
+
+const actionSearchConsumable = (state, name) => {
+  axiosInstance.get(`consumables_search/?name=${name}`).then(response => {
+    if (response.status === 200) {
+      console.log(response)
+      state.consumablesearchresults = response.data
+    }
+  })
 }
 
 export {
@@ -86,5 +139,9 @@ export {
   actionDestroyConsumableItem,
   actionUpdateConsumableItem,
   actionOpenConsumableDetailsPage,
-  actionCloseConsumableDetailsPage
+  actionCloseConsumableDetailsPage,
+  actionOpenAddConsumableItemDialog,
+  actionCloseAddConsumableItemDialog,
+  actionPostConsumableItem,
+  actionSearchConsumable
 };
