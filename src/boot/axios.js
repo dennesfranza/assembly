@@ -23,38 +23,20 @@
 
 // // export default { api };
 
-// const request = (method, uri, data = null) => {
-//   if (!method) {
-//     return;
-//   }
-//   if (!uri) {
-//     return;
-//   }
-//   const url = "http://localhost:8000/" + uri;
-//   return axios({
-//     method,
-//     url,
-//     data,
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Access-Control-Allow-Credentials": true,
-//       "Authorization": ''
-//     },
-//   });
-// };
-
-// export default {
-//   request,
-// };
-
 import axios from "axios";
 import { LocalStorage } from "quasar";
 import baseUrl from "../config/index";
 
+let login_object = JSON.parse(LocalStorage.getItem("login"))
+
+console.log(login_object)
+
 let token =
-  LocalStorage.getItem("user") === null
+    login_object === null
     ? "X"
-    : LocalStorage.getItem("user").token;
+    : login_object.login.token;
+
+console.log(token)
 
 const axiosInstance = axios.create({
   baseURL: baseUrl.baseUrl,
@@ -68,4 +50,13 @@ const axiosLogin = axios.create({
   baseURL: baseUrl.baseUrl,
 });
 
-export { axiosInstance, axiosLogin };
+const axiosFormPost = axios.create({
+  baseURL: baseUrl.baseUrl,
+  headers: {
+    Accept: "*/*",
+    "Content-Type": "multipart/form-data",
+    Authorization: `Bearer ${token}`,
+  },
+});
+
+export { axiosInstance, axiosLogin, axiosFormPost };
