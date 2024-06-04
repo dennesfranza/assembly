@@ -36,12 +36,15 @@ export default route(function (/* { store, ssrContext } */) {
 
   Router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
-      let isloggedin = LocalStorage.getItem("isloggedin");
-      let user = LocalStorage.getItem("user");
-      if (isloggedin === false || user === null) {
+      let user = LocalStorage.getItem("login");
+      if (user === null) {
         next({ name: "Login" });
       } else {
-        next();
+        if (user.isloggedin === false) {
+          next({ name: "Login" });
+        } else {
+          next();
+        }
       }
       if (to.fullPath === '/') {
         next({ path: '/Dashboard'} )
