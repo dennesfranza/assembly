@@ -5,6 +5,7 @@ export default {
     name: null,
     email: null,
     is_staff: null,
+    is_approver: null,
     is_superuser: null,
     token: null,
     refresh_token: null

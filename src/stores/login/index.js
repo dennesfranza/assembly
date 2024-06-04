@@ -1,16 +1,24 @@
 import { defineStore } from "pinia";
 import state from "./state";
-import { actionLogin, actionLogout } from "./actions";
+import { actionLogin, actionLogout, actionRefreshToken } from "./actions";
 
 export const useLoginStore = defineStore("login", {
   state: () => state,
+  getters: {
+    preparedByOptions: (state) => {
+      return [{label: state.login.name, value: state.login.id}]
+    },
+  },
   actions: {
     userLogin() {
       actionLogin(this, this.credentials);
     },
     userLogout() {
-      actionLogout(this)
-    }
+      actionLogout(this);
+    },
+    userRefreshToken() {
+      actionRefreshToken(this);
+    },
   },
-  persist: true
+  persist: true,
 });
