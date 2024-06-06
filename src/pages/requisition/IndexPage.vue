@@ -23,6 +23,11 @@
       v-model:selected="selected"
     >
       <template v-slot:top-right>
+        <q-input class="q-mr-sm" dense debounce="500" v-model="indextablefilter" placeholder="Search" outlined>
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
         <q-btn class="q-mr-sm" color="primary" icon="thumb_up" v-if="hasSelection">
           <q-tooltip class="bg-accent">Approve Request</q-tooltip>
         </q-btn>

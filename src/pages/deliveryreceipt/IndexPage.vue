@@ -21,6 +21,11 @@
       @row-click="onRowClick"
     >
       <template v-slot:top-right>
+        <q-input class="q-mr-sm" dense v-model="filter" placeholder="Search" outlined>
+          <template v-slot:append>
+            <q-icon name="search" />
+          </template>
+        </q-input>
         <q-btn class="q-mr-sm" color="primary" icon="sync">
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>
@@ -44,8 +49,11 @@ export default defineComponent({
   setup() {
     const deliveryreceiptstore = useDeliveryReceiptStore()
 
+    onMounted(() => deliveryreceiptstore.getAllDeliveryItems())
+
     return {
-      deliveryreceiptstore
+      deliveryreceiptstore,
+      filter: ref('')
     }
   },
   methods: {
