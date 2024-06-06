@@ -19,7 +19,32 @@ const routes = [
       {
         name: "Consumables",
         path: "/Consumables",
-        component: () => import("pages/consumables/ConsumablesIndexPage.vue"),
+        component: () => import("pages/consumables/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "Warehouse",
+        path: "/Warehouse",
+        component: () => import("pages/warehouse/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "Equipments",
+        path: "/Equipments",
+        component: () => import("pages/equipments/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      // Vehicle Management
+      {
+        name: "Vehicles",
+        path: "/Vehicles",
+        component: () => import("pages/vehicles/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "RequisitionSlipLogsheet",
+        path: "/RequisitionSlipLogsheet",
+        component: () => import("pages/reports/RequisitionSlipLogsheet.vue"),
         meta: { requiresAuth: true },
       },
       {
@@ -76,17 +101,10 @@ const routes = [
         component: () => import("pages/ybc/GatePass.vue"),
         meta: { requiresAuth: true },
       },
-      // Vehicle Management
-      {
-        name: "VehicleIndexPage",
-        path: "/VehicleIndexPage",
-        component: () => import("pages/vehiclemanagement/IndexPage.vue"),
-        meta: { requiresAuth: true },
-      },
       // Requisition
       {
-        name: "RequisitionIndexPage",
-        path: "/RequisitionIndexPage",
+        name: "Requisition",
+        path: "/Requisition",
         component: () => import("pages/requisition/IndexPage.vue"),
         meta: { requiresAuth: true },
       },
@@ -98,8 +116,8 @@ const routes = [
       },
       // Delivery Receipts
       {
-        name: "DeliveryReceiptIndexPage",
-        path: "/DeliveryReceiptIndexPage",
+        name: "DeliveryReceipts",
+        path: "/DeliveryReceipts",
         component: () => import("pages/deliveryreceipt/IndexPage.vue"),
         meta: { requiresAuth: true },
       },
