@@ -73,7 +73,7 @@
             <q-item-label>Consumables</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/ProjectIndexPage" active-class="q-item-no-link-highlighting">
+        <q-item to="/Warehouse" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
             <q-icon name="engineering" />
           </q-item-section>
@@ -81,7 +81,7 @@
             <q-item-label>Project/Site</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/EquipmenttIndexPage" active-class="q-item-no-link-highlighting">
+        <q-item to="/Equipments" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
             <q-icon name="build" />
           </q-item-section>
@@ -89,7 +89,7 @@
             <q-item-label>Equipments</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/VehicleIndexPage" active-class="q-item-no-link-highlighting">
+        <q-item to="/Vehicles" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
             <q-icon name="garage" />
           </q-item-section>
@@ -100,7 +100,7 @@
 
         <q-expansion-item icon="inventory" label="Reports">
           <q-item
-            to="/InventoryIndexPage"
+            to="/RequisitionSlipLogsheet"
             class="q-ml-xl"
             active-class="q-item-no-link-highlighting"
           >
@@ -108,14 +108,14 @@
               <q-icon color="white" name="garage" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>Vehicle List</q-item-label>
+              <q-item-label>Requisition Slip Logsheet</q-item-label>
             </q-item-section>
           </q-item>
         </q-expansion-item>
 
         <q-expansion-item icon="task" label="Requisition Slip">
           <q-item
-            to="/RequisitionIndexPage"
+            to="/Requisition"
             class="q-ml-xl"
             active-class="q-item-no-link-highlighting"
           >
@@ -142,7 +142,7 @@
 
         <q-expansion-item icon="local_shipping" label="Delivery Receipts">
           <q-item
-            to="/DeliveryReceiptIndexPage"
+            to="/DeliveryReceipts"
             class="q-ml-xl"
             active-class="q-item-no-link-highlighting"
           >
