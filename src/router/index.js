@@ -37,6 +37,9 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach((to, from, next) => {
     if (to.matched.some((record) => record.meta.requiresAuth)) {
       let user = LocalStorage.getItem("login");
+      if (to.fullPath === '/') {
+        next({ path: '/Dashboard'} )
+      }
       if (user === null) {
         next({ name: "Login" });
       } else {
@@ -45,9 +48,6 @@ export default route(function (/* { store, ssrContext } */) {
         } else {
           next();
         }
-      }
-      if (to.fullPath === '/') {
-        next({ path: '/Dashboard'} )
       }
     } else {
       next();
