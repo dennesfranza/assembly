@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import state from "./state";
 import {
+  actionGetAllDeliveryReceiptItems,
   actionOpenDeliveryItemDialog,
   actionCloseDeliveryItemDialog,
   addItemToCreateDeliveryReceipt,
@@ -11,6 +12,9 @@ export const useDeliveryReceiptStore = defineStore("deliveryreceipt", {
   state: () => state,
   getters: {},
   actions: {
+    getAllDeliveryItems () {
+      actionGetAllDeliveryReceiptItems(this)
+    },
     openAddDeliveryDialog() {
       actionOpenDeliveryItemDialog(this)
     },

@@ -5,6 +5,7 @@ const actionGetAllDeliveryReceiptItems = (state) => {
   state.listallitemstableloading = true
   axiosInstance.get(`deliveryreceipt/`).then(response => {
     console.log(response)
+    state.tableindexrows  = response.data
   }).catch(error => {
     console.log(error)
   }).finally(() => {

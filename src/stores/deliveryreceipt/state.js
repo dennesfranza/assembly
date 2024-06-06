@@ -16,7 +16,7 @@ export default {
     {
       name: "address",
       label: "Address",
-      field: (row) => row.location.name,
+      field: (row) => row.address.name,
       align: "left",
     },
     {
