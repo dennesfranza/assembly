@@ -1,0 +1,88 @@
+export default {
+  listequipmentstableloading: false,
+  retrievedetailspageloading: false,
+  deleteequipmentitemloading: false,
+  updateequipmentitemloading: false,
+  postequipmentitemloading: false,
+  equipmenttableindexrows: [],
+  equipmenttableindexcolumns: [
+    {
+      name: "name",
+      label: "Name",
+      field: "name",
+      align: "left",
+    },
+    {
+      name: "serial_number",
+      label: "Serial Number",
+      field: "serial_number",
+      align: "left",
+    },
+    {
+      name: "brand",
+      label: "Brand",
+      field: "brand",
+      align: "left",
+    },
+    {
+      name: "location",
+      label: "Location",
+      field: "location",
+      align: "left",
+    },
+  ],
+  equipmentinputitems: [
+    {
+      name: "name",
+      label: "Name",
+      icon: "",
+      type: "input",
+    },
+    {
+      name: "type",
+      label: "Type",
+      icon: "",
+      type: "input",
+    },
+    {
+      name: "serial_number",
+      label: "Serial Number",
+      icon: "",
+      type: "input",
+    },
+    {
+      name: "brand",
+      label: "Brand",
+      icon: "",
+      type: "input",
+    },
+    {
+      name: "remarks",
+      label: "Remarks",
+      icon: "",
+      type: "input",
+    },
+    {
+      name: "location",
+      label: "Location",
+      icon: "",
+      type: "select",
+    },
+    {
+      name: "image",
+      label: "Name",
+      icon: "",
+      type: "file",
+    },
+  ],
+  createequipmentitem: {
+    name: "",
+    type: "",
+    serial_number: "",
+    brand: "",
+    remarks: "",
+    location: null,
+    image: null,
+    imageurl: "",
+  },
+};

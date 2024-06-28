@@ -25,15 +25,34 @@
         <q-inner-loading showing color="primary" />
       </template>
       <template v-slot:top-right>
-        <q-input class="q-mr-sm" dense debounce="500" v-model="indextablefilter" placeholder="Search" outlined>
+        <q-input
+          class="q-mr-sm"
+          dense
+          debounce="500"
+          v-model="indextablefilter"
+          placeholder="Search"
+          outlined
+        >
           <template v-slot:append>
             <q-icon name="search" />
           </template>
         </q-input>
-        <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="add" @click="vehiclestore.openAddVehicleDialog()">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          :disable="loading"
+          icon="add"
+          @click="vehiclestore.openAddVehicleDialog()"
+        >
           <q-tooltip class="bg-accent">Add Item</q-tooltip>
         </q-btn>
-        <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="remove" @click="clickRemoveItem()">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          :disable="loading"
+          icon="remove"
+          @click="clickRemoveItem()"
+        >
           <q-tooltip class="bg-accent">Remove Item</q-tooltip>
         </q-btn>
         <q-btn class="q-mr-sm" color="primary" icon="sync">

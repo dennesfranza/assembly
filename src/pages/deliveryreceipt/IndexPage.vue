@@ -19,9 +19,17 @@
       bordered
       :loading="deliveryreceiptstore.listallitemstableloading"
       @row-click="onRowClick"
+      selection="single"
+      v-model:selected="selected"
     >
       <template v-slot:top-right>
-        <q-input class="q-mr-sm" dense v-model="filter" placeholder="Search" outlined>
+        <q-input
+          class="q-mr-sm"
+          dense
+          v-model="filter"
+          placeholder="Search"
+          outlined
+        >
           <template v-slot:append>
             <q-icon name="search" />
           </template>
@@ -31,6 +39,7 @@
         </q-btn>
       </template>
     </q-table>
+    <delivery-details-page />
   </q-page>
 </template>
 
@@ -43,27 +52,33 @@ import {
   onMounted,
 } from "vue";
 import { useDeliveryReceiptStore } from "src/stores/deliveryreceipt/index";
+import DeliveryDetailsPage from "./DeliveryDetailsPage.vue";
 
 export default defineComponent({
   name: "deliveryreceipt",
   setup() {
-    const deliveryreceiptstore = useDeliveryReceiptStore()
+    const deliveryreceiptstore = useDeliveryReceiptStore();
+    const selected = computed({
+      get: () => deliveryreceiptstore.selected,
+      set: (value) => (deliveryreceiptstore.selected = value)
+    })
 
-    onMounted(() => deliveryreceiptstore.getAllDeliveryItems())
+    onMounted(() => deliveryreceiptstore.getAllDeliveryItems());
 
     return {
       deliveryreceiptstore,
-      filter: ref('')
-    }
+      filter: ref(""),
+      selected
+    };
   },
   methods: {
-    onRowClick (event, row, index) {
-      this.requeststore.openRequisitionDetailsDialog()
-      this.requisitionid = row.id
-      this.requeststore.retrieveRequisitionItem(row.id)
-    }
+    onRowClick(event, row, index) {
+      this.deliveryreceiptstore.openDeliveryDetailsDialog();
+      this.deliveryreceiptstore.retrieveDeliveryItem(row.id)
+    },
   },
   components: {
-  }
+    DeliveryDetailsPage,
+  },
 });
 </script>

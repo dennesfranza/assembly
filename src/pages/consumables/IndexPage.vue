@@ -16,24 +16,49 @@
       :separator="'vertical'"
       :columns="tableindexcolumns"
       :rows="tableindexrows"
+      :filter="indextablefilter"
       selection="single"
       v-model:selected="selected"
       :loading="listallitemstableloading"
       @row-click="onRowClick"
     >
       <template v-slot:top-right>
-        <q-input class="q-mr-sm" dense debounce="500" v-model="indextablefilter" placeholder="Search" outlined>
+        <q-input
+          class="q-mr-sm"
+          dense
+          debounce="500"
+          v-model="indextablefilter"
+          placeholder="Search"
+          outlined
+        >
           <template v-slot:append>
             <q-icon name="search" />
           </template>
         </q-input>
-        <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="add" @click="consumablesstore.openAddConsumableItemDialog()">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          :disable="loading"
+          icon="add"
+          @click="consumablesstore.openAddConsumableItemDialog()"
+        >
           <q-tooltip class="bg-accent">Add Item</q-tooltip>
         </q-btn>
-        <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="remove" @click="clickRemoveItem()">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          :disable="loading"
+          icon="remove"
+          @click="clickRemoveItem()"
+        >
           <q-tooltip class="bg-accent">Remove Item</q-tooltip>
         </q-btn>
-        <q-btn class="q-mr-sm" color="primary" icon="sync" @click="consumablesstore.getAllItems()">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          icon="sync"
+          @click="consumablesstore.getAllItems()"
+        >
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>
       </template>
@@ -52,8 +77,8 @@ import {
   onMounted,
 } from "vue";
 import { useConsumablesStore } from "src/stores/consumables/index";
-import ConsumableDetailsDialogPage from './ConsumableDetailsDialogPage.vue'
-import AddConsumableDialog from './AddConsumableDialog.vue'
+import ConsumableDetailsDialogPage from "./ConsumableDetailsDialogPage.vue";
+import AddConsumableDialog from "./AddConsumableDialog.vue";
 
 export default defineComponent({
   name: "consumables",
@@ -63,34 +88,37 @@ export default defineComponent({
       () => consumablesstore.tableindexcolumns
     );
     const tableindexrows = computed(() => consumablesstore.consumableItems);
-    const listallitemstableloading = computed(() => consumablesstore.listallitemstableloading)
+    const listallitemstableloading = computed(
+      () => consumablesstore.listallitemstableloading
+    );
     const selected = computed({
       get: () => consumablesstore.selected,
-      set: (value) =>  (consumablesstore.selected = value)
-    })
+      set: (value) => (consumablesstore.selected = value),
+    });
 
-    onMounted(() => consumablesstore.getAllItems())
+    onMounted(() => consumablesstore.getAllItems());
 
     return {
       consumablesstore,
       tableindexcolumns,
       tableindexrows,
       selected,
-      listallitemstableloading
+      listallitemstableloading,
+      indextablefilter: ref('')
     };
   },
   methods: {
     onRowClick(event, row, index) {
-      this.consumablesstore.openConsumableDetailsDialog(row)
+      this.consumablesstore.openConsumableDetailsDialog(row);
     },
     clickRemoveItem() {
-      console.log(this.selected[0])
-      this.consumablesstore.deleteConsumableItem(this.selected[0])
-    }
+      console.log(this.selected[0]);
+      this.consumablesstore.deleteConsumableItem(this.selected[0]);
+    },
   },
   components: {
     ConsumableDetailsDialogPage,
-    AddConsumableDialog
-  }
+    AddConsumableDialog,
+  },
 });
 </script>

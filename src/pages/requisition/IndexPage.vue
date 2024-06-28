@@ -23,18 +23,42 @@
       v-model:selected="selected"
     >
       <template v-slot:top-right>
-        <q-input class="q-mr-sm" dense debounce="500" v-model="indextablefilter" placeholder="Search" outlined>
+        <q-input
+          class="q-mr-sm"
+          dense
+          debounce="500"
+          v-model="indextablefilter"
+          placeholder="Search"
+          outlined
+        >
           <template v-slot:append>
             <q-icon name="search" />
           </template>
         </q-input>
-        <q-btn class="q-mr-sm" color="primary" icon="thumb_up" v-if="hasSelection">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          icon="thumb_up"
+          v-if="hasSelection"
+          @click="onClickApproval"
+        >
           <q-tooltip class="bg-accent">Approve Request</q-tooltip>
         </q-btn>
-        <q-btn class="q-mr-sm" color="primary" icon="thumb_down" v-if="hasSelection">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          icon="thumb_down"
+          v-if="hasSelection"
+          @click="onClickDisapproval"
+        >
           <q-tooltip class="bg-accent">Disapprove Request</q-tooltip>
         </q-btn>
-        <q-btn class="q-mr-sm" color="primary" icon="sync" @click="requeststore.getAllItems()">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          icon="sync"
+          @click="requeststore.getAllItems()"
+        >
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>
       </template>
@@ -52,16 +76,15 @@ import {
   onMounted,
 } from "vue";
 import { useRequisitionStore } from "src/stores/requisition/index";
-import RequisitionDetailsPage from "./RequisitionDetailsPage.vue"
+import { useLoginStore } from "src/stores/login/index";
+import RequisitionDetailsPage from "./RequisitionDetailsPage.vue";
 
 export default defineComponent({
   name: "requisitionslip",
   setup() {
     const requeststore = useRequisitionStore();
-
-    const tableindexcolumns = computed(
-      () => requeststore.tableindexcolumns
-    );
+    const loginstore = useLoginStore();
+    const tableindexcolumns = computed(() => requeststore.tableindexcolumns);
     const tableindexrows = computed(() => requeststore.tableindexrows);
     const listallitemstableloading = computed(
       () => requeststore.listallitemstableloading
@@ -74,34 +97,43 @@ export default defineComponent({
     );
     const selected = computed({
       get: () => requeststore.selected,
-      set: (value) => (requeststore.selected = value)
-    })
+      set: (value) => (requeststore.selected = value),
+    });
 
-    const hasSelection = computed(() => requeststore.hasSelection)
+    const hasSelection = computed(() => requeststore.hasSelection);
 
-    onMounted(() => requeststore.getAllItems())
+    onMounted(() => requeststore.getAllItems());
 
     return {
-      requisitionid: null,
       requeststore,
+      loginstore,
       tableindexcolumns,
       tableindexrows,
       listallitemstableloading,
       postrequisitionrequestitemloading,
       openrequisitionrequestdialog,
       selected,
-      hasSelection
-    }
+      hasSelection,
+      requisitionid: null,
+    };
   },
   methods: {
-    onRowClick (event, row, index) {
-      this.requeststore.openRequisitionDetailsDialog()
-      this.requisitionid = row.id
-      this.requeststore.retrieveRequisitionItem(row.id)
-    }
+    onRowClick(event, row, index) {
+      this.requeststore.openRequisitionDetailsDialog();
+      this.requisitionid = row.id;
+      this.requeststore.retrieveRequisitionItem(row.id);
+    },
+    onClickApproval() {
+      let _item = {
+        id: this.selected[0].id,
+        is_approved: true
+      };
+      this.requeststore.approveRequest(_item);
+    },
+    onClickDisapproval() {},
   },
   components: {
-    RequisitionDetailsPage
-  }
+    RequisitionDetailsPage,
+  },
 });
 </script>

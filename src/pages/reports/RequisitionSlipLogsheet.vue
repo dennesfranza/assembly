@@ -15,9 +15,12 @@
       bordered
       :separator="'vertical'"
       :columns="reportstore.requisitionlogsheetcolumns"
+      :rows="reportstore.requisitionlogsheetrows"
+      :rows-per-page-options="[100, 200, 300, 0]"
+      :loading="reportstore.requisitionlogsheettableindexloading"
     >
       <template v-slot:top-right>
-        <q-btn class="q-mr-sm" color="primary" icon="sync">
+        <q-btn class="q-mr-sm" color="primary" icon="sync" @click="reportstore.getAllRequestLogsheetItems()">
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>
       </template>
@@ -40,10 +43,12 @@ export default defineComponent({
   setup() {
     const reportstore = useReportsStore()
 
+
+    onMounted(() => reportstore.getAllRequestLogsheetItems())
+
     return {
       reportstore,
     }
-  },
-  methods: {}
+  }
 })
 </script>

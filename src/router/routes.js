@@ -47,6 +47,7 @@ const routes = [
         component: () => import("pages/reports/RequisitionSlipLogsheet.vue"),
         meta: { requiresAuth: true },
       },
+      // YBC Forms
       {
         name: "RequisitionForm",
         path: "/RequisitionForm",
@@ -60,8 +61,8 @@ const routes = [
         meta: { requiresAuth: true },
       },
       {
-        name: "WithdrawalSlip",
-        path: "/WithdrawalSlip",
+        name: "WithdrawalSlip2",
+        path: "/WithdrawalSlip2",
         component: () => import("pages/ybc/WithdrawalSlip.vue"),
         meta: { requiresAuth: true },
       },
@@ -126,6 +127,32 @@ const routes = [
         path: "/AddDeliveryReceiptPage",
         component: () =>
           import("pages/deliveryreceipt/AddDeliveryReceiptPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      // Withdrawal Slip
+      {
+        name: "WithdrawalSlip",
+        path: "/WithdrawalSlip",
+        component: () => import("pages/withdrawal/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "AddWithdrawalSlipPage",
+        path: "/AddWithdrawalSlipPage",
+        component: () => import("pages/withdrawal/AddWithdrawalSlipPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      // Receiving Report
+      {
+        name: "ReceivingReport",
+        path: "/ReceivingReport",
+        component: () => import("pages/receiving/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "AddReceivingReportPage",
+        path: "/AddReceivingReportPage",
+        component: () => import("pages/receiving/AddReceivingReportPage.vue"),
         meta: { requiresAuth: true },
       },
     ],

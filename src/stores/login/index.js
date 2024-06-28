@@ -8,6 +8,9 @@ export const useLoginStore = defineStore("login", {
     preparedByOptions: (state) => {
       return [{label: state.login.name, value: state.login.id}]
     },
+    currentUserId: (state) => {
+      return state.login.id
+    }
   },
   actions: {
     userLogin() {

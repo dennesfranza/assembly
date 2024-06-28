@@ -7,27 +7,21 @@ export default {
       align: 'left'
     },
     {
-      name: 'rs_number',
+      name: 'rs_number_label',
       label: 'RS Number',
-      field: 'rs_number',
+      field: 'rs_number_label',
       align: 'left'
     },
     {
-      name: 'item_name',
-      label: 'Item Name',
-      field: 'item_name',
+      name: 'description_label',
+      label: 'Description',
+      field: 'description_label',
       align: 'left'
     },
     {
-      name: 'item_description',
-      label: 'Item Description',
-      field: 'item_description',
-      align: 'left'
-    },
-    {
-      name: 'quantity',
+      name: 'quantity_requested',
       label: 'Quantity',
-      field: 'quantity',
+      field: 'quantity_requested',
       align: 'left'
     },
     {
@@ -43,9 +37,9 @@ export default {
       align: 'left'
     },
     {
-      name: 'date_delivered',
+      name: 'received_date',
       label: 'Date Delivered',
-      field: 'date_delivered',
+      field: 'received_date',
       align: 'left'
     },
     {
@@ -60,5 +54,8 @@ export default {
       field: 'remarks',
       align: 'left'
     }
-  ]
+  ],
+  requisitionlogsheetrows: [],
+  requisitionlogsheettableindexloading: false,
+  requisitionlogsheetrefreshbuttondisable: false
 }

@@ -6,7 +6,7 @@ const actionGetAllRequisitionItems = (state) => {
     .get(`requisition/`)
     .then((response) => {
       if (response.status === 200) {
-        state.tableindexrows = response.data;
+        state.tableindexrows = response.data.results;
       }
     })
     .catch(() => {
@@ -122,11 +122,36 @@ const actionCloseRequestDetailsDialog = (state) => {
 };
 
 const actionSearchRsNumber = (state, rs_number) => {
+  state.requisitionsearchrsnumberloading = true
   axiosInstance.get(`requisition_search/?rs_number=${rs_number}`).then(response => {
     if (response.status === 200) {
-      console.log(response)
       state.rsnumbersearchresults = response.data
     }
+  }).catch(error => {
+    console.log(error)
+  }).finally(() => {
+    setTimeout(() => {
+      state.requisitionsearchrsnumberloading = false
+    }, 2000)
+  })
+}
+
+const actionApproveRequest = (state, payload) => {
+  state.requisitionapprovalloading = true
+  axiosInstance.put(`requisition-approval/${payload.id}/`, payload).then(response => {
+    if (response.status === 200) {
+      // state.tableindexrows
+      let objindex = state.tableindexrows.findIndex(item => item.id === response.data.id)
+      state.tableindexrows[objindex].is_approved = response.data.is_approved
+      state.tableindexrows[objindex].status = response.data.status
+      state.tableindexrows[objindex].approved_by = response.data.approved_by
+      console.log(response)
+    }
+  }).catch(error => {
+    console.log(error)
+  }).finally(() => {
+    state.requisitionapprovalloading = false
+    state.selected = []
   })
 }
 
@@ -142,5 +167,6 @@ export {
   rearrageItemNumberCreateRequest,
   actionOpenRequestDetailsDialog,
   actionCloseRequestDetailsDialog,
-  actionSearchRsNumber
+  actionSearchRsNumber,
+  actionApproveRequest
 };

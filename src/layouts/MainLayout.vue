@@ -111,6 +111,18 @@
               <q-item-label>Requisition Slip Logsheet</q-item-label>
             </q-item-section>
           </q-item>
+          <q-item
+            to="/InventoryReport"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="local_shipping" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Inventory Report</q-item-label>
+            </q-item-section>
+          </q-item>
         </q-expansion-item>
 
         <q-expansion-item icon="task" label="Requisition Slip">
@@ -167,6 +179,62 @@
           </q-item>
         </q-expansion-item>
 
+        <q-expansion-item icon="back_hand" label="Withdrawal Slip">
+          <q-item
+            to="/WithdrawalSlip"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="list" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Withdrawal Slip List</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddWithdrawalSlipPage"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="edit" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Withdrawal Slip</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+
+        <q-expansion-item icon="handshake" label="Receiving Report">
+          <q-item
+            to="/ReceivingReport"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="list" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Receiving Report List</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddReceivingReportPage"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="edit" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Receiving Report</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+
+
+        <!-- YBC Forms -->
         <q-expansion-item icon="menu_open" label="Forms">
           <q-item
             to="/RequisitionForm"
@@ -190,7 +258,7 @@
             </q-item-section>
           </q-item>
           <q-item
-            to="/WithdrawalSlip"
+            to="/WithdrawalSlip2"
             class="q-ml-xl"
             active-class="q-item-no-link-highlighting"
           >

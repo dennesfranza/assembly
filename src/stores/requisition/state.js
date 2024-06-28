@@ -59,8 +59,16 @@ export default {
   requisitionrequestdialog: false,
   requisitiondetailspagedialog: false,
   requisitiondetailsloadingpage: false,
+  requisitionsearchrsnumberloading: false,
+  requisitionapprovalloading: false,
   tableindexrows: [],
   tableindexcolumns: [
+    {
+      name: "rs_number",
+      label: "RS Number",
+      field: "rs_number",
+      align: "left",
+    },
     {
       name: "location",
       label: "Location",
@@ -71,12 +79,6 @@ export default {
       name: "requested_by",
       label: "Requested By",
       field: row => row.requested_by.name,
-      align: "left",
-    },
-    {
-      name: "rs_number",
-      label: "RS Number",
-      field: "rs_number",
       align: "left",
     },
     {
@@ -141,5 +143,6 @@ export default {
     requisition_request_items: [],
   },
   selected: [],
-  rsnumbersearchresults: []
+  rsnumbersearchresults: [],
+  requisitionitemsresults: []
 };

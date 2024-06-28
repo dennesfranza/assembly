@@ -10,6 +10,8 @@
     </div>
     <q-table
       :filter="indextablefilter"
+      :columns="locationstore.locationtableindexcolumns"
+      :rows="locationstore.locationtableindexrows"
       title="Location List"
       row-key="id"
       :separator="'vertical'"
@@ -42,15 +44,17 @@
 
 <script>
 import { defineComponent, ref, getCurrentInstance, computed } from "vue";
-import { useVehicleManagementStore } from "src/stores/vehiclemanagement/index";
+import { useLocationStore } from "src/stores/location/index";
 
 export default defineComponent({
   name: "location",
   setup() {
+    const locationstore = useLocationStore()
 
+    // onMounted(() => locationstore.getAllRequestLogsheetItems())
 
     return {
-
+      locationstore
     };
   },
   components: {

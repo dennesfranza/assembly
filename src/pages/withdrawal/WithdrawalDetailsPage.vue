@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-sm">
     <q-dialog
-      v-model="requeststore.requisitiondetailspagedialog"
+      v-model="withdrawalstore.withdrawalslipdetailsdialog"
       persistent
       maximized
     >
@@ -15,48 +15,23 @@
         <q-card-section>
           <div class="row items-center">
             <div class="col q-pa-sm">
-              <q-input
-                v-model="requeststore.requisitiondetails.rs_number"
-                label="RS Number"
-                readonly
-              >
+              <q-input v-model="withdrawalslipdetails.ws_number" label="WS Number" readonly>
                 <template v-slot:prepend>
                   <q-icon name="123" color="black" />
                 </template>
               </q-input>
             </div>
             <div class="col q-pa-sm">
-              <q-input
-                v-model="requeststore.requisitiondetails.date_requested"
-                label="Date Requested"
-                readonly
-              >
-                <template v-slot:prepend>
-                  <q-icon name="calendar_month" color="black" />
-                </template>
-              </q-input>
-            </div>
-            <div class="col q-pa-sm">
-              <q-input
-                class="fit"
-                v-model="requeststore.requisitiondetails.date_needed"
-                label="Date Needed"
-                readonly
-              >
-                <template v-slot:prepend>
-                  <q-icon name="calendar_month" color="black" />
-                </template>
-              </q-input>
-            </div>
-            <div class="col q-pa-sm">
-              <q-input
-                class="fit"
-                v-model="requeststore.requisitiondetails.location"
-                label="Location"
-                readonly
-              >
+              <q-input v-model="withdrawalslipdetails.location" label="Location" readonly>
                 <template v-slot:prepend>
                   <q-icon name="map" color="black" />
+                </template>
+              </q-input>
+            </div>
+            <div class="col q-pa-sm">
+              <q-input v-model="withdrawalslipdetails.date" label="Date" readonly>
+                <template v-slot:prepend>
+                  <q-icon name="calendar_month" color="black" />
                 </template>
               </q-input>
             </div>
@@ -65,10 +40,10 @@
         <q-card-section>
           <div class="q-pt-md">
             <q-table
-              :rows="requeststore.requisitiondetailsitems"
-              :columns="requeststore.tablecreatecolumns"
-              row-key="item_number"
+              :columns="withdrawalstore.withdrawalslipdetailscolumns"
+              :rows="withdrawalstore.withdrawalslipdetailsitems"
               :separator="'vertical'"
+              row-key="id"
               auto-width
               flat
               bordered
@@ -79,24 +54,23 @@
         <q-card-section>
           <div class="row q-pa-md">
             <div class="col q-pa-sm">
-              <q-input
-                v-model="requeststore.requisitiondetails.requested_by"
-                label="Requested By"
-                readonly
-              >
+              <q-input v-model="withdrawalslipdetails.requested_by" label="Requested By" readonly>
                 <template v-slot:prepend>
-                  <q-icon name="fact_check" color="green" />
+                  <q-icon name="fact_check" color="black" />
                 </template>
               </q-input>
             </div>
             <div class="col q-pa-sm">
-              <q-input
-                v-model="requeststore.requisitiondetails.approved_by"
-                label="Approved By"
-                readonly
-              >
+              <q-input v-model="withdrawalslipdetails.noted_by" label="Noted By" readonly>
                 <template v-slot:prepend>
-                  <q-icon name="fact_check" color="orange" />
+                  <q-icon name="fact_check" color="black" />
+                </template>
+              </q-input>
+            </div>
+            <div class="col q-pa-sm">
+              <q-input v-model="withdrawalslipdetails.issued_by" label="Issued By" readonly>
+                <template v-slot:prepend>
+                  <q-icon name="fact_check" color="black" />
                 </template>
               </q-input>
             </div>
@@ -108,44 +82,41 @@
             outline
             label="Close"
             color="red"
-            @click="requeststore.closeRequisitionDetailsDialog()"
+            @click="withdrawalstore.closeDetailsDialog()"
           />
         </q-card-actions>
-        <q-inner-loading :showing="requeststore.requisitiondetailsloadingpage">
+        <q-inner-loading
+          :showing="withdrawalstore.withdrawalslipdetailsloadingpage"
+        >
           <q-spinner-gears size="50px" color="primary" />
         </q-inner-loading>
       </q-card>
     </q-dialog>
   </q-page>
 </template>
-
 <script>
-import { defineComponent, ref, getCurrentInstance } from "vue";
+import { defineComponent, ref, getCurrentInstance, computed } from "vue";
 import { useFormHeadersStore } from "src/stores/formheaders/index";
-import { useRequisitionStore } from "src/stores/requisition/index";
 import FormHeaderVue from "src/components/forms/FormHeader.vue";
+import { useWithdrawalStore } from "src/stores/withdrawal/index";
 
 export default defineComponent({
-  name: "requisitionslip",
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
+  name: "withdrawalslip",
+  setup() {
     const formheaders = useFormHeadersStore();
     const formHeader = formheaders[getCurrentInstance().type.name];
-    const requeststore = useRequisitionStore();
+    const withdrawalstore = useWithdrawalStore();
+    const withdrawalslipdetails = computed(() => withdrawalstore.withdrawalslipdetails)
 
     return {
       formheaders,
       formHeader,
-      requeststore,
+      withdrawalstore,
+      withdrawalslipdetails
     };
   },
   components: {
-    FormHeaderVue,
-  },
+    FormHeaderVue
+  }
 });
 </script>

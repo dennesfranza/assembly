@@ -2,31 +2,54 @@ import { defineStore } from "pinia";
 import state from "./state";
 import {
   actionGetAllDeliveryReceiptItems,
+  actionRetrieveDeliveryItem,
   actionOpenDeliveryItemDialog,
   actionCloseDeliveryItemDialog,
   addItemToCreateDeliveryReceipt,
-  actionPostDeliveryReceiptItem
-} from './actions'
+  actionPostDeliveryReceiptItem,
+  actionOpenDeliveryDetailsDialog,
+  actionCloseDeliveryDetailsDialog,
+  actionSearchRsNumberOrConsumableItem,
+  actionOpenAddQuantityRemarksDialog,
+  actionCloseAddQuantityRemarksDialog
+} from "./actions";
 
 export const useDeliveryReceiptStore = defineStore("deliveryreceipt", {
   state: () => state,
   getters: {},
   actions: {
-    getAllDeliveryItems () {
-      actionGetAllDeliveryReceiptItems(this)
+    getAllDeliveryItems() {
+      actionGetAllDeliveryReceiptItems(this);
+    },
+    retrieveDeliveryItem(payload) {
+      actionRetrieveDeliveryItem(this, payload);
     },
     openAddDeliveryDialog() {
-      actionOpenDeliveryItemDialog(this)
+      actionOpenDeliveryItemDialog(this);
     },
     closeAddDeliveryDialog() {
-      actionCloseDeliveryItemDialog(this)
+      actionCloseDeliveryItemDialog(this);
     },
     addDeliveryItem() {
-      addItemToCreateDeliveryReceipt(this)
-      actionCloseDeliveryItemDialog(this)
+      addItemToCreateDeliveryReceipt(this);
     },
     postItem() {
-      actionPostDeliveryReceiptItem(this)
+      actionPostDeliveryReceiptItem(this);
+    },
+    openDeliveryDetailsDialog() {
+      actionOpenDeliveryDetailsDialog(this);
+    },
+    closeDeliveryDetailsDialog() {
+      actionCloseDeliveryDetailsDialog(this);
+    },
+    searchDeliveryRsOrItem(payload) {
+      actionSearchRsNumberOrConsumableItem(this, payload)
+    },
+    openQuantityRemarksDialog() {
+      actionOpenAddQuantityRemarksDialog(this)
+    },
+    closeQuantityRemarksDialog() {
+      actionCloseAddQuantityRemarksDialog(this)
     }
-  }
-})
+  },
+});

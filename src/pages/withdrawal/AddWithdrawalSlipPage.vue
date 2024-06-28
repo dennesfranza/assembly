@@ -4,9 +4,11 @@
       :headers="formHeader.headers"
       :name="`Create ${formHeader.name}`"
     />
+    {{ createwithdrawalitem }}
+    {{ withdrawalstore.createwithdrawalitems }}
     <div class="row items-center">
       <div class="col q-pa-sm">
-        <q-input v-model="requisitionRequestItem.rs_number" label="RS Number">
+        <q-input v-model="createwithdrawalitem.ws_number" label="WS Number">
           <template v-slot:prepend>
             <q-icon name="123" color="black" />
           </template>
@@ -16,9 +18,9 @@
         <q-select
           label="Location"
           :options="locationstore.locationOptions"
+          v-model="createwithdrawalitem.location"
           map-options
           emit-value
-          v-model="requisitionRequestItem.location"
         >
           <template v-slot:prepend>
             <q-icon name="map" color="black" />
@@ -26,51 +28,17 @@
         </q-select>
       </div>
       <div class="col q-pa-sm">
-        <q-input
-          v-model="requisitionRequestItem.date_requested"
-          label="Date Requested"
-        >
+        <q-input class="fit" v-model="createwithdrawalitem.date" label="Date">
           <template v-slot:prepend>
-            <q-icon name="event" class="cursor-pointer" color="black">
+            <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy
                 cover
                 transition-show="scale"
                 transition-hide="scale"
               >
-                <q-date
-                  v-model="requisitionRequestItem.date_requested"
-                  :mask="requeststore.dateFormat"
-                  today-btn
-                >
+                <q-date v-model="createwithdrawalitem.date" :mask="withdrawalstore.dateFormat" today-btn>
                   <div class="row items-center justify-end">
-                    <q-btn v-close-popup label="Close" color="primary" flat />
-                  </div>
-                </q-date>
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
-      </div>
-      <div class="col q-pa-sm">
-        <q-input
-          class="fit"
-          v-model="requisitionRequestItem.date_needed"
-          label="Date Needed"
-        >
-          <template v-slot:prepend>
-            <q-icon name="event" class="cursor-pointer" color="black">
-              <q-popup-proxy
-                cover
-                transition-show="scale"
-                transition-hide="scale"
-              >
-                <q-date
-                  v-model="requisitionRequestItem.date_needed"
-                  :mask="requeststore.dateFormat"
-                  today-btn
-                >
-                  <div class="row items-center justify-end">
-                    <q-btn v-close-popup label="Close" color="primary" flat />
+                    <q-btn v-close-popup label="Close" color="black" flat />
                   </div>
                 </q-date>
               </q-popup-proxy>
@@ -82,8 +50,8 @@
     <div class="q-pt-md">
       <q-table
         title="Items List"
-        :rows="requeststore.createrequisitionrequest.requisition_request_items"
-        :columns="requeststore.tablecreatecolumns"
+        :columns="withdrawalstore.tablecreatecolumns"
+        :rows="withdrawalstore.tablecreaterows"
         selection="single"
         v-model:selected="selected"
         row-key="item_number"
@@ -93,13 +61,7 @@
         bordered
       >
         <template v-slot:top-right>
-          <q-btn
-            class="q-mr-sm"
-            color="primary"
-            :disable="loading"
-            icon="add"
-            @click="requeststore.openAddRequisitionDialog()"
-          >
+          <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="add">
             <q-tooltip class="bg-accent">Add Item</q-tooltip>
           </q-btn>
           <q-btn
@@ -107,7 +69,6 @@
             color="primary"
             :disable="loading"
             icon="remove"
-            @click="requeststore.removeRequesItem(selected[0])"
           >
             <q-tooltip class="bg-accent">Remove Item</q-tooltip>
           </q-btn>
@@ -119,13 +80,7 @@
           >
             <q-tooltip class="bg-accent">Reset</q-tooltip>
           </q-btn>
-          <q-btn
-            class="q-mr-sm"
-            color="primary"
-            :loading="requeststore.postrequisitionrequestitemloading"
-            icon="save"
-            @click="requeststore.postItem(requisitionRequestItem)"
-          >
+          <q-btn class="q-mr-sm" color="primary" icon="save">
             <q-tooltip class="bg-accent">Save</q-tooltip>
           </q-btn>
         </template>
@@ -135,10 +90,10 @@
       <div class="col q-pa-sm">
         <q-select
           label="Requested By"
-          :options="preparedByOptions"
+          :options="loginstore.preparedByOptions"
           map-options
           emit-value
-          v-model="requisitionRequestItem.requested_by"
+          v-model="createwithdrawalitem.requested_by"
         >
           <template v-slot:prepend>
             <q-icon name="fact_check" color="black" />
@@ -147,11 +102,24 @@
       </div>
       <div class="col q-pa-sm">
         <q-select
-          label="Approved By"
-          :options="approverOptions"
+          label="Noted By"
+          :options="userstore.supervisorOptions"
           map-options
           emit-value
-          v-model="requisitionRequestItem.approved_by"
+          v-model="createwithdrawalitem.noted_by"
+        >
+          <template v-slot:prepend>
+            <q-icon name="fact_check" color="black" />
+          </template>
+        </q-select>
+      </div>
+      <div class="col q-pa-sm">
+        <q-select
+          label="Issued By"
+          :options="userstore.supervisorOptions"
+          map-options
+          emit-value
+          v-model="createwithdrawalitem.issued_by"
         >
           <template v-slot:prepend>
             <q-icon name="fact_check" color="black" />
@@ -159,52 +127,46 @@
         </q-select>
       </div>
     </div>
-    <AddRequisitionDialog />
+    <AddWithdrawalSlipDialog />
   </q-page>
 </template>
 
 <script>
 import { defineComponent, ref, getCurrentInstance, computed } from "vue";
 import { useFormHeadersStore } from "src/stores/formheaders/index";
+import { useWithdrawalStore } from "src/stores/withdrawal/index";
 import { useLocationStore } from "src/stores/location/index";
-import { useUserStore } from "src/stores/users/index";
-import { useRequisitionStore } from "src/stores/requisition/index";
-import FormHeaderVue from "src/components/forms/FormHeader.vue";
-import AddRequisitionDialog from "./AddRequisitionDialog.vue";
 import { useLoginStore } from "src/stores/login/index";
+import { useUserStore } from "src/stores/users/index";
+import FormHeaderVue from "src/components/forms/FormHeader.vue";
+import AddWithdrawalSlipDialog from "./AddWithdrawalSlipDialog.vue"
 
 export default defineComponent({
-  name: "requisitionslip",
+  name: "withdrawalslip",
   setup() {
     const formheaders = useFormHeadersStore();
-    const locationstore = useLocationStore();
-    const userstore = useUserStore();
-    const loginstore = useLoginStore();
-    const requeststore = useRequisitionStore();
     const formHeader = formheaders[getCurrentInstance().type.name];
-    const requisitionRequestItem = computed(
-      () => requeststore.createrequisitionrequest
-    );
-    const dateNeeded = computed(() => requeststore.dateNeeded);
-    const preparedByOptions = computed(() => loginstore.preparedByOptions);
-    const approverOptions = computed(() => userstore.approverOptions);
+    const withdrawalstore = useWithdrawalStore()
+    const locationstore = useLocationStore();
+    const loginstore = useLoginStore();
+    const userstore = useUserStore()
+    const selected = computed(() => withdrawalstore.selected);
+    const createwithdrawalitem = computed(() => withdrawalstore.createwithdrawalitem)
 
     return {
       formheaders,
       formHeader,
+      withdrawalstore,
       locationstore,
+      loginstore,
       userstore,
-      requeststore,
-      requisitionRequestItem,
-      dateNeeded,
-      selected: ref([]),
-      preparedByOptions,
-      approverOptions,
+      selected,
+      createwithdrawalitem
     };
   },
   components: {
     FormHeaderVue,
-    AddRequisitionDialog,
+    AddWithdrawalSlipDialog
   },
 });
 </script>

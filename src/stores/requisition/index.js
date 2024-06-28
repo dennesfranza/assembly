@@ -12,7 +12,8 @@ import {
   rearrageItemNumberCreateRequest,
   actionOpenRequestDetailsDialog,
   actionCloseRequestDetailsDialog,
-  actionSearchRsNumber
+  actionSearchRsNumber,
+  actionApproveRequest
 } from "./actions";
 
 export const useRequisitionStore = defineStore("requisitionslip", {
@@ -66,6 +67,9 @@ export const useRequisitionStore = defineStore("requisitionslip", {
     },
     searchRsNumber(payload) {
       actionSearchRsNumber(this, payload)
+    },
+    approveRequest(payload) {
+      actionApproveRequest(this, payload)
     }
   },
 });

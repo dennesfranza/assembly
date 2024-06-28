@@ -3,27 +3,18 @@
     <div class="row items-center">
       <div class="col items-center">
         <div class="row">
-          <h2 v-if="$q.platform.is.desktop">Equipment Management</h2>
-          <h6 v-if="$q.platform.is.mobile">Equipment Management</h6>
+          <h2 v-if="$q.platform.is.desktop">Receiving Report</h2>
+          <h6 v-if="$q.platform.is.mobile">Receiving Report</h6>
         </div>
       </div>
     </div>
     <q-table
-      title="Equipment List"
+      title="Receiving List"
+      :separator="'vertical'"
       auto-width
       flat
       bordered
-      row-key="id"
-      selection="single"
-      v-model:selected="selected"
-      :filter="indextablefilter"
-      :separator="'vertical'"
-      :columns="equipmenttableindexcolumns"
-      :rows="equipmenttableindexrows"
     >
-      <template v-slot:loading>
-        <q-inner-loading showing color="primary" />
-      </template>
       <template v-slot:top-right>
         <q-input
           class="q-mr-sm"
@@ -42,7 +33,6 @@
           color="primary"
           :disable="loading"
           icon="add"
-          @click="vehiclestore.openAddVehicleDialog()"
         >
           <q-tooltip class="bg-accent">Add Item</q-tooltip>
         </q-btn>
@@ -51,7 +41,6 @@
           color="primary"
           :disable="loading"
           icon="remove"
-          @click="clickRemoveItem()"
         >
           <q-tooltip class="bg-accent">Remove Item</q-tooltip>
         </q-btn>
@@ -64,27 +53,18 @@
 </template>
 
 <script>
-import { defineComponent, ref, getCurrentInstance, computed } from "vue";
-import { useEquipmentStore } from "src/stores/equipments/index";
+import {
+  defineComponent,
+  ref,
+  getCurrentInstance,
+  computed,
+  onMounted,
+} from "vue";
 
 export default defineComponent({
-  name: "equipments",
+  name: "receivingreport",
   setup() {
-    const equipmentstore = useEquipmentStore();
-    const equipmenttableindexcolumns = computed(
-      () => equipmentstore.equipmenttableindexcolumns
-    );
-    const equipmenttableindexrows = computed(
-      () => equipmentstore.equipmenttableindexrows
-    );
-
-    return {
-      equipmentstore,
-      equipmenttableindexcolumns,
-      equipmenttableindexrows,
-      indextablefilter: ref('')
-    };
+    return {};
   },
-  components: {},
 });
 </script>

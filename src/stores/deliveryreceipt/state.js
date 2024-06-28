@@ -8,9 +8,9 @@ export default {
       align: "left",
     },
     {
-      name: "delivered_to",
-      label: "Delivered To",
-      field: "delivered_to",
+      name: "invoice_number",
+      label: "Invoice Number",
+      field: "invoice_number",
       align: "left",
     },
     {
@@ -47,21 +47,28 @@ export default {
       align: "left",
     },
     {
-      name: "quantity_int",
-      label: "Quantity Int",
-      field: "quantity_int",
+      name: "description_label",
+      label: "Description",
+      field: "description_label",
       align: "left",
     },
     {
-      name: "description",
-      label: "Description",
-      field: "description",
+      name: "invoice_number",
+      label: "Delivery Receipt/Invoice Number",
+      field: "invoice_number",
+      align: "left",
+    },
+    {
+      name: "remarks",
+      label: "Remarks",
+      field: "remarks",
       align: "left",
     },
   ],
   tablecreaterows: [],
   deliveryreceiptdetails: {
     id: null,
+    invoice_number: null,
     date: null,
     delivered_to: null,
     received_date: null,
@@ -73,6 +80,7 @@ export default {
   },
   deliveryreceiptdetailsitems: [],
   deliveryreceiptpayload: {
+    invoice_number: null,
     date: null,
     delivered_to: null,
     received_date: null,
@@ -86,15 +94,17 @@ export default {
   delivery_receipt_item: {
     rs_number: null,
     rs_number_label: null,
-    quantity: null,
-    quantity_int: null,
+    quantity: 0,
     description: null,
+    description_label: null,
+    remarks: null
   },
   listallitemstableloading: false,
   postdeliveryreceiptitemloading: false,
   deliveryreceiptdialog: false,
   deliveryreceiptdetailspagedialog: false,
   deliveryreceiptdetailsloadingpage: false,
+  deliveryreceiptaddquantityremarksdialog: false,
   deliveryreceiptinput: [
     {
       name: "rs_number",
@@ -109,16 +119,101 @@ export default {
       type: "input",
     },
     {
-      name: "quantity_int",
-      label: "Quantity in Number",
-      icon: "",
-      type: "input",
-    },
-    {
       name: "description",
       label: "Description",
       icon: "",
       type: "input",
     },
   ],
+  deliveryreceiptdetailscolumns: [
+    {
+      name: "rs_number",
+      label: "RS Number",
+      field: (row) => row.rs_number.rs_number,
+      align: "left",
+    },
+    {
+      name: "quantity",
+      label: "Quantity",
+      field: "quantity",
+      align: "left",
+    },
+    {
+      name: "description",
+      label: "Description",
+      field: (row) => row.description.name,
+      align: "left",
+    },
+    {
+      name: "remarks",
+      label: "Remarks",
+      field: "remarks",
+      align: "left",
+    },
+  ],
+  selected: [],
+  deliveryreceiptsearchcolumns: [
+    {
+      name: "date_requested",
+      label: "Date Requested",
+      field: "date_requested",
+      align: "left",
+    },
+    {
+      name: "rs_number_label",
+      label: "RS Number",
+      field: "rs_number_label",
+      align: "left",
+    },
+    {
+      name: "description_label",
+      label: "Description",
+      field: "description_label",
+      align: "left",
+    },
+    {
+      name: "quantity_requested",
+      label: "Quantity Requested",
+      field: "quantity_requested",
+      align: "left",
+    },
+    {
+      name: "quantity_delivered",
+      label: "Quantity Delivered",
+      field: "quantity_delivered",
+      align: "left",
+    },
+    {
+      name: "requested_by",
+      label: "Requested By",
+      field: "requested_by",
+      align: "left",
+    },
+    {
+      name: "date_needed",
+      label: "Date Needed",
+      field: "date_needed",
+      align: "left",
+    },
+    {
+      name: "received_date",
+      label: "Received Date",
+      field: "received_date",
+      align: "left",
+    },
+    {
+      name: "invoice_number",
+      label: "Invoice Number",
+      field: "invoice_number",
+      align: "left",
+    },
+    {
+      name: "remarks",
+      label: "Remarks",
+      field: "remarks",
+      align: "left",
+    }
+  ],
+  deliveryreceiptsearchrows: [],
+  deliveryreceiptsearchtableloading: false
 };

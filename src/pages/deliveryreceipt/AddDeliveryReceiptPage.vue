@@ -8,6 +8,16 @@
     <div class="row items-center">
       <div class="col q-pa-sm">
         <q-input
+          v-model="deliveryreceiptpayload.invoice_number"
+          label="Delivery Receipt/Invoice Number"
+        >
+          <template v-slot:prepend>
+            <q-icon name="123" color="black" />
+          </template>
+        </q-input>
+      </div>
+      <!-- <div class="col q-pa-sm">
+        <q-input
           v-model="deliveryreceiptpayload.delivered_to"
           label="Delivered To"
         >
@@ -15,10 +25,10 @@
             <q-icon name="123" color="black" />
           </template>
         </q-input>
-      </div>
+      </div> -->
       <div class="col q-pa-sm">
         <q-select
-          label="Address"
+          label="Delivered To"
           :options="locationstore.locationOptions"
           map-options
           emit-value
@@ -53,20 +63,54 @@
         </q-input>
       </div>
     </div>
+    {{ selected }}
     <div class="q-pt-md">
       <q-table
         title="Items List"
+        loading-label="Gimme a sec and I'll fetch ya data!"
         :rows="deliveryreceiptpayload.delivery_receipt_items"
         :columns="tablecreatecolumns"
         selection="single"
         v-model:selected="selected"
-        row-key="item_number"
+        row-key="description_label"
         :separator="'vertical'"
         auto-width
         flat
         bordered
       >
         <template v-slot:top-right>
+          <!-- <q-input class="q-mr-sm" dense debounce="500" v-model="indextablefilter" placeholder="Search RS Number" outlined>
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input> -->
+          <!-- <q-select
+            use-input
+            hide-selected
+            outlined
+            fill-input
+            map-options
+            emit-value
+            input-debounce="0"
+            class="q-mr-sm" dense debounce="500"
+            v-model="delivery_receipt_item.rs_number"
+            label="RS Number"
+            :options="requisitionstore.rsNumberOptions"
+            :loading="requisitionsearchrsnumberloading"
+            @filter="filterRsNumber"
+            @update:model-value="updateRsNumberModel"
+          >
+            <template v-slot:no-option>
+              <q-item>
+                <q-item-section class="text-grey">
+                  No results
+                </q-item-section>
+              </q-item>
+            </template>
+            <template v-slot:prepend>
+              <q-icon name="title" />
+            </template>
+          </q-select> -->
           <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="add" @click="deliverystore.openAddDeliveryDialog()">
             <q-tooltip class="bg-accent">Add Item</q-tooltip>
           </q-btn>
@@ -108,16 +152,24 @@
           v-model="deliveryreceiptpayload.prepared_by"
         >
           <template v-slot:prepend>
-            <q-icon name="fact_check" color="green" />
+            <q-icon name="fact_check" color="black" />
           </template>
         </q-select>
       </div>
       <div class="col q-pa-sm">
-        <q-select label="Received By" :options="usersOptions" map-options emit-value v-model="deliveryreceiptpayload.delivered_by">
+        <q-input
+          label="Delivered By"
+          v-model="deliveryreceiptpayload.delivered_by"
+        >
           <template v-slot:prepend>
-            <q-icon name="fact_check" color="green" />
+            <q-icon name="fact_check" color="black" />
           </template>
-        </q-select>
+        </q-input>
+        <!-- <q-select label="Delivered By" :options="usersOptions" map-options emit-value v-model="deliveryreceiptpayload.delivered_by">
+          <template v-slot:prepend>
+            <q-icon name="fact_check" color="black" />
+          </template>
+        </q-select> -->
       </div>
     </div>
     <div class="row items-center">
@@ -132,14 +184,14 @@
       <div class="col q-pa-sm">
         <q-select label="Received By" :options="usersOptions" map-options emit-value v-model="deliveryreceiptpayload.received_by">
           <template v-slot:prepend>
-            <q-icon name="fact_check" color="green" />
+            <q-icon name="fact_check" color="black" />
           </template>
         </q-select>
       </div>
       <div class="col q-pa-sm">
         <q-select label="Noted By" :options="usersOptions" map-options emit-value v-model="deliveryreceiptpayload.noted_by">
           <template v-slot:prepend>
-            <q-icon name="fact_check" color="green" />
+            <q-icon name="fact_check" color="black" />
           </template>
         </q-select>
       </div>
@@ -182,6 +234,7 @@ import { useDeliveryReceiptStore } from "src/stores/deliveryreceipt/index";
 import { useLocationStore } from "src/stores/location/index";
 import { useUserStore } from "src/stores/users/index";
 import { useLoginStore } from "src/stores/login/index";
+import { useRequisitionStore } from "src/stores/requisition/index";
 import FormHeaderVue from "src/components/forms/FormHeader.vue";
 import AddDeliveryReceiptDialog from './AddDeliveryReceiptDialog.vue'
 
@@ -192,6 +245,7 @@ export default defineComponent({
     const formHeader = formheaders[getCurrentInstance().type.name];
     const deliverystore = useDeliveryReceiptStore();
     const locationstore = useLocationStore();
+    const requisitionstore = useRequisitionStore();
     const userstore = useUserStore();
     const loginstore = useLoginStore();
     const deliveryreceiptpayload = computed(
@@ -201,22 +255,46 @@ export default defineComponent({
     const preparedByOptions = computed(() => loginstore.preparedByOptions);
     const approverOptions = computed(() => userstore.approverOptions);
     const usersOptions = computed(() => userstore.usersOptions);
-
+    const delivery_receipt_item = computed(() => deliverystore.delivery_receipt_item)
+    const requisitionsearchrsnumberloading = computed(() => requisitionstore.requisitionsearchrsnumberloading)
 
     return {
       formheaders,
       formHeader,
       deliverystore,
       locationstore,
+      requisitionstore,
       userstore,
       loginstore,
-      selected: ref([]),
       deliveryreceiptpayload,
       tablecreatecolumns,
       preparedByOptions,
       approverOptions,
       usersOptions,
+      delivery_receipt_item,
+      requisitionsearchrsnumberloading,
+      selected: ref([]),
+      rsnumberoptions: ref([]),
     };
+  },
+  methods: {
+    filterRsNumber(inputvalue, update, abort) {
+      console.log('HEHHEHE')
+      update(() => {
+        if (inputvalue === '') {
+          this.rsnumberoptions = ref([])
+        } else {
+          // this.requisitionstore.searchRsNumber(inputvalue)
+          this.deliverystore.searchDeliveryRsOrItem(inputvalue)
+        }
+      })
+    },
+    updateRsNumberModel(value) {
+      console.log(value)
+      this.delivery_receipt_item.rs_number_label = value
+      let searchresult = this.requisitionstore.rsnumbersearchresults.find(item => item.id === value)
+      this.deliverystore.delivery_receipt_item.rs_number_label = searchresult.rs_number
+    },
   },
   components: {
     FormHeaderVue,
