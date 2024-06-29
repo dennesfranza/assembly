@@ -4,12 +4,19 @@ export default {
   deleteequipmentitemloading: false,
   updateequipmentitemloading: false,
   postequipmentitemloading: false,
+  equipmentitemdialog: false,
   equipmenttableindexrows: [],
   equipmenttableindexcolumns: [
     {
       name: "name",
       label: "Name",
       field: "name",
+      align: "left",
+    },
+    {
+      name: "type",
+      label: "Type",
+      field: "type",
       align: "left",
     },
     {
@@ -27,7 +34,13 @@ export default {
     {
       name: "location",
       label: "Location",
-      field: "location",
+      field: (row) => row.location.name,
+      align: "left",
+    },
+    {
+      name: "remarks",
+      label: "Remarks",
+      field: "remarks",
       align: "left",
     },
   ],

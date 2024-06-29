@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, getCurrentInstance, computed } from "vue";
+import { defineComponent, ref, getCurrentInstance, computed, onMounted } from "vue";
 import { useEquipmentStore } from "src/stores/equipments/index";
 
 export default defineComponent({
@@ -77,6 +77,8 @@ export default defineComponent({
     const equipmenttableindexrows = computed(
       () => equipmentstore.equipmenttableindexrows
     );
+
+    onMounted(() => equipmentstore.getAllItems())
 
     return {
       equipmentstore,

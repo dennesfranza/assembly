@@ -127,7 +127,6 @@ const actionPostConsumableItem = (state) => {
 const actionSearchConsumable = (state, name) => {
   axiosInstance.get(`consumables_search/?name=${name}`).then(response => {
     if (response.status === 200) {
-      console.log(response)
       state.consumablesearchresults = response.data
     }
   })

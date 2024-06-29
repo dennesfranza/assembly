@@ -81,14 +81,6 @@
             <q-item-label>Project/Site</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/Equipments" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="build" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Equipments</q-item-label>
-          </q-item-section>
-        </q-item>
         <q-item to="/Vehicles" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
             <q-icon name="garage" />
@@ -97,7 +89,32 @@
             <q-item-label>Vehicles</q-item-label>
           </q-item-section>
         </q-item>
-
+        <q-expansion-item icon="build" label="Equipments">
+          <q-item
+            to="/Equipments"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="list" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Equipments List</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/EquipmentsTransferSlip"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="engineering" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Equipments Transfer Slip</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
         <q-expansion-item icon="inventory" label="Reports">
           <q-item
             to="/RequisitionSlipLogsheet"
