@@ -1,37 +1,39 @@
 import { defineStore } from "pinia";
 import state from "./state";
-import getters from "./getters";
 import {
-  actionCloseAddVehicleDialog,
+  actionGetAllVehicles,
+  actionOpenVehicleDetailsDialog,
+  actionCloseVehicleDetailsDialog,
   actionOpenAddVehicleDialog,
-  updateTableIndexRowsToFirst,
-  setDefaultVehicleDetails,
-  getAllVehicles,
+  actionCloseAddVehicleDialog
 } from "./actions";
 
-export const useVehicleManagementStore = defineStore("vehiclemanagement", {
+export const useVehicleStore = defineStore("vehicleStore", {
   state: () => state,
-  getters: { getters },
-  actions: {
-    getVehicles() {
-      getAllVehicles(this);
-    },
-    openAddVehicleDialog() {
-      actionOpenAddVehicleDialog(this);
-      let p = {
-        id: 3,
-        vehicle_model: "Eon",
-        body_type: "Hatchback",
-        plate_number: "FBD495",
-        year_model: "2016",
-        status: "Registered",
-        site: "Project C",
-      };
-      updateTableIndexRowsToFirst(this, p);
-    },
-    closeAddVehicleDialog() {
-      actionCloseAddVehicleDialog(this);
-      setDefaultVehicleDetails(this);
+  getters: {
+    hasSelection: (state) => {
+      if (state.selected.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
+  actions: {
+    getAllVehicles() {
+      actionGetAllVehicles(this)
+    },
+    openVehicleDetailsDialog(payload) {
+      actionOpenVehicleDetailsDialog(this, payload)
+    },
+    closeVehicleDetailsDialog() {
+      actionCloseVehicleDetailsDialog(this)
+    },
+    openAddVehicleDialog() {
+      actionOpenAddVehicleDialog(this)
+    },
+    closeAddVehicleDialog() {
+      actionCloseAddVehicleDialog(this)
+    }
+  }
 });

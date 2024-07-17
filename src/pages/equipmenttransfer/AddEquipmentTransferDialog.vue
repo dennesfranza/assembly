@@ -1,23 +1,25 @@
 <template>
   <q-page class="q-pa-sm">
     <q-dialog
-      v-model="withdrawalstore.addwithdrawalslipitemdialog"
-      :backdrop-filter="'blur(4px)'"
+      v-model="addequipmenttransferitemdialog"
       persistent
+      maximized
     >
-      <q-card style="width: 700px; max-width: 80vw">
-        <q-card-section><h6>Withdrawal Slip</h6></q-card-section>
+      <q-card>
+        <q-card-section>
+          <h6>Equipment Transfer</h6>
+        </q-card-section>
         <q-separator></q-separator>
         <q-card-section class="scroll">
           <q-row
             class="q-gutter-xs"
-            v-for="item in withdrawalstore.withdrawalslipdetailsinput"
+            v-for="item in equipmentitemsinput"
             :key="item.name"
           >
             <q-input
               filled
               :label="item.label"
-              v-model="withdrawalstore.createwithdrawalitems[item.name]"
+              v-model="createequipmenttransferitems[item.name]"
               v-if="item.type === 'input'"
             >
               <template v-slot:prepend>
@@ -27,7 +29,7 @@
             <q-select
               v-else-if="item.type === 'select'"
               :label="item.label"
-              v-model="withdrawalstore.createwithdrawalitems[item.name]"
+              v-model="createequipmenttransferitems[item.name]"
               use-input
               hide-selected
               filled
@@ -35,7 +37,6 @@
               map-options
               emit-value
               input-debounce="0"
-              :options="consumablesstore.consumableOptions"
               @filter="filterFn"
               @update:model-value="on"
             >
@@ -58,14 +59,8 @@
             outline
             label="Close"
             color="red"
-            @click="withdrawalstore.closeAddWithdrawalSlipDialog()"
+            @click="equipttransferstore.closeCreateDialog()"
           ></q-btn>
-          <q-btn
-            outline
-            label="Add"
-            color="blue"
-            @click="withdrawalstore.addWithdrawalItem()"
-          />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -73,22 +68,31 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref } from "vue";
-import { useConsumablesStore } from "src/stores/consumables/index";
-import { useWithdrawalStore } from "src/stores/withdrawal/index";
+import { defineComponent, ref, getCurrentInstance, computed } from "vue";
+import { useLocationStore } from "src/stores/location/index";
+import { useUserStore } from "src/stores/users/index";
+import { useLoginStore } from "src/stores/login/index";
+import { useEquipTransferSlipStore } from "src/stores/toolsequiptransferslip/index";
 
 export default defineComponent({
-  name: 'addwithdrawalslip',
+  name: 'toolsequiptransferslip',
   setup() {
-    const consumablesstore = useConsumablesStore()
-    const withdrawalstore = useWithdrawalStore()
-    const createwithdrawalitems = computed(() => withdrawalstore.createwithdrawalitems)
+    const locationstore = useLocationStore();
+    const userstore = useUserStore();
+    const loginstore = useLoginStore();
+    const equipttransferstore = useEquipTransferSlipStore()
+    const createequipmenttransferitems = computed(() => equipttransferstore.createequipmenttransferitems)
+    const addequipmenttransferitemdialog = computed(() => equipttransferstore.addequipmenttransferitemdialog)
+    const equipmentitemsinput = computed(() => equipttransferstore.equipmentitemsinput)
 
     return {
-      consumablesstore,
-      withdrawalstore,
-      createwithdrawalitems,
-      options: ref([]),
+      locationstore,
+      userstore,
+      loginstore,
+      equipttransferstore,
+      createequipmenttransferitems,
+      addequipmenttransferitemdialog,
+      equipmentitemsinput
     }
   },
   methods: {
@@ -103,12 +107,11 @@ export default defineComponent({
     },
     on(value) {
       console.log(value)
-      this.createwithdrawalitems.description = value
+      this.requisition_request_item.description = value
       let x = this.consumablesstore.consumablesearchresults.find(item => item.id === value)
       console.log(x.name)
-      this.withdrawalstore.createwithdrawalitems.description_label = x.name
+      this.requeststore.requisition_request_item.description_label = x.name
     }
   }
 })
-
 </script>

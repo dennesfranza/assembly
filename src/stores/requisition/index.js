@@ -69,6 +69,11 @@ export const useRequisitionStore = defineStore("requisitionslip", {
       actionSearchRsNumber(this, payload)
     },
     approveRequest(payload) {
+      state.requisitionapprovalloading = true
+      actionApproveRequest(this, payload)
+    },
+    disapproveRequest(payload) {
+      state.requisitiondisapprovalloading = true
       actionApproveRequest(this, payload)
     }
   },

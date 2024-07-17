@@ -17,6 +17,13 @@ import {
 export const useConsumablesStore = defineStore("consumables", {
   state: () => state,
   getters: {
+    hasSelection: (state) => {
+      if (state.selected.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     consumableItems: (state) => {
       return state.tableindexrows.map((a) => ({
         id: a.id,
@@ -27,11 +34,11 @@ export const useConsumablesStore = defineStore("consumables", {
       }));
     },
     consumableOptions: (state) => {
-      return state.consumablesearchresults.map(a => ({
+      return state.consumablesearchresults.map((a) => ({
         label: a.name,
-        value: a.id
-      }))
-    }
+        value: a.id,
+      }));
+    },
   },
   actions: {
     getAllItems() {
@@ -62,7 +69,7 @@ export const useConsumablesStore = defineStore("consumables", {
       actionPostConsumableItem(this);
     },
     searchConsumable(payload) {
-      actionSearchConsumable(this, payload)
-    }
+      actionSearchConsumable(this, payload);
+    },
   },
 });

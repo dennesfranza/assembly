@@ -29,9 +29,27 @@ const routes = [
         meta: { requiresAuth: true },
       },
       {
+        name: "GatePass",
+        path: "/GatePass",
+        component: () => import("pages/gatepass/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
         name: "Equipments",
         path: "/Equipments",
         component: () => import("pages/equipments/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "EquipmentTransferSlip",
+        path: "/EquipmentTransferSlip",
+        component: () => import("pages/equipmenttransfer/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "AddEquipmentTransferSlip",
+        path: "/AddEquipmentTransferSlip",
+        component: () => import("pages/equipmenttransfer/AddEquipmentTransferPage.vue"),
         meta: { requiresAuth: true },
       },
       // Vehicle Management
@@ -96,12 +114,12 @@ const routes = [
         component: () => import("pages/ybc/InventoryReport.vue"),
         meta: { requiresAuth: true },
       },
-      {
-        name: "GatePass",
-        path: "/GatePass",
-        component: () => import("pages/ybc/GatePass.vue"),
-        meta: { requiresAuth: true },
-      },
+      // {
+      //   name: "GatePass",
+      //   path: "/GatePass",
+      //   component: () => import("pages/ybc/GatePass.vue"),
+      //   meta: { requiresAuth: true },
+      // },
       // Requisition
       {
         name: "Requisition",

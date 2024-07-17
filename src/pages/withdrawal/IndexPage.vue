@@ -13,6 +13,7 @@
       :separator="'vertical'"
       :columns="tableindexcolumns"
       :rows="tableindexrows"
+      :loading="tableindexloading"
       row-key="id"
       selection="single"
       v-model:selected="selected"
@@ -34,13 +35,38 @@
             <q-icon name="search" />
           </template>
         </q-input>
-        <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="add">
+        <!-- <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="add">
           <q-tooltip class="bg-accent">Add Item</q-tooltip>
         </q-btn>
         <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="remove">
           <q-tooltip class="bg-accent">Remove Item</q-tooltip>
+        </q-btn> -->
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          icon="thumb_up"
+          v-if="hasSelection"
+          :loading="withdrawalslipapprovalloading"
+          @click="onClickApproval"
+        >
+          <q-tooltip class="bg-accent">Approve Request</q-tooltip>
         </q-btn>
-        <q-btn class="q-mr-sm" color="primary" icon="sync">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          icon="thumb_down"
+          v-if="hasSelection"
+          :loading="withdrawalslipdisapprovalloading"
+          @click="onClickDisapproval"
+        >
+          <q-tooltip class="bg-accent">Disapprove Request</q-tooltip>
+        </q-btn>
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          icon="sync"
+          @click="withdrawalstore.getAllItems()"
+        >
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>
       </template>
@@ -70,6 +96,14 @@ export default defineComponent({
       get: () => withdrawalstore.selected,
       set: (value) => (withdrawalstore.selected = value),
     });
+    const tableindexloading = computed(() => withdrawalstore.tableindexloading);
+    const hasSelection = computed(() => withdrawalstore.hasSelection);
+    const withdrawalslipapprovalloading = computed(
+      () => withdrawalstore.withdrawalslipapprovalloading
+    );
+    const withdrawalslipdisapprovalloading = computed(
+      () => withdrawalstore.withdrawalslipdisapprovalloading
+    );
 
     onMounted(() => withdrawalstore.getAllItems());
 
@@ -77,18 +111,38 @@ export default defineComponent({
       withdrawalstore,
       tableindexrows,
       tableindexcolumns,
-      selected
+      selected,
+      tableindexloading,
+      hasSelection,
+      withdrawalslipapprovalloading,
+      withdrawalslipdisapprovalloading,
     };
   },
   methods: {
     onRowClick(event, row, index) {
-      console.log(row)
-      this.withdrawalstore.openDetailsDialog()
-      this.withdrawalstore.retrieveWithdrawalItem(row.id)
-    }
+      console.log(row);
+      this.withdrawalstore.openDetailsDialog();
+      this.withdrawalstore.retrieveWithdrawalItem(row.id);
+    },
+    onClickApproval() {
+      let _item = {
+        id: this.selected[0].id,
+        is_approved: true,
+        status: "Approved",
+      };
+      this.withdrawalstore.approveRequest(_item);
+    },
+    onClickDisapproval() {
+      let _item = {
+        id: this.selected[0].id,
+        is_approved: false,
+        status: "Disapproved",
+      };
+      this.withdrawalstore.disapproveRequest(_item);
+    },
   },
   components: {
-    WithdrawalDetailsPage
-  }
+    WithdrawalDetailsPage,
+  },
 });
 </script>

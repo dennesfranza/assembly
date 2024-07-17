@@ -89,6 +89,14 @@
             <q-item-label>Vehicles</q-item-label>
           </q-item-section>
         </q-item>
+        <q-item to="/GatePass" active-class="q-item-no-link-highlighting">
+          <q-item-section avatar>
+            <q-icon name="fence" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Gate Pass</q-item-label>
+          </q-item-section>
+        </q-item>
         <q-expansion-item icon="build" label="Equipments">
           <q-item
             to="/Equipments"
@@ -103,7 +111,7 @@
             </q-item-section>
           </q-item>
           <q-item
-            to="/EquipmentsTransferSlip"
+            to="/EquipmentTransferSlip"
             class="q-ml-xl"
             active-class="q-item-no-link-highlighting"
           >
@@ -112,6 +120,18 @@
             </q-item-section>
             <q-item-section>
               <q-item-label>Equipments Transfer Slip</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddEquipmentTransferSlip"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="engineering" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Equipments Transfer Slip</q-item-label>
             </q-item-section>
           </q-item>
         </q-expansion-item>

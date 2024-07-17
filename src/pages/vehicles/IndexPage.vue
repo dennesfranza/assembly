@@ -9,16 +9,17 @@
       </div>
     </div>
     <q-table
-      :filter="indextablefilter"
       title="Vehicle List"
-      :columns="tableindexcolumns"
-      :rows="tableindexrows"
-      row-key="id"
-      :separator="'vertical'"
       auto-width
       flat
       bordered
-      :loading="indextableloading"
+      selection="single"
+      v-model:selected="selected"
+      :columns="tableindexcolumns"
+      :rows="tableindexrows"
+      :separator="'vertical'"
+      :filter="indextablefilter"
+      :loading="vehiclestore.vehicleindextableloading"
       @row-click="onRowClick"
     >
       <template v-slot:loading>
@@ -40,7 +41,6 @@
         <q-btn
           class="q-mr-sm"
           color="primary"
-          :disable="loading"
           icon="add"
           @click="vehiclestore.openAddVehicleDialog()"
         >
@@ -49,17 +49,23 @@
         <q-btn
           class="q-mr-sm"
           color="primary"
-          :disable="loading"
           icon="remove"
+          v-if="hasSelection"
           @click="clickRemoveItem()"
         >
           <q-tooltip class="bg-accent">Remove Item</q-tooltip>
         </q-btn>
-        <q-btn class="q-mr-sm" color="primary" icon="sync">
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          icon="sync"
+          @click="vehiclestore.getAllVehicles()"
+        >
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>
       </template>
     </q-table>
+    <VehicleDetailsDialog />
     <AddVehicleDialog />
   </q-page>
 </template>
@@ -72,47 +78,45 @@ import {
   computed,
   onMounted,
 } from "vue";
-import { useVehicleManagementStore } from "src/stores/vehiclemanagement/index";
+import { useVehicleStore } from "src/stores/vehiclemanagement/index";
+import VehicleDetailsDialog from "./VehicleDetailsDialog.vue";
 import AddVehicleDialog from "./AddVehicleDialog.vue";
 
 export default defineComponent({
   name: "vehiclemanagement",
   setup() {
-    const vehiclestore = useVehicleManagementStore();
-
-    const indextablefilter = computed({
-      get: () => vehiclestore.indextablefilter,
-      set: (value) => (vehiclestore.indextablefilter = value),
-    });
-    const indextableloading = computed(() => vehiclestore.indextableloading);
-    const savevehicledetailsloading = computed(
-      () => vehiclestore.savevehicledetailsloading
-    );
-    const vehicledefaultdetails = computed(
-      () => vehiclestore.vehicledefaultdetails
-    );
+    const vehiclestore = useVehicleStore();
     const tableindexcolumns = computed(() => vehiclestore.tableindexcolumns);
     const tableindexrows = computed(() => vehiclestore.tableindexrows);
+    const selected = computed({
+      get: () => vehiclestore.selected,
+      set: (value) => (vehiclestore.selected = value),
+    });
+    const hasSelection = computed(() => vehiclestore.hasSelection);
 
-    function onRowClick(event, row) {
-      console.log(event, row);
-    }
-
-    onMounted(() => vehiclestore.getVehicles());
+    onMounted(() => vehiclestore.getAllVehicles());
 
     return {
       vehiclestore,
-      onRowClick,
-      indextablefilter,
-      indextableloading,
-      savevehicledetailsloading,
-      vehicledefaultdetails,
       tableindexcolumns,
       tableindexrows,
+      selected,
+      hasSelection,
     };
   },
+  methods: {
+    onRowClick(event, row, index) {
+      console.log(row);
+      this.vehiclestore.openVehicleDetailsDialog(row);
+    },
+    clickRemoveItem() {
+      console.log(this.selected[0]);
+      // this.consumablesstore.deleteConsumableItem(this.selected[0]);
+    },
+  },
   components: {
-    AddVehicleDialog,
+    VehicleDetailsDialog,
+    AddVehicleDialog
   },
 });
 </script>

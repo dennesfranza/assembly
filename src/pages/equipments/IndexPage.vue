@@ -20,6 +20,8 @@
       :separator="'vertical'"
       :columns="equipmenttableindexcolumns"
       :rows="equipmenttableindexrows"
+      :loading="equipmentstore.listequipmentstableloading"
+      @row-click="onRowClick"
     >
       <template v-slot:loading>
         <q-inner-loading showing color="primary" />
@@ -40,32 +42,36 @@
         <q-btn
           class="q-mr-sm"
           color="primary"
-          :disable="loading"
           icon="add"
-          @click="vehiclestore.openAddVehicleDialog()"
+          @click="equipmentstore.openAddEquipmentItemDialog()"
         >
           <q-tooltip class="bg-accent">Add Item</q-tooltip>
         </q-btn>
         <q-btn
           class="q-mr-sm"
           color="primary"
-          :disable="loading"
           icon="remove"
+          :disable="equipmentstore.hasSelected"
+          :loading="equipmentstore.deleteequipmentitemloading"
           @click="clickRemoveItem()"
         >
           <q-tooltip class="bg-accent">Remove Item</q-tooltip>
         </q-btn>
-        <q-btn class="q-mr-sm" color="primary" icon="sync">
+        <q-btn class="q-mr-sm" color="primary" icon="sync" @click="equipmentstore.getAllItems()">
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>
       </template>
     </q-table>
+    <EquipmentDetailsDialogPage />
+    <AddEquipmentDialog />
   </q-page>
 </template>
 
 <script>
 import { defineComponent, ref, getCurrentInstance, computed, onMounted } from "vue";
 import { useEquipmentStore } from "src/stores/equipments/index";
+import EquipmentDetailsDialogPage from "./EquipmentDetailsDialogPage.vue";
+import AddEquipmentDialog from './AddEquipmentDialog.vue'
 
 export default defineComponent({
   name: "equipments",
@@ -77,6 +83,10 @@ export default defineComponent({
     const equipmenttableindexrows = computed(
       () => equipmentstore.equipmenttableindexrows
     );
+    const selected = computed({
+      get: () => equipmentstore.selected,
+      set: (value) => (equipmentstore.selected = value),
+    });
 
     onMounted(() => equipmentstore.getAllItems())
 
@@ -84,9 +94,22 @@ export default defineComponent({
       equipmentstore,
       equipmenttableindexcolumns,
       equipmenttableindexrows,
+      selected,
       indextablefilter: ref('')
     };
   },
-  components: {},
+  methods: {
+    onRowClick(event, row, index) {
+      this.equipmentstore.openEquipmentDetailsDialog(row)
+    },
+    clickRemoveItem() {
+      console.log(this.selected)
+      this.equipmentstore.deleteEquipmentItem(this.selected[0].id)
+    }
+  },
+  components: {
+    EquipmentDetailsDialogPage,
+    AddEquipmentDialog
+  },
 });
 </script>

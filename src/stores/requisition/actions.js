@@ -137,10 +137,8 @@ const actionSearchRsNumber = (state, rs_number) => {
 }
 
 const actionApproveRequest = (state, payload) => {
-  state.requisitionapprovalloading = true
   axiosInstance.put(`requisition-approval/${payload.id}/`, payload).then(response => {
     if (response.status === 200) {
-      // state.tableindexrows
       let objindex = state.tableindexrows.findIndex(item => item.id === response.data.id)
       state.tableindexrows[objindex].is_approved = response.data.is_approved
       state.tableindexrows[objindex].status = response.data.status
@@ -150,8 +148,11 @@ const actionApproveRequest = (state, payload) => {
   }).catch(error => {
     console.log(error)
   }).finally(() => {
-    state.requisitionapprovalloading = false
-    state.selected = []
+    setTimeout(() => {
+      state.requisitiondisapprovalloading = false
+      state.requisitionapprovalloading = false
+      state.selected = []
+    }, 1500);
   })
 }
 

@@ -4,8 +4,6 @@
       :headers="formHeader.headers"
       :name="`Create ${formHeader.name}`"
     />
-    {{ createwithdrawalitem }}
-    {{ withdrawalstore.createwithdrawalitems }}
     <div class="row items-center">
       <div class="col q-pa-sm">
         <q-input v-model="createwithdrawalitem.ws_number" label="WS Number">
@@ -36,7 +34,11 @@
                 transition-show="scale"
                 transition-hide="scale"
               >
-                <q-date v-model="createwithdrawalitem.date" :mask="withdrawalstore.dateFormat" today-btn>
+                <q-date
+                  v-model="createwithdrawalitem.date"
+                  :mask="withdrawalstore.dateFormat"
+                  today-btn
+                >
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="black" flat />
                   </div>
@@ -51,24 +53,31 @@
       <q-table
         title="Items List"
         :columns="withdrawalstore.tablecreatecolumns"
-        :rows="withdrawalstore.tablecreaterows"
+        :rows="withdrawalstore.createwithdrawalitem.withdrawal_slip_items"
         selection="single"
         v-model:selected="selected"
-        row-key="item_number"
+        row-key="description"
         :separator="'vertical'"
         auto-width
         flat
         bordered
       >
         <template v-slot:top-right>
-          <q-btn class="q-mr-sm" color="primary" :disable="loading" icon="add">
+          <q-btn
+            class="q-mr-sm"
+            color="primary"
+            :disable="loading"
+            icon="add"
+            @click="withdrawalstore.openAddWithdrawalSlipDialog()"
+          >
             <q-tooltip class="bg-accent">Add Item</q-tooltip>
           </q-btn>
           <q-btn
             class="q-mr-sm"
             color="primary"
-            :disable="loading"
+            :disable="selected.length == 0"
             icon="remove"
+            @click="onClickRemoveItem"
           >
             <q-tooltip class="bg-accent">Remove Item</q-tooltip>
           </q-btn>
@@ -80,7 +89,14 @@
           >
             <q-tooltip class="bg-accent">Reset</q-tooltip>
           </q-btn>
-          <q-btn class="q-mr-sm" color="primary" icon="save">
+          <q-btn
+            class="q-mr-sm"
+            color="primary"
+            icon="save"
+            :disable="createwithdrawalitem.withdrawal_slip_items.length === 0"
+            :loading="postwithdrawalslipitemloading"
+            @click="withdrawalstore.postWithdrawalItem(createwithdrawalitem)"
+          >
             <q-tooltip class="bg-accent">Save</q-tooltip>
           </q-btn>
         </template>
@@ -139,19 +155,23 @@ import { useLocationStore } from "src/stores/location/index";
 import { useLoginStore } from "src/stores/login/index";
 import { useUserStore } from "src/stores/users/index";
 import FormHeaderVue from "src/components/forms/FormHeader.vue";
-import AddWithdrawalSlipDialog from "./AddWithdrawalSlipDialog.vue"
+import AddWithdrawalSlipDialog from "./AddWithdrawalSlipDialog.vue";
 
 export default defineComponent({
   name: "withdrawalslip",
   setup() {
     const formheaders = useFormHeadersStore();
     const formHeader = formheaders[getCurrentInstance().type.name];
-    const withdrawalstore = useWithdrawalStore()
+    const withdrawalstore = useWithdrawalStore();
     const locationstore = useLocationStore();
     const loginstore = useLoginStore();
-    const userstore = useUserStore()
-    const selected = computed(() => withdrawalstore.selected);
-    const createwithdrawalitem = computed(() => withdrawalstore.createwithdrawalitem)
+    const userstore = useUserStore();
+    const createwithdrawalitem = computed(
+      () => withdrawalstore.createwithdrawalitem
+    );
+    const postwithdrawalslipitemloading = computed(
+      () => withdrawalstore.postwithdrawalslipitemloading
+    );
 
     return {
       formheaders,
@@ -160,13 +180,20 @@ export default defineComponent({
       locationstore,
       loginstore,
       userstore,
-      selected,
-      createwithdrawalitem
+      createwithdrawalitem,
+      postwithdrawalslipitemloading,
+      selected: ref([]),
     };
+  },
+  methods: {
+    onClickRemoveItem() {
+      this.withdrawalstore.removeWithdrawalItem(this.selected[0])
+      this.selected = []
+    }
   },
   components: {
     FormHeaderVue,
-    AddWithdrawalSlipDialog
+    AddWithdrawalSlipDialog,
   },
 });
 </script>

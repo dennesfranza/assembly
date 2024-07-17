@@ -98,4 +98,16 @@ export default {
     image: null,
     imageurl: "",
   },
+  selected: [],
+  equipmentdetailsdialog: false,
+  equipmentdetailsitem: {
+    name: "",
+    type: "",
+    serial_number: "",
+    brand: "",
+    remarks: "",
+    location: "",
+    image: "",
+  },
+  addequipmentdialog: false,
 };

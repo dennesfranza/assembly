@@ -13,15 +13,18 @@
       auto-width
       flat
       bordered
+      selection="single"
+      v-model:selected="selected"
       :separator="'vertical'"
       :columns="tableindexcolumns"
       :rows="tableindexrows"
       :filter="indextablefilter"
-      selection="single"
-      v-model:selected="selected"
       :loading="listallitemstableloading"
       @row-click="onRowClick"
     >
+      <template v-slot:loading>
+        <q-inner-loading showing color="primary" />
+      </template>
       <template v-slot:top-right>
         <q-input
           class="q-mr-sm"
@@ -38,7 +41,6 @@
         <q-btn
           class="q-mr-sm"
           color="primary"
-          :disable="loading"
           icon="add"
           @click="consumablesstore.openAddConsumableItemDialog()"
         >
@@ -47,8 +49,8 @@
         <q-btn
           class="q-mr-sm"
           color="primary"
-          :disable="loading"
           icon="remove"
+          v-if="hasSelection"
           @click="clickRemoveItem()"
         >
           <q-tooltip class="bg-accent">Remove Item</q-tooltip>
@@ -95,6 +97,7 @@ export default defineComponent({
       get: () => consumablesstore.selected,
       set: (value) => (consumablesstore.selected = value),
     });
+    const hasSelection = computed(() => consumablesstore.hasSelection)
 
     onMounted(() => consumablesstore.getAllItems());
 
@@ -102,8 +105,9 @@ export default defineComponent({
       consumablesstore,
       tableindexcolumns,
       tableindexrows,
-      selected,
       listallitemstableloading,
+      selected,
+      hasSelection,
       indextablefilter: ref('')
     };
   },

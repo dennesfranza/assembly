@@ -25,6 +25,12 @@ export default {
       field: (row) => row.requested_by.name,
       align: "left",
     },
+    {
+      name: "status",
+      label: "Status",
+      field: "status",
+      align: "left",
+    },
   ],
   tableindexrows: [],
   tablecreatecolumns: [
@@ -63,7 +69,6 @@ export default {
     quantity: 0,
     purpose: "",
   },
-  selected: [],
   tableindexloading: false,
   withdrawalslipdetailsdialog: false,
   withdrawalslipdetailsloadingpage: false,
@@ -95,5 +100,30 @@ export default {
       field: "purpose",
       align: "left",
     },
-  ]
+  ],
+  postwithdrawalslipitemloading: false,
+  addwithdrawalslipitemdialog: false,
+  withdrawalslipdetailsinput: [
+    {
+      name: "quantity",
+      label: "Quantity",
+      icon: "123",
+      type: "input",
+    },
+    {
+      name: "description",
+      label: "Description",
+      icon: "search",
+      type: "select",
+    },
+    {
+      name: "purpose",
+      label: "Purpose",
+      icon: "sunny",
+      type: "input",
+    },
+  ],
+  selected: [],
+  withdrawalslipapprovalloading: false,
+  withdrawalslipdisapprovalloading: false
 };

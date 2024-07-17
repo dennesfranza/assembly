@@ -1,9 +1,4 @@
 export default {
-  addvehicledialog: false,
-  indextablefilter: "",
-  indextableloading: false,
-  addvehicleloading: false,
-  savevehicledetailsloading: false,
   vehicledefaultdetails: {
     mv_file_number: "",
     series: "",
@@ -18,85 +13,117 @@ export default {
     cr_number: "",
     vehicle_registration_date: "",
     vehicle_registration_expiry_date: "",
+    location: "",
+    image: "",
+  },
+  createvehicleitem: {
+    mv_file_number: "",
+    series: "",
+    maker: "",
+    vehicle_model: "",
+    body_type: "",
+    plate_number: "",
+    engine_number: "",
+    chassis_number: "",
+    year_model: "",
+    or_date: "",
+    cr_number: "",
+    vehicle_registration_date: "",
+    vehicle_registration_expiry_date: "",
+    location: "",
+    image: "",
+    imageurl: ""
   },
   vehicledetailsinput: [
     {
       name: "mv_file_number",
       label: "MV File Number",
       icon: "123",
-      type: 'input'
+      type: "input",
     },
     {
       name: "series",
       label: "Series",
       icon: "light",
-      type: 'input'
+      type: "input",
     },
     {
-      name: "maker",
+      name: "make",
       label: "Maker",
       icon: "factory",
-      type: 'input'
+      type: "input",
     },
     {
       name: "vehicle_model",
       label: "Model",
       icon: "pallet",
-      type: 'input'
+      type: "input",
     },
     {
       name: "body_type",
       label: "Body Type",
       icon: "directions_car",
-      type: 'input'
+      type: "input",
     },
     {
       name: "plate_number",
       label: "Plate Number",
       icon: "local_parking",
-      type: 'input'
+      type: "input",
     },
     {
       name: "engine_number",
       label: "Engine Number",
       icon: "garage",
-      type: 'input'
+      type: "input",
     },
     {
       name: "chassis_number",
       label: "Chassis Number",
       icon: "local_taxi",
-      type: 'input'
+      type: "input",
     },
     {
       name: "year_model",
       label: "Year Model",
       icon: "verified",
-      type: 'input'
+      type: "input",
     },
     {
       name: "or_date",
       label: "OR Date",
       icon: "calendar_month",
-      type: 'date'
+      type: "date",
     },
     {
       name: "cr_number",
       label: "CR Number",
       icon: "tag",
-      type: 'input'
+      type: "input",
     },
     {
       name: "vehicle_registration_date",
       label: "Vehicle Registration Date",
       icon: "calendar_month",
-      type: 'date'
+      type: "date",
     },
     {
       name: "vehicle_registration_expiry_date",
-      label: "Registration Expiry date",
+      label: "Registration Expiry Date",
       icon: "calendar_month",
-      type: 'date'
+      type: "date",
+    },
+    {
+      name: "location",
+      label: "Location",
+      icon: "map",
+      type: "input",
+    },
+    {
+      name: "image",
+      label: "Image",
+      icon: "calendar_month",
+      type: "file",
     },
   ],
   tableindexcolumns: [
@@ -131,30 +158,20 @@ export default {
       align: "left",
     },
     {
-      name: "site",
+      name: "location",
       label: "Project Site",
-      field: "site",
+      field: (row) => row.location.name,
       align: "left",
     },
   ],
-  tableindexrows: [
-    // {
-    //   id: 1,
-    //   vehicle_model: "L300",
-    //   body_type: "Box",
-    //   plate_number: "FBD495",
-    //   year_model: "2016",
-    //   status: "Registered",
-    //   site: "Project A",
-    // },
-    // {
-    //   id: 2,
-    //   vehicle_model: "Corolla",
-    //   body_type: "Sedan",
-    //   plate_number: "THE284",
-    //   year_model: "2024",
-    //   status: "Unregistered",
-    //   site: "Project B",
-    // },
-  ],
+  tableindexrows: [],
+  vehicleindextableloading: false,
+  vehicleadditemdialog: false,
+  vehicleadditemloading: false,
+  vehicleremoveitemdialog: false,
+  vehicleremoveitemloading: false,
+  vehicleupdateitemdialog: false,
+  vehicleupdateitemloading: false,
+  vehicledetailsdialog: false,
+  selected: [],
 };

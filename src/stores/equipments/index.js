@@ -4,7 +4,13 @@ import baseUrl from "../../config/index";
 import {
   actionGetAllEquipments,
   actionRetrieveEquipmentItem,
-  actionPostEquipmentItem
+  actionPostEquipmentItem,
+  actionSearchEquipment,
+  actionOpenEquipmentDetailsDialogPage,
+  actionCloseEquipmentDetailsDialogPage,
+  actionOpenAddEquipmentDialog,
+  actionCloseAddEquipmentDialog,
+  actionDestroyEquipmentItem
 } from "./actions";
 
 export const useEquipmentStore = defineStore("equipments", {
@@ -24,7 +30,13 @@ export const useEquipmentStore = defineStore("equipments", {
       }))
     },
     equipmentOptions: (state) => {
-      return state.q
+      return state
+    },
+    hasSelected: (state) => {
+      if (state.selected.length > 0) {
+        return false
+      }
+      return true
     }
   },
   actions: {
@@ -36,6 +48,24 @@ export const useEquipmentStore = defineStore("equipments", {
     },
     postEquipmentItem() {
       actionPostEquipmentItem(this)
+    },
+    searchEquipmentItem(payload) {
+      actionSearchEquipment(this, payload)
+    },
+    openEquipmentDetailsDialog(payload) {
+      actionOpenEquipmentDetailsDialogPage(this, payload)
+    },
+    closeEquipmentDetailsDialog() {
+      actionCloseEquipmentDetailsDialogPage(this)
+    },
+    openAddEquipmentItemDialog() {
+      actionOpenAddEquipmentDialog(this)
+    },
+    closeAddEquipmentItemDialog() {
+      actionCloseAddEquipmentDialog(this)
+    },
+    deleteEquipmentItem(payload) {
+      actionDestroyEquipmentItem(this, payload)
     }
   },
 });

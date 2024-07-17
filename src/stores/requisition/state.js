@@ -61,6 +61,7 @@ export default {
   requisitiondetailsloadingpage: false,
   requisitionsearchrsnumberloading: false,
   requisitionapprovalloading: false,
+  requisitiondisapprovalloading: false,
   tableindexrows: [],
   tableindexcolumns: [
     {
@@ -144,5 +145,6 @@ export default {
   },
   selected: [],
   rsnumbersearchresults: [],
-  requisitionitemsresults: []
+  requisitionitemsresults: [],
+  editable: true
 };

@@ -10,18 +10,21 @@
     </div>
     <q-table
       title="Requisition List"
+      row-key="id"
+      selection="single"
       :columns="tableindexcolumns"
       :rows="tableindexrows"
-      row-key="id"
       :separator="'vertical'"
+      :loading="listallitemstableloading"
       auto-width
       flat
       bordered
-      :loading="listallitemstableloading"
-      @row-click="onRowClick"
-      selection="single"
       v-model:selected="selected"
+      @row-click="onRowClick"
     >
+      <template v-slot:loading>
+        <q-inner-loading showing color="primary" />
+      </template>
       <template v-slot:top-right>
         <q-input
           class="q-mr-sm"
@@ -40,6 +43,7 @@
           color="primary"
           icon="thumb_up"
           v-if="hasSelection"
+          :loading="requisitionapprovalloading"
           @click="onClickApproval"
         >
           <q-tooltip class="bg-accent">Approve Request</q-tooltip>
@@ -49,6 +53,7 @@
           color="primary"
           icon="thumb_down"
           v-if="hasSelection"
+          :loading="requisitiondisapprovalloading"
           @click="onClickDisapproval"
         >
           <q-tooltip class="bg-accent">Disapprove Request</q-tooltip>
@@ -99,8 +104,13 @@ export default defineComponent({
       get: () => requeststore.selected,
       set: (value) => (requeststore.selected = value),
     });
-
     const hasSelection = computed(() => requeststore.hasSelection);
+    const requisitionapprovalloading = computed(
+      () => requeststore.requisitionapprovalloading
+    );
+    const requisitiondisapprovalloading = computed(
+      () => requeststore.requisitiondisapprovalloading
+    );
 
     onMounted(() => requeststore.getAllItems());
 
@@ -114,6 +124,8 @@ export default defineComponent({
       openrequisitionrequestdialog,
       selected,
       hasSelection,
+      requisitionapprovalloading,
+      requisitiondisapprovalloading,
       requisitionid: null,
     };
   },
@@ -126,11 +138,19 @@ export default defineComponent({
     onClickApproval() {
       let _item = {
         id: this.selected[0].id,
-        is_approved: true
+        is_approved: true,
+        status: "Approved",
       };
       this.requeststore.approveRequest(_item);
     },
-    onClickDisapproval() {},
+    onClickDisapproval() {
+      let _item = {
+        id: this.selected[0].id,
+        is_approved: false,
+        status: "Disapproved",
+      };
+      this.requeststore.approveRequest(_item);
+    },
   },
   components: {
     RequisitionDetailsPage,

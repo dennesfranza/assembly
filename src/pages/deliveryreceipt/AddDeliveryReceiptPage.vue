@@ -4,7 +4,6 @@
       :headers="formHeader.headers"
       :name="`Create ${formHeader.name}`"
     />
-    {{ deliveryreceiptpayload }}
     <div class="row items-center">
       <div class="col q-pa-sm">
         <q-input
@@ -16,16 +15,6 @@
           </template>
         </q-input>
       </div>
-      <!-- <div class="col q-pa-sm">
-        <q-input
-          v-model="deliveryreceiptpayload.delivered_to"
-          label="Delivered To"
-        >
-          <template v-slot:prepend>
-            <q-icon name="123" color="black" />
-          </template>
-        </q-input>
-      </div> -->
       <div class="col q-pa-sm">
         <q-select
           label="Delivered To"
@@ -63,7 +52,6 @@
         </q-input>
       </div>
     </div>
-    {{ selected }}
     <div class="q-pt-md">
       <q-table
         title="Items List"

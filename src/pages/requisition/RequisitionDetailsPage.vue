@@ -18,7 +18,7 @@
               <q-input
                 v-model="requeststore.requisitiondetails.rs_number"
                 label="RS Number"
-                readonly
+                :readonly="editable"
               >
                 <template v-slot:prepend>
                   <q-icon name="123" color="black" />
@@ -29,7 +29,7 @@
               <q-input
                 v-model="requeststore.requisitiondetails.date_requested"
                 label="Date Requested"
-                readonly
+                :readonly="editable"
               >
                 <template v-slot:prepend>
                   <q-icon name="calendar_month" color="black" />
@@ -41,7 +41,7 @@
                 class="fit"
                 v-model="requeststore.requisitiondetails.date_needed"
                 label="Date Needed"
-                readonly
+                :readonly="editable"
               >
                 <template v-slot:prepend>
                   <q-icon name="calendar_month" color="black" />
@@ -53,7 +53,7 @@
                 class="fit"
                 v-model="requeststore.requisitiondetails.location"
                 label="Location"
-                readonly
+                :readonly="editable"
               >
                 <template v-slot:prepend>
                   <q-icon name="map" color="black" />
@@ -73,6 +73,25 @@
               flat
               bordered
             >
+              <template v-slot:top-right v-if="editable">
+                <q-btn
+                  class="q-mr-sm"
+                  color="primary"
+                  icon="add"
+                >
+                  <q-tooltip class="bg-accent">Add Item</q-tooltip>
+                </q-btn>
+                <q-btn
+                  class="q-mr-sm"
+                  color="primary"
+                  icon="remove"
+                >
+                  <q-tooltip class="bg-accent">Remove Item</q-tooltip>
+                </q-btn>
+                <q-btn class="q-mr-sm" color="primary" icon="sync">
+                  <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
+                </q-btn>
+              </template>
             </q-table>
           </div>
         </q-card-section>
@@ -82,10 +101,10 @@
               <q-input
                 v-model="requeststore.requisitiondetails.requested_by"
                 label="Requested By"
-                readonly
+                :readonly="editable"
               >
                 <template v-slot:prepend>
-                  <q-icon name="fact_check" color="green" />
+                  <q-icon name="fact_check" color="black" />
                 </template>
               </q-input>
             </div>
@@ -93,10 +112,10 @@
               <q-input
                 v-model="requeststore.requisitiondetails.approved_by"
                 label="Approved By"
-                readonly
+                :readonly="editable"
               >
                 <template v-slot:prepend>
-                  <q-icon name="fact_check" color="orange" />
+                  <q-icon name="fact_check" color="black" />
                 </template>
               </q-input>
             </div>
@@ -120,28 +139,24 @@
 </template>
 
 <script>
-import { defineComponent, ref, getCurrentInstance } from "vue";
+import { defineComponent, ref, getCurrentInstance, computed } from "vue";
 import { useFormHeadersStore } from "src/stores/formheaders/index";
 import { useRequisitionStore } from "src/stores/requisition/index";
 import FormHeaderVue from "src/components/forms/FormHeader.vue";
 
 export default defineComponent({
   name: "requisitionslip",
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
+  setup() {
     const formheaders = useFormHeadersStore();
     const formHeader = formheaders[getCurrentInstance().type.name];
     const requeststore = useRequisitionStore();
+    const editable = computed(() => requeststore.editable)
 
     return {
       formheaders,
       formHeader,
       requeststore,
+      editable
     };
   },
   components: {

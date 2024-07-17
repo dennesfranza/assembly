@@ -101,12 +101,6 @@
             color="red"
             @click="deliverystore.closeAddDeliveryDialog()"
           ></q-btn>
-          <!-- <q-btn
-            outline
-            label="Add"
-            color="blue"
-            @click="deliverystore.addDeliveryItem()"
-          ></q-btn> -->
         </q-card-actions>
       </q-card>
     </q-dialog>
