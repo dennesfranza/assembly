@@ -5,7 +5,8 @@ import {
   actionOpenVehicleDetailsDialog,
   actionCloseVehicleDetailsDialog,
   actionOpenAddVehicleDialog,
-  actionCloseAddVehicleDialog
+  actionCloseAddVehicleDialog,
+  actionPostVehicleItem
 } from "./actions";
 
 export const useVehicleStore = defineStore("vehicleStore", {
@@ -34,6 +35,9 @@ export const useVehicleStore = defineStore("vehicleStore", {
     },
     closeAddVehicleDialog() {
       actionCloseAddVehicleDialog(this)
+    },
+    postVehicleItem() {
+      actionPostVehicleItem(this)
     }
   }
 });

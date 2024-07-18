@@ -66,6 +66,75 @@ const actionOpenAddVehicleDialog = (state) => {
 
 const actionCloseAddVehicleDialog = (state) => {
   state.vehicleadditemdialog = false
+  state.createvehicleitem = {
+    mv_file_number: "",
+    series: "",
+    make: "",
+    vehicle_model: "",
+    body_type: "",
+    plate_number: "",
+    engine_number: "",
+    chassis_number: "",
+    year_model: "",
+    or_date: "",
+    cr_number: "",
+    vehicle_registration_date: "",
+    vehicle_registration_expiry_date: "",
+    location: "",
+    image: "",
+    imageurl: ""
+  }
+}
+
+const actionPostVehicleItem = (state) => {
+  state.vehicleadditemloading = true
+  let formdata = new FormData()
+  formdata.append('mv_file_number', state.createvehicleitem.mv_file_number)
+  formdata.append('series', state.createvehicleitem.series)
+  formdata.append('make', state.createvehicleitem.make)
+  formdata.append('vehicle_model', state.createvehicleitem.vehicle_model)
+  formdata.append('body_type', state.createvehicleitem.body_type)
+  formdata.append('plate_number', state.createvehicleitem.plate_number)
+  formdata.append('engine_number', state.createvehicleitem.engine_number)
+  formdata.append('chassis_number', state.createvehicleitem.chassis_number)
+  formdata.append('year_model', state.createvehicleitem.year_model)
+  formdata.append('or_date', state.createvehicleitem.or_date)
+  formdata.append('cr_number', state.createvehicleitem.cr_number)
+  formdata.append('vehicle_registration_date', state.createvehicleitem.vehicle_registration_date)
+  formdata.append('vehicle_registration_expiry_date', state.createvehicleitem.vehicle_registration_expiry_date)
+  formdata.append('location', state.createvehicleitem.location)
+  formdata.append('image', state.createvehicleitem.image)
+  axiosInstance.post(`vehicle/`, formdata).then(response => {
+    if (response.status === 201) {
+      console.log(response)
+      state.tableindexrows.unshift(response.data)
+    }
+  }).catch(error => {
+    console.log(error)
+  }).finally(() => {
+    setTimeout(() => {
+      state.vehicleadditemloading = false
+      state.vehicleadditemdialog = false
+      state.createvehicleitem = {
+        mv_file_number: "",
+        series: "",
+        make: "",
+        vehicle_model: "",
+        body_type: "",
+        plate_number: "",
+        engine_number: "",
+        chassis_number: "",
+        year_model: "",
+        or_date: "",
+        cr_number: "",
+        vehicle_registration_date: "",
+        vehicle_registration_expiry_date: "",
+        location: "",
+        image: "",
+        imageurl: ""
+      }
+    }, 1500);
+  })
 }
 
 export {
@@ -73,5 +142,6 @@ export {
   actionOpenVehicleDetailsDialog,
   actionCloseVehicleDetailsDialog,
   actionOpenAddVehicleDialog,
-  actionCloseAddVehicleDialog
+  actionCloseAddVehicleDialog,
+  actionPostVehicleItem
 };

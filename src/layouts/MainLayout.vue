@@ -272,7 +272,7 @@
 
 
         <!-- YBC Forms -->
-        <q-expansion-item icon="menu_open" label="Forms">
+        <!-- <q-expansion-item icon="menu_open" label="Forms">
           <q-item
             to="/RequisitionForm"
             class="q-ml-xl"
@@ -357,7 +357,7 @@
               <q-item-label>Gate Pass</q-item-label>
             </q-item-section>
           </q-item>
-        </q-expansion-item>
+        </q-expansion-item> -->
 
         <!--  -->
         <q-item @click="loginstore.userLogout()" :clickable="true" active-class="q-item-no-link-highlighting">

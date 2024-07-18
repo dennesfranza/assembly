@@ -43,7 +43,7 @@
                   >
                     <q-date
                       v-model="createvehicleitem[item.name]"
-                      :mask="dateFormat"
+                      :mask="vehiclestore.dateFormat"
                       today-btn
                     >
                       <div class="row items-center justify-end">
@@ -104,7 +104,13 @@
             color="red"
             @click="vehiclestore.closeAddVehicleDialog()"
           />
-          <q-btn outline label="Save" color="blue" v-close-popup />
+          <q-btn
+            outline
+            label="Save"
+            color="blue"
+            :loading="vehiclestore.vehicleadditemloading"
+            @click="vehiclestore.postVehicleItem()"
+          />
         </q-card-actions>
       </q-card>
     </q-dialog>

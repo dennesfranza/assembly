@@ -22,7 +22,11 @@
           </div>
           <div class="row items-center">
             <div class="col q-pa-sm">
-              <q-input label="Description" v-model="createconsumableitem.description" filled>
+              <q-input
+                label="Description"
+                v-model="createconsumableitem.description"
+                filled
+              >
                 <template v-slot:prepend>
                   <q-icon name="description" />
                 </template>
@@ -30,7 +34,13 @@
             </div>
           </div>
           <div class="row items-center" style="max-width: 300px">
-            <q-file v-model="createconsumableitem.image" label="Image" @update:model-value="onSelected()" clearable filled>
+            <q-file
+              v-model="createconsumableitem.image"
+              label="Image"
+              @update:model-value="onSelected()"
+              clearable
+              filled
+            >
               <template v-slot:prepend>
                 <q-icon name="attach_file" />
               </template>
@@ -81,7 +91,9 @@ export default defineComponent({
   name: "consumabledetails",
   setup() {
     const consumablesstore = useConsumablesStore();
-    const createconsumableitem = computed(() => consumablesstore.createconsumableitem)
+    const createconsumableitem = computed(
+      () => consumablesstore.createconsumableitem
+    );
 
     return {
       consumablesstore,
@@ -91,11 +103,13 @@ export default defineComponent({
   methods: {
     onSelected() {
       if (this.createconsumableitem.image != null) {
-        this.createconsumableitem.imageurl = window.URL.createObjectURL(this.createconsumableitem.image)
+        this.createconsumableitem.imageurl = window.URL.createObjectURL(
+          this.createconsumableitem.image
+        );
       } else {
-        this.createconsumableitem.imageurl = null
+        this.createconsumableitem.imageurl = null;
       }
-    }
-  }
+    },
+  },
 });
 </script>

@@ -1,8 +1,9 @@
 export default {
+  dateFormat: "YYYY-MM-DD",
   vehicledefaultdetails: {
     mv_file_number: "",
     series: "",
-    maker: "",
+    make: "",
     vehicle_model: "",
     body_type: "",
     plate_number: "",
@@ -19,7 +20,7 @@ export default {
   createvehicleitem: {
     mv_file_number: "",
     series: "",
-    maker: "",
+    make: "",
     vehicle_model: "",
     body_type: "",
     plate_number: "",
@@ -49,7 +50,7 @@ export default {
     },
     {
       name: "make",
-      label: "Maker",
+      label: "Make",
       icon: "factory",
       type: "input",
     },
