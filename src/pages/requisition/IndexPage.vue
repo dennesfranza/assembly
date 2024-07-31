@@ -41,6 +41,16 @@
         <q-btn
           class="q-mr-sm"
           color="primary"
+          icon="remove"
+          v-if="hasSelection"
+          :loading="requeststore.deleterequisitionitemloading"
+          @click="removeItem"
+        >
+          <q-tooltip class="bg-accent">Remove Item</q-tooltip>
+        </q-btn>
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
           icon="thumb_up"
           v-if="hasSelection"
           :loading="requisitionapprovalloading"
@@ -61,6 +71,15 @@
         <q-btn
           class="q-mr-sm"
           color="primary"
+          icon="edit"
+          v-if="hasSelection"
+          @click="requeststore.openEditDialog()"
+        >
+          <q-tooltip class="bg-accent">Edit</q-tooltip>
+        </q-btn>
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
           icon="sync"
           @click="requeststore.getAllItems()"
         >
@@ -68,7 +87,8 @@
         </q-btn>
       </template>
     </q-table>
-    <RequisitionDetailsPage :id="requisitionid" />
+    <RequisitionDetailsPage />
+    <EditRequisitionDialog />
   </q-page>
 </template>
 
@@ -83,6 +103,7 @@ import {
 import { useRequisitionStore } from "src/stores/requisition/index";
 import { useLoginStore } from "src/stores/login/index";
 import RequisitionDetailsPage from "./RequisitionDetailsPage.vue";
+import EditRequisitionDialog from "./EditRequisitionDialog.vue";
 
 export default defineComponent({
   name: "requisitionslip",
@@ -151,9 +172,13 @@ export default defineComponent({
       };
       this.requeststore.approveRequest(_item);
     },
+    removeItem() {
+      this.requeststore.removeRequesitionRequestItem(this.selected[0].id)
+    }
   },
   components: {
     RequisitionDetailsPage,
+    EditRequisitionDialog
   },
 });
 </script>

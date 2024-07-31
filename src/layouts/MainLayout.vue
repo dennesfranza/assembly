@@ -89,14 +89,34 @@
             <q-item-label>Vehicles</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item to="/GatePass" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="fence" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Gate Pass</q-item-label>
-          </q-item-section>
-        </q-item>
+
+        <q-expansion-item icon="fence" label="Gate Pass">
+          <q-item
+            to="/GatePass"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon name="fence" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Gate Pass List</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddGatePass"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon name="fence" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Gate Pass</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+
         <q-expansion-item icon="build" label="Equipments">
           <q-item
             to="/Equipments"
@@ -270,7 +290,6 @@
           </q-item>
         </q-expansion-item>
 
-
         <!-- YBC Forms -->
         <!-- <q-expansion-item icon="menu_open" label="Forms">
           <q-item
@@ -360,7 +379,11 @@
         </q-expansion-item> -->
 
         <!--  -->
-        <q-item @click="loginstore.userLogout()" :clickable="true" active-class="q-item-no-link-highlighting">
+        <q-item
+          @click="loginstore.userLogout()"
+          :clickable="true"
+          active-class="q-item-no-link-highlighting"
+        >
           <q-item-section avatar>
             <q-icon name="logout" />
           </q-item-section>
@@ -402,9 +425,9 @@ export default defineComponent({
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value;
       },
-      loginstore
+      loginstore,
     };
-  }
+  },
 });
 </script>
 

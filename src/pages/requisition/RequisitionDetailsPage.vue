@@ -66,32 +66,13 @@
           <div class="q-pt-md">
             <q-table
               :rows="requeststore.requisitiondetailsitems"
-              :columns="requeststore.tablecreatecolumns"
+              :columns="requeststore.requisitiondetailscolumns"
               row-key="item_number"
               :separator="'vertical'"
               auto-width
               flat
               bordered
             >
-              <template v-slot:top-right v-if="editable">
-                <q-btn
-                  class="q-mr-sm"
-                  color="primary"
-                  icon="add"
-                >
-                  <q-tooltip class="bg-accent">Add Item</q-tooltip>
-                </q-btn>
-                <q-btn
-                  class="q-mr-sm"
-                  color="primary"
-                  icon="remove"
-                >
-                  <q-tooltip class="bg-accent">Remove Item</q-tooltip>
-                </q-btn>
-                <q-btn class="q-mr-sm" color="primary" icon="sync">
-                  <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
-                </q-btn>
-              </template>
             </q-table>
           </div>
         </q-card-section>

@@ -1,0 +1,137 @@
+export default {
+  dateFormat: "YYYY-MM-DD",
+  tableindexcolumns: [
+    {
+      name: "rr_no",
+      label: "Receiving Report Number",
+      field: "rr_no",
+      align: "left",
+    },
+    {
+      name: "invoice_dr_no",
+      label: "Invoice Number",
+      field: row => row.invoice_dr_no.invoice_number,
+      align: "left",
+    },
+    {
+      name: "report_from",
+      label: "Report From",
+      field: row => row.report_from.name,
+      align: "left",
+    },
+    {
+      name: "received_by",
+      label: "Received By",
+      field: row => row.received_by.name,
+      align: "left",
+    },
+  ],
+  tableindexrows: [],
+  tablecreatecolumns: [
+    {
+      name: "description_label",
+      label: "Description",
+      field: "description_label",
+      align: "left",
+    },
+    {
+      name: "quantity",
+      label: "Quantity",
+      field: "quantity",
+      align: "left",
+    },
+    {
+      name: "suppliers_name",
+      label: "Suppliers Name",
+      field: "suppliers_name",
+      align: "left",
+    },
+    {
+      name: "remarks",
+      label: "Remarks",
+      field: "remarks",
+      align: "left",
+    },
+  ],
+  tabledetailscolumns: [
+    {
+      name: "description",
+      label: "Description",
+      field: row => row.description.name,
+      align: "left",
+    },
+    {
+      name: "quantity",
+      label: "Quantity",
+      field: "quantity",
+      align: "left",
+    },
+    {
+      name: "suppliers_name",
+      label: "Suppliers Name",
+      field: "suppliers_name",
+      align: "left",
+    },
+    {
+      name: "remarks",
+      label: "Remarks",
+      field: "remarks",
+      align: "left",
+    },
+  ],
+  searchresultstablecolumn: [
+    {
+      name: "description_label",
+      label: "Description",
+      field: "description_label",
+      align: "left",
+    },
+    {
+      name: "quantity",
+      label: "Quantity",
+      field: "quantity",
+      align: "left",
+    },
+  ],
+  tablecreaterows: [],
+  receivingdetails: {},
+  receivingdetailsitems: [],
+  receivingpayload: {
+    rr_no: null,
+    date: null,
+    report_from: null,
+    invoice_dr_no: null,
+    received_by: null,
+    receiving_report_items: [],
+  },
+  receivingpayloaditems: {
+    quantity: null,
+    description: null,
+    suppliers_name: null,
+    remarks: null
+  },
+  listitemsloading: false,
+  postitemloading: false,
+  updateitemloading: false,
+  retrieveitemloading: false,
+  deleteitemloading: false,
+  additemdialog: false,
+  detailsdialog: false,
+  detailsloading: false,
+  selected: [],
+  receivinginput: [
+    {
+      name: "quantity",
+      label: "Quantity",
+      icon: "",
+      type: "input",
+    },
+  ],
+  deliverynumbersearchresults: [],
+  deliverynumbersearchloading: false,
+  deliverynumbersearchnumber: '',
+  addsupplierdialog: false,
+  addremarksdialog: false,
+  confirmedloading: false,
+  verifiedloading: false
+};

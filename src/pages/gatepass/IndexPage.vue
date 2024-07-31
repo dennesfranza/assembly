@@ -49,20 +49,6 @@
         >
           <q-tooltip class="bg-accent">Remove Item</q-tooltip>
         </q-btn>
-        <!-- <q-btn
-          class="q-mr-sm"
-          color="primary"
-          icon="thumb_up"
-        >
-          <q-tooltip class="bg-accent">Approve Request</q-tooltip>
-        </q-btn>
-        <q-btn
-          class="q-mr-sm"
-          color="primary"
-          icon="thumb_down"
-        >
-          <q-tooltip class="bg-accent">Disapprove Request</q-tooltip>
-        </q-btn> -->
         <q-btn
           class="q-mr-sm"
           color="primary"

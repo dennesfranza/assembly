@@ -1,6 +1,7 @@
 export default {
   dateFormat: "YYYY-MM-DD",
   requisitiondetails: {
+    id: null,
     location: null,
     requested_by: null,
     approved_by: null,
@@ -9,6 +10,72 @@ export default {
     date_needed: "",
   },
   requisitiondetailsitems: [],
+  requisitionedit: {
+    id: null,
+    location: null,
+    location_label: null,
+    requested_by: null,
+    requested_by_label: null,
+    requisition_request_items: [],
+  },
+  requisitioneditcolumns: [
+    {
+      name: "quantity",
+      label: "Quantity",
+      field: "quantity",
+      align: "left",
+    },
+    {
+      name: "unit",
+      label: "Unit",
+      field: "unit",
+      align: "left",
+    },
+    {
+      name: "description_label",
+      label: "Description",
+      field: "description_label",
+      align: "left",
+    },
+    {
+      name: "purpose",
+      label: "Purpose",
+      field: "purpose",
+      align: "left",
+    },
+  ],
+  requisitiondetailscolumns: [
+    {
+      name: "item_number",
+      label: "Item Number",
+      field: "item_number",
+      align: "left",
+    },
+    {
+      name: "quantity",
+      label: "Quantity",
+      field: "quantity",
+      align: "left",
+    },
+    {
+      name: "unit",
+      label: "Unit",
+      field: "unit",
+      align: "left",
+    },
+    {
+      name: "description",
+      label: "Description",
+      field: (row) => row.description.name,
+      align: "left",
+    },
+    {
+      name: "purpose",
+      label: "Purpose",
+      field: "purpose",
+      align: "left",
+    },
+  ],
   requisition_request: {
     id: 0,
     location: null,
@@ -73,13 +140,13 @@ export default {
     {
       name: "location",
       label: "Location",
-      field: row => row.location.name,
+      field: (row) => row.location.name,
       align: "left",
     },
     {
       name: "requested_by",
       label: "Requested By",
-      field: row => row.requested_by.name,
+      field: (row) => row.requested_by.name,
       align: "left",
     },
     {
@@ -98,8 +165,8 @@ export default {
       name: "status",
       label: "Status",
       field: "status",
-      align: "left"
-    }
+      align: "left",
+    },
   ],
   tablecreatecolumns: [
     {
@@ -146,5 +213,11 @@ export default {
   selected: [],
   rsnumbersearchresults: [],
   requisitionitemsresults: [],
-  editable: true
+  editable: true,
+  requisitioneditdialog: false,
+  requisitionaddeditdialog: false,
+  deleterequisitionitemloading: false,
+  itemselected: [],
+  removerequisitionitemloading: false,
+  updaterequisitioneditloading: false
 };

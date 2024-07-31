@@ -35,6 +35,12 @@ const routes = [
         meta: { requiresAuth: true },
       },
       {
+        name: "AddGatePass",
+        path: "/AddGatePass",
+        component: () => import("pages/gatepass/AddGatepassPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
         name: "Equipments",
         path: "/Equipments",
         component: () => import("pages/equipments/IndexPage.vue"),

@@ -13,7 +13,14 @@ import {
   actionOpenRequestDetailsDialog,
   actionCloseRequestDetailsDialog,
   actionSearchRsNumber,
-  actionApproveRequest
+  actionApproveRequest,
+  actionResetCreateItem,
+  actionOpenEditDialog,
+  actionRemoveRequisitionRequestItem,
+  actionRemoveRequisitionItem,
+  actionOpenAddEditDialog,
+  actionCloseAddEditDialog,
+  actionUpdateRequisitionRequest
 } from "./actions";
 
 export const useRequisitionStore = defineStore("requisitionslip", {
@@ -21,6 +28,13 @@ export const useRequisitionStore = defineStore("requisitionslip", {
   getters: {
     hasSelection: (state) => {
       if (state.selected.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    hasEditItemSelection: (state) => {
+      if (state.itemselected.length > 0) {
         return true;
       } else {
         return false;
@@ -75,6 +89,28 @@ export const useRequisitionStore = defineStore("requisitionslip", {
     disapproveRequest(payload) {
       state.requisitiondisapprovalloading = true
       actionApproveRequest(this, payload)
+    },
+    resetCreateItem() {
+      setDefaultRequestItems(this);
+      actionResetCreateItem(this)
+    },
+    openEditDialog() {
+      actionOpenEditDialog(this)
+    },
+    removeRequesitionRequestItem(id) {
+      actionRemoveRequisitionRequestItem(this, id)
+    },
+    removeRequisitionItem(id) {
+      actionRemoveRequisitionItem(this, id)
+    },
+    openAddEditDialog() {
+      actionOpenAddEditDialog(this)
+    },
+    closeAddEditDialog() {
+      actionCloseAddEditDialog(this)
+    },
+    updateRequisitionRequest() {
+      actionUpdateRequisitionRequest(this)
     }
   },
 });

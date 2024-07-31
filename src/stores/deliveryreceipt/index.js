@@ -11,12 +11,36 @@ import {
   actionCloseDeliveryDetailsDialog,
   actionSearchRsNumberOrConsumableItem,
   actionOpenAddQuantityRemarksDialog,
-  actionCloseAddQuantityRemarksDialog
+  actionCloseAddQuantityRemarksDialog,
+  actionReset,
+  actionRemoveItem,
+  actionAddRemarksToItems,
+  actionCloseAddRemarksDialog,
+  actionOpenAddRemarksDialog,
+  actionGenerateDeliveryNumber
 } from "./actions";
 
 export const useDeliveryReceiptStore = defineStore("deliveryreceipt", {
   state: () => state,
-  getters: {},
+  getters: {
+    deliveryGetItems: (state) => {
+      return state.deliveryreceiptdetailsitems.map((item) => ({
+        id: item.id,
+        description: item.description.id,
+        description_label: item.description.name,
+        quantity: item.quantity,
+        remarks: "",
+        suppliers_name: "",
+      }));
+    },
+    hasSelection: (state) => {
+      if (state.selected.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
   actions: {
     getAllDeliveryItems() {
       actionGetAllDeliveryReceiptItems(this);
@@ -43,13 +67,31 @@ export const useDeliveryReceiptStore = defineStore("deliveryreceipt", {
       actionCloseDeliveryDetailsDialog(this);
     },
     searchDeliveryRsOrItem(payload) {
-      actionSearchRsNumberOrConsumableItem(this, payload)
+      actionSearchRsNumberOrConsumableItem(this, payload);
     },
     openQuantityRemarksDialog() {
-      actionOpenAddQuantityRemarksDialog(this)
+      actionOpenAddQuantityRemarksDialog(this);
     },
     closeQuantityRemarksDialog() {
-      actionCloseAddQuantityRemarksDialog(this)
+      actionCloseAddQuantityRemarksDialog(this);
+    },
+    resetCreateItem() {
+      actionReset(this);
+    },
+    removeItem() {
+      actionRemoveItem(this);
+    },
+    addRemarksToItems(payload) {
+      actionAddRemarksToItems(this, payload);
+    },
+    closeAddRemarksDialog() {
+      actionCloseAddRemarksDialog(this)
+    },
+    openAddRemarksDialog() {
+      actionOpenAddRemarksDialog(this)
+    },
+    generateDeliveryNumber() {
+      actionGenerateDeliveryNumber(this)
     }
   },
 });

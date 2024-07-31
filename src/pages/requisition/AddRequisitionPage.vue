@@ -96,7 +96,6 @@
           <q-btn
             class="q-mr-sm"
             color="primary"
-            :disable="loading"
             icon="add"
             @click="requeststore.openAddRequisitionDialog()"
           >
@@ -105,7 +104,6 @@
           <q-btn
             class="q-mr-sm"
             color="primary"
-            :disable="loading"
             icon="remove"
             @click="requeststore.removeRequesItem(selected[0])"
           >
@@ -114,8 +112,8 @@
           <q-btn
             class="q-mr-sm"
             color="primary"
-            :disable="loading"
             icon="restart_alt"
+            @click="requeststore.resetCreateItem()"
           >
             <q-tooltip class="bg-accent">Reset</q-tooltip>
           </q-btn>
@@ -139,19 +137,6 @@
           map-options
           emit-value
           v-model="requisitionRequestItem.requested_by"
-        >
-          <template v-slot:prepend>
-            <q-icon name="fact_check" color="black" />
-          </template>
-        </q-select>
-      </div>
-      <div class="col q-pa-sm">
-        <q-select
-          label="Approved By"
-          :options="approverOptions"
-          map-options
-          emit-value
-          v-model="requisitionRequestItem.approved_by"
         >
           <template v-slot:prepend>
             <q-icon name="fact_check" color="black" />

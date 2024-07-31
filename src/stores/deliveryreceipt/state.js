@@ -53,12 +53,6 @@ export default {
       align: "left",
     },
     {
-      name: "invoice_number",
-      label: "Delivery Receipt/Invoice Number",
-      field: "invoice_number",
-      align: "left",
-    },
-    {
       name: "remarks",
       label: "Remarks",
       field: "remarks",
@@ -82,13 +76,8 @@ export default {
   deliveryreceiptpayload: {
     invoice_number: null,
     date: null,
-    delivered_to: null,
-    received_date: null,
     address: null,
-    delivered_by: null,
-    noted_by: null,
     prepared_by: null,
-    received_by: null,
     delivery_receipt_items: [],
   },
   delivery_receipt_item: {
@@ -154,66 +143,40 @@ export default {
   selected: [],
   deliveryreceiptsearchcolumns: [
     {
-      name: "date_requested",
-      label: "Date Requested",
-      field: "date_requested",
+      name: "item_number",
+      label: "Item Number",
+      field: "item_number",
       align: "left",
     },
     {
-      name: "rs_number_label",
-      label: "RS Number",
-      field: "rs_number_label",
+      name: "quantity",
+      label: "Quantity",
+      field: "quantity",
       align: "left",
     },
     {
-      name: "description_label",
+      name: "unit",
+      label: "Unit",
+      field: "unit",
+      align: "left",
+    },
+    {
+      name: "description",
       label: "Description",
-      field: "description_label",
+      field: row => row.description.name,
       align: "left",
     },
     {
-      name: "quantity_requested",
-      label: "Quantity Requested",
-      field: "quantity_requested",
+      name: "purpose",
+      label: "Purpose",
+      field: "purpose",
       align: "left",
     },
-    {
-      name: "quantity_delivered",
-      label: "Quantity Delivered",
-      field: "quantity_delivered",
-      align: "left",
-    },
-    {
-      name: "requested_by",
-      label: "Requested By",
-      field: "requested_by",
-      align: "left",
-    },
-    {
-      name: "date_needed",
-      label: "Date Needed",
-      field: "date_needed",
-      align: "left",
-    },
-    {
-      name: "received_date",
-      label: "Received Date",
-      field: "received_date",
-      align: "left",
-    },
-    {
-      name: "invoice_number",
-      label: "Invoice Number",
-      field: "invoice_number",
-      align: "left",
-    },
-    {
-      name: "remarks",
-      label: "Remarks",
-      field: "remarks",
-      align: "left",
-    }
   ],
   deliveryreceiptsearchrows: [],
-  deliveryreceiptsearchtableloading: false
+  deliveryreceiptsearchtableloading: false,
+  rssearchnumber: '',
+  selected: [],
+  addremarksdialog: false,
+  deliverynumber: null
 };

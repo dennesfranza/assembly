@@ -2,10 +2,8 @@
   <q-page class="q-pa-sm">
     <q-dialog
       v-model="requeststore.requisitionrequestdialog"
-      persistent
-      maximized
     >
-      <q-card>
+    <q-card style="width: 450px; height: 360px">
         <q-card-section><h6>Requisition Slip</h6></q-card-section>
         <q-separator />
         <q-card-section class="scroll">
@@ -105,7 +103,6 @@ export default defineComponent({
       console.log(value)
       this.requisition_request_item.description = value
       let x = this.consumablesstore.consumablesearchresults.find(item => item.id === value)
-      console.log(x.name)
       this.requeststore.requisition_request_item.description_label = x.name
     }
   }
