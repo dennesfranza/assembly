@@ -2,7 +2,6 @@
   <q-page class="q-pa-sm">
     <q-dialog v-model="locationstore.locationeditdialog">
       <q-card style="width: 700px; max-width: 80vw">
-        {{ locationrequestedititem }}
         <q-card-section><h6>Edit Warehouse/Project/Site</h6></q-card-section>
         <q-separator></q-separator>
         <q-card-section>

@@ -64,6 +64,22 @@
         <q-btn
           class="q-mr-sm"
           color="primary"
+          icon="sentiment_satisfied"
+          v-if="hasSelection"
+        >
+          <q-tooltip class="bg-accent">Noted By</q-tooltip>
+        </q-btn>
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
+          icon="sentiment_very_satisfied"
+          v-if="hasSelection"
+        >
+          <q-tooltip class="bg-accent">Issued By</q-tooltip>
+        </q-btn>
+        <q-btn
+          class="q-mr-sm"
+          color="primary"
           icon="sync"
           @click="withdrawalstore.getAllItems()"
         >

@@ -34,6 +34,9 @@
             <q-icon name="search" />
           </template>
         </q-input>
+        <q-btn class="q-mr-sm" color="primary" icon="local_shipping">
+          <q-tooltip class="bg-accent">Delivered By</q-tooltip>
+        </q-btn>
         <q-btn class="q-mr-sm" color="primary" icon="sync">
           <q-tooltip class="bg-accent">Get Latest Data</q-tooltip>
         </q-btn>

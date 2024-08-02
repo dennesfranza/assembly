@@ -51,7 +51,7 @@
           class="q-mr-sm"
           color="primary"
           icon="remove"
-          :disable="equipmentstore.hasSelected"
+          v-if="equipmentstore.hasSelected"
           :loading="equipmentstore.deleteequipmentitemloading"
           @click="clickRemoveItem()"
         >

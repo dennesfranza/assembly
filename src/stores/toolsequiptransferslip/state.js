@@ -78,7 +78,8 @@ export default {
     date: null,
     location_from: null,
     location_to: null,
-    prepared_by: null
+    prepared_by: null,
+    equipment_transfer_items: []
   },
   createequipmenttransferitems: {
     item: null,
@@ -91,10 +92,10 @@ export default {
   },
   equipmentitemsinput: [
     {
-      name: "item",
-      label: "Item",
-      icon: "123",
-      type: "input",
+      name: "rs_number",
+      label: "RS Number",
+      icon: "search",
+      type: "select",
     },
     {
       name: "quantity",
@@ -103,33 +104,33 @@ export default {
       type: "input",
     },
     {
+      name: "description",
+      label: "Description",
+      icon: "description",
+      type: "input",
+    },
+    {
+      name: "item",
+      label: "Item",
+      icon: "category",
+      type: "input",
+    },
+    {
       name: "ids",
       label: "IDs",
-      icon: "123",
+      icon: "chevron_left",
       type: "input",
     },
     {
       name: "returns",
       label: "Returns",
-      icon: "123",
+      icon: "circle",
       type: "input",
     },
     {
       name: "remarks",
       label: "Remarks",
-      icon: "123",
-      type: "input",
-    },
-    {
-      name: "description",
-      label: "Description",
-      icon: "search",
-      type: "select",
-    },
-    {
-      name: "rs_number",
-      label: "RS Number",
-      icon: "123",
+      icon: "done_outline",
       type: "input",
     },
   ],

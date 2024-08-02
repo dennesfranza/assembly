@@ -4,7 +4,6 @@
       :headers="formHeader.headers"
       :name="`Create ${formHeader.name}`"
     />
-    {{ deliveryreceiptpayload }}
     <div class="row items-center">
       <div class="col q-pa-sm">
         <q-input

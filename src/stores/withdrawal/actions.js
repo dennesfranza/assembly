@@ -1,4 +1,5 @@
 import { axiosInstance } from "boot/axios";
+import { Notify } from "quasar";
 
 const actionGetAllWithdrawalItems = (state) => {
   state.tableindexloading = true;
@@ -10,12 +11,17 @@ const actionGetAllWithdrawalItems = (state) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      Notify.create({
+        timeout: 1500,
+        position: "center",
+        color: "red",
+        message: `Error: ${JSON.stringify(error.response.data)}`,
+      });
     })
     .finally(() => {
       setTimeout(() => {
         state.tableindexloading = false;
-      }, 1500);
+      }, 500);
     });
 };
 
@@ -42,28 +48,44 @@ const actionRetrieveWithdrawalItem = (state, id) => {
     if (response.status === 200) {
       state.withdrawalslipdetails.location = response.data.location.name
       state.withdrawalslipdetails.requested_by = response.data.requested_by.name
-      // state.withdrawalslipdetails.noted_by = response.data.noted_by.name
-      // state.withdrawalslipdetails.issued_by = response.data.issued_by.name
+      state.withdrawalslipdetails.noted_by = response.data.noted_by === null ? response.data.noted_by.name : ''
+      state.withdrawalslipdetails.issued_by = response.data.issued_by === null ? response.data.issued_by.name : ''
       state.withdrawalslipdetails.ws_number = response.data.ws_number
       state.withdrawalslipdetails.date = response.data.date
       state.withdrawalslipdetailsitems = response.data.withdrawal_slip_items
     }
   }).catch(error => {
-    console.log(error)
+    Notify.create({
+      timeout: 1500,
+      position: "center",
+      color: "red",
+      message: `Error: ${JSON.stringify(error.response.data)}`,
+    });
   }).finally(() => {
     setTimeout(() => {
       state.withdrawalslipdetailsloadingpage = false
-    }, 2000);
+    }, 500);
   })
 }
 
 const actionPostWithdrawalItem = (state, payload) => {
-  console.log(payload)
   state.postwithdrawalslipitemloading = true
   axiosInstance.post(`withdrawalslip/`, payload).then(response => {
-    console.log(response)
+    if (response.status === 200) {
+      Notify.create({
+        timeout: 1500,
+        position: "center",
+        color: "primary",
+        message: `Withdrawal Slip Saved`,
+      });
+    }
   }).catch(error => {
-    console.log(error)
+    Notify.create({
+      timeout: 1500,
+      position: "center",
+      color: "red",
+      message: `Error: ${JSON.stringify(error.response.data)}`,
+    });
   }).finally(() => {
     setTimeout(() => {
       state.postwithdrawalslipitemloading = false
@@ -76,7 +98,8 @@ const actionPostWithdrawalItem = (state, payload) => {
         issued_by: null,
         withdrawal_slip_items: [],
       }
-    }, 1500);
+      state.router.push({ path: "/WithdrawalSlip" });
+    }, 500);
   })
 }
 
@@ -117,14 +140,25 @@ const actionApproveRequest = (state, payload) => {
       state.tableindexrows[objindex].status = response.data.status
       state.tableindexrows[objindex].noted_by = response.data.noted_by
     }
+    Notify.create({
+      timeout: 1500,
+      position: "center",
+      color: "primary",
+      message: `Approval Sent`,
+    });
   }).catch(error => {
-    console.log(error)
+    Notify.create({
+      timeout: 1500,
+      position: "center",
+      color: "red",
+      message: `Error: ${JSON.stringify(error.response.data)}`,
+    });
   }).finally(() => {
     setTimeout(() => {
       state.withdrawalslipapprovalloading = false
       state.withdrawalslipdisapprovalloading = false
       state.selected = []
-    }, 1500);
+    }, 500);
   })
 }
 

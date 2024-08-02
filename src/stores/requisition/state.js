@@ -46,12 +46,6 @@ export default {
   ],
   requisitiondetailscolumns: [
     {
-      name: "item_number",
-      label: "Item Number",
-      field: "item_number",
-      align: "left",
-    },
-    {
       name: "quantity",
       label: "Quantity",
       field: "quantity",

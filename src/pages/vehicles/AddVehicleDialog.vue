@@ -10,7 +10,6 @@
           <h6>Add Vehicle</h6>
         </q-card-section>
         <q-separator />
-        {{ createvehicleitem }}
         <q-card-section class="scroll">
           <q-row
             class="q-gutter-xs"

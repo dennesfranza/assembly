@@ -34,9 +34,9 @@ export const useEquipmentStore = defineStore("equipments", {
     },
     hasSelected: (state) => {
       if (state.selected.length > 0) {
-        return false
+        return true
       }
-      return true
+      return false
     }
   },
   actions: {

@@ -155,7 +155,7 @@
             </q-item-section>
           </q-item>
         </q-expansion-item>
-        <q-expansion-item icon="inventory" label="Reports">
+        <q-expansion-item icon="commute" label="Reports">
           <q-item
             to="/RequisitionSlipLogsheet"
             class="q-ml-xl"
@@ -174,10 +174,34 @@
             active-class="q-item-no-link-highlighting"
           >
             <q-item-section avatar>
-              <q-icon color="white" name="local_shipping" />
+              <q-icon color="white" name="inventory" />
             </q-item-section>
             <q-item-section>
               <q-item-label>Inventory Report</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/VehicleHistory"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="local_shipping" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Vehicle History</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/EquipmentHistory"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="plumbing" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Equipment History</q-item-label>
             </q-item-section>
           </q-item>
         </q-expansion-item>
@@ -192,7 +216,7 @@
               <q-icon color="white" name="list" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>Requisitions List</q-item-label>
+              <q-item-label>Requisitions</q-item-label>
             </q-item-section>
           </q-item>
           <q-item
@@ -204,7 +228,7 @@
               <q-icon color="white" name="edit" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>Create Request</q-item-label>
+              <q-item-label>Create Requisition Slip</q-item-label>
             </q-item-section>
           </q-item>
         </q-expansion-item>
@@ -289,96 +313,6 @@
             </q-item-section>
           </q-item>
         </q-expansion-item>
-
-        <!-- YBC Forms -->
-        <!-- <q-expansion-item icon="menu_open" label="Forms">
-          <q-item
-            to="/RequisitionForm"
-            class="q-ml-xl"
-            active-class="q-item-no-link-highlighting"
-          >
-            <q-item-section avatar>
-              <q-icon color="white" name="bluetooth" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>Requisition Slip</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item
-            to="/ReceivingReport"
-            class="q-ml-xl"
-            active-class="q-item-no-link-highlighting"
-          >
-            <q-item-section>
-              <q-item-label>Recieving Report</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item
-            to="/WithdrawalSlip2"
-            class="q-ml-xl"
-            active-class="q-item-no-link-highlighting"
-          >
-            <q-item-section>
-              <q-item-label>Withdrawal Slip</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item
-            to="/StockCard"
-            class="q-ml-xl"
-            active-class="q-item-no-link-highlighting"
-          >
-            <q-item-section>
-              <q-item-label>Stock Card</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item
-            to="/ListToolsEquipmentFacilities"
-            class="q-ml-xl"
-            active-class="q-item-no-link-highlighting"
-          >
-            <q-item-section>
-              <q-item-label>List Tools/Equipment/Facilities</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item
-            to="/DeliveryReceipt"
-            class="q-ml-xl"
-            active-class="q-item-no-link-highlighting"
-          >
-            <q-item-section>
-              <q-item-label>Delivery Receipt</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item
-            to="/ToolsEquipmentTransferSlip"
-            class="q-ml-xl"
-            active-class="q-item-no-link-highlighting"
-          >
-            <q-item-section>
-              <q-item-label>Tools/Equipment Transfer Slip</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item
-            to="/InventoryReport"
-            class="q-ml-xl"
-            active-class="q-item-no-link-highlighting"
-          >
-            <q-item-section>
-              <q-item-label>Inventory Report</q-item-label>
-            </q-item-section>
-          </q-item>
-          <q-item
-            to="/GatePass"
-            class="q-ml-xl"
-            active-class="q-item-no-link-highlighting"
-          >
-            <q-item-section>
-              <q-item-label>Gate Pass</q-item-label>
-            </q-item-section>
-          </q-item>
-        </q-expansion-item> -->
-
-        <!--  -->
         <q-item
           @click="loginstore.userLogout()"
           :clickable="true"

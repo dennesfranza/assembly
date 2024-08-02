@@ -306,8 +306,37 @@ const actionCloseAddEditDialog = (state) => {
 }
 
 const actionUpdateRequisitionRequest = (state) => {
-  console.log(state.requisitionedit)
+  let id = state.requisitionedit.id
   state.updaterequisitioneditloading = true
+  axiosInstance.put(`requisition/${id}/`, state.requisitionedit).then(response => {
+    if (response.status === 200) {
+      Notify.create({
+        timeout: 1500,
+        position: "center",
+        color: "primary",
+        message: `Item Updated`,
+      });
+    }
+  }).catch(error => {
+    Notify.create({
+      timeout: 1500,
+      position: "center",
+      color: "red",
+      message: `Error: ${JSON.stringify(error.response)}`,
+    });
+  }).finally(() => {
+    state.requisitiondetailspagedialog = false;
+    state.updaterequisitioneditloading = false
+    state.requisitioneditdialog = false;
+    state.requisitionedit = {
+      id: null,
+      location: null,
+      location_label: null,
+      requested_by: null,
+      requested_by_label: null,
+      requisition_request_items: [],
+    }
+  })
 }
 
 export {

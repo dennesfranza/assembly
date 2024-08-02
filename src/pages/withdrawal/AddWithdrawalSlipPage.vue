@@ -116,7 +116,7 @@
           </template>
         </q-select>
       </div>
-      <div class="col q-pa-sm">
+      <!-- <div class="col q-pa-sm">
         <q-select
           label="Noted By"
           :options="userstore.supervisorOptions"
@@ -128,8 +128,8 @@
             <q-icon name="fact_check" color="black" />
           </template>
         </q-select>
-      </div>
-      <div class="col q-pa-sm">
+      </div> -->
+      <!-- <div class="col q-pa-sm">
         <q-select
           label="Issued By"
           :options="userstore.supervisorOptions"
@@ -141,7 +141,7 @@
             <q-icon name="fact_check" color="black" />
           </template>
         </q-select>
-      </div>
+      </div> -->
     </div>
     <AddWithdrawalSlipDialog />
   </q-page>
