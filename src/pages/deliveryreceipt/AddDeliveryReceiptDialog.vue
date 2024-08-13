@@ -133,7 +133,7 @@ export default defineComponent({
         rs_number_label: this.requisitiondetails.rs_number,
         remarks: "",
       }));
-      this.deliveryreceiptpayload.delivery_receipt_items = _items;
+      this.deliveryreceiptpayload.delivery_receipt_items = this.deliveryreceiptpayload.delivery_receipt_items.concat(_items);
       this.requisitionstore.requisitiondetailsitems = [];
       this.deliverystore.closeAddDeliveryDialog();
     },

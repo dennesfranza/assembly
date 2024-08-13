@@ -20,7 +20,7 @@ import { LocalStorage } from "quasar";
 export default route(function (/* { store, ssrContext } */) {
   const createHistory = process.env.SERVER
     ? createMemoryHistory
-    : process.env.VUE_ROUTER_MODE === "history"
+    : process.env.VUE_ROUTER_MODE === "hash"
     ? createWebHistory
     : createWebHashHistory;
 

@@ -60,7 +60,7 @@
         :columns="tablecreatecolumns"
         selection="single"
         v-model:selected="selected"
-        row-key="description_label"
+        row-key="rs_number"
         :separator="'vertical'"
         auto-width
         flat

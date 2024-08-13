@@ -26,9 +26,47 @@ const actionUpdateGatePassItem = (state, id) => {}
 
 const actionRemoveGatePassItem = (state, id) => {}
 
+const actionOpenAddGatepassDialog = (state) => {
+  state.addgatepassdialog = true
+}
+
+const actionCloseAddGatepassDialog = (state) => {
+  state.addgatepassdialog = false
+  state.gate_pass_items = {
+    item: "",
+    description: null,
+    quantity: 0,
+  }
+}
+
+const actionResetGatepassCreate = (state) => {
+  state.gate_pass_items = {
+    item: "",
+    description: null,
+    quantity: 0,
+  }
+  state.gatepasscreateitem = {
+    gp_number: "",
+    please_allow: "",
+    date: "",
+    purpose: "",
+    prepared_by: null,
+    noted_by: null,
+    checked_by: null,
+    location: null,
+    date_time_in: "",
+    date_time_out: "",
+    remarks: "",
+    gate_pass_items: []
+  }
+}
+
 export {
   actionGetAllGatePassItems,
   actionRetrieveGatePassItem,
   actionUpdateGatePassItem,
-  actionRemoveGatePassItem
+  actionRemoveGatePassItem,
+  actionOpenAddGatepassDialog,
+  actionCloseAddGatepassDialog,
+  actionResetGatepassCreate
 }

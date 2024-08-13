@@ -139,7 +139,7 @@
               <q-icon color="white" name="engineering" />
             </q-item-section>
             <q-item-section>
-              <q-item-label>Equipments Transfer Slip</q-item-label>
+              <q-item-label>Equipments Transfer Slips</q-item-label>
             </q-item-section>
           </q-item>
           <q-item

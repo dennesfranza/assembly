@@ -1,33 +1,47 @@
 <template>
   <q-page class="q-pa-sm">
     <q-dialog
-      v-model="requeststore.requisitionrequestdialog"
+      v-model="gatepassstore.addgatepassdialog"
+      :backdrop-filter="'blur(4px)'"
       persistent
-      maximized
     >
-      <q-card>
-        <q-card-section><h6>Requisition Slip</h6></q-card-section>
-        <q-separator />
+      <q-card style="width: 700px; max-width: 80vw">
+        <q-card-section>
+          <h6>Add Gatepass Item</h6>
+        </q-card-section>
+        <q-separator></q-separator>
+        {{ gate_pass_items }}
         <q-card-section class="scroll">
           <q-row
             class="q-gutter-xs"
-            v-for="item in requeststore.requestdetailsinput"
+            v-for="item in gatepassinput"
             :key="item.name"
           >
             <q-input
               filled
               :label="item.label"
-              v-model="requisition_request_item[item.name]"
-              v-if="item.type === 'input'"
+              v-model="gate_pass_items[item.name]"
+              v-if="item.name === 'quantity'"
+              type="number"
+            >
+              <template v-slot:prepend>
+                <q-icon :name="item.icon" color="black" />
+              </template>
+            </q-input>
+            <q-input
+              filled
+              :label="item.label"
+              v-model="gate_pass_items[item.name]"
+              v-else-if="item.name != 'quantity'"
             >
               <template v-slot:prepend>
                 <q-icon :name="item.icon" color="black" />
               </template>
             </q-input>
             <q-select
-              v-else-if="item.type === 'select'"
+              v-if="item.type === 'select'"
               :label="item.label"
-              v-model="requisition_request_item[item.name]"
+              v-model="gate_pass_items[item.name]"
               use-input
               hide-selected
               filled
@@ -52,20 +66,15 @@
             </q-select>
           </q-row>
         </q-card-section>
-        <q-separator />
+        <q-separator></q-separator>
         <q-card-actions align="left">
           <q-btn
             outline
             label="Close"
             color="red"
-            @click="requeststore.closeAddRequisitionDialog()"
+            @click="gatepassstore.closeAddGatepassDialog()"
           ></q-btn>
-          <q-btn
-            outline
-            label="Add"
-            color="blue"
-            @click="requeststore.addRequestItem()"
-          />
+          <q-btn outline label="Add" color="blue" @click="addItem" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -73,27 +82,39 @@
 </template>
 
 <script>
-import { defineComponent, computed, ref } from "vue";
-import { useRequisitionStore } from "src/stores/requisition/index";
+import {
+  defineComponent,
+  ref,
+  getCurrentInstance,
+  computed,
+  onMounted,
+} from "vue";
+import { useGatepassStore } from "src/stores/gatepass";
 import { useConsumablesStore } from "src/stores/consumables/index";
 
 export default defineComponent({
-  name: "addrequest",
+  name: "gatepass",
   setup() {
-    const requeststore = useRequisitionStore();
+    const gatepassstore = useGatepassStore();
     const consumablesstore = useConsumablesStore();
-    const requisition_request_item = computed(
-      () => requeststore.requisition_request_item
-    );
+    const gatepassinput = computed(() => gatepassstore.gatepassinput);
+    const gate_pass_items = computed(() => gatepassstore.gate_pass_items);
+    const gatepasscreateitem = computed(() => gatepassstore.gatepasscreateitem);
 
     return {
-      requeststore,
-      requisition_request_item,
+      gatepassstore,
       consumablesstore,
+      gatepassinput,
+      gate_pass_items,
+      gatepasscreateitem,
       options: ref([]),
     };
   },
   methods: {
+    addItem() {
+      this.gatepasscreateitem.gate_pass_items.unshift(this.gate_pass_items);
+      this.gatepassstore.closeAddGatepassDialog();
+    },
     filterFn(inputvalue, update, abort) {
       update(() => {
         if (inputvalue === "") {
@@ -104,14 +125,12 @@ export default defineComponent({
       });
     },
     updateModelValue(value) {
-      console.log(value);
-      this.requisition_request_item.description = value;
+      this.gate_pass_items.description = value
       let x = this.consumablesstore.consumablesearchresults.find(
         (item) => item.id === value
       );
-      console.log(x.name);
-      this.requeststore.requisition_request_item.description_label = x.name;
-    },
+      this.gate_pass_items.description_label = x.name
+    }
   },
 });
 </script>

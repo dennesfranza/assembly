@@ -1,7 +1,13 @@
 import { defineStore } from "pinia";
 import state from "./state";
 import {
-
+  actionGetAllGatePassItems,
+  actionRetrieveGatePassItem,
+  actionUpdateGatePassItem,
+  actionRemoveGatePassItem,
+  actionOpenAddGatepassDialog,
+  actionCloseAddGatepassDialog,
+  actionResetGatepassCreate
 } from "./actions";
 
 export const useGatepassStore = defineStore('gatepass', {
@@ -16,6 +22,15 @@ export const useGatepassStore = defineStore('gatepass', {
     },
   },
   actions: {
-
+    //
+    openAddGatepassDialog() {
+      actionOpenAddGatepassDialog(this)
+    },
+    closeAddGatepassDialog() {
+      actionCloseAddGatepassDialog(this)
+    },
+    reset() {
+      actionResetGatepassCreate(this)
+    }
   }
 })

@@ -63,6 +63,7 @@ export default {
   gatepassadditemdialog: false,
   gatepassremoveitemloading: false,
   gatepasspostitemloading: false,
+  addgatepassdialog: false,
   selected: [],
   createtablecolumn: [
     {
@@ -72,12 +73,12 @@ export default {
       align: "left",
     },
     {
-      name: "description",
+      name: "description_label",
       label: "Item Description",
-      field: "description",
+      field: "description_label",
       align: "left",
     },
-    { name: "remarks", label: "Remarks", field: "remarks", align: "left" },
+    { name: "quantity", label: "Quantity", field: "quantity", align: "left" },
   ],
   createtablerows: [],
   gatepasscreateitem: {
@@ -92,11 +93,32 @@ export default {
     date_time_in: "",
     date_time_out: "",
     remarks: "",
-    gatepasscreateitems: []
+    gate_pass_items: []
   },
-  gatepasscreateitems: {
+  gate_pass_items: {
     item: "",
     description: null,
+    description_label: null,
     quantity: 0,
-  }
+  },
+  gatepassinput: [
+    {
+      name: "item",
+      label: "Item",
+      icon: "task",
+      type: "input",
+    },
+    {
+      name: "description",
+      label: "Description",
+      icon: "description",
+      type: "select",
+    },
+    {
+      name: "quantity",
+      label: "Quantity",
+      icon: "123",
+      type: "input",
+    },
+  ],
 };

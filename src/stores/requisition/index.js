@@ -46,6 +46,17 @@ export const useRequisitionStore = defineStore("requisitionslip", {
         value: a.id,
       }));
     },
+    isApproved: (state) => {
+      if (state.selected.length > 0) {
+        if (state.selected[0].is_approved === true) {
+          return true
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
+    }
   },
   actions: {
     getAllItems() {

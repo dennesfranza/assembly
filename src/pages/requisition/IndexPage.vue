@@ -52,7 +52,7 @@
           class="q-mr-sm"
           color="primary"
           icon="thumb_up"
-          v-if="hasSelection"
+          v-if="hasSelection && isApproved === false"
           :loading="requisitionapprovalloading"
           @click="onClickApproval"
         >
@@ -62,7 +62,7 @@
           class="q-mr-sm"
           color="primary"
           icon="thumb_down"
-          v-if="hasSelection"
+          v-if="hasSelection && isApproved === false"
           :loading="requisitiondisapprovalloading"
           @click="onClickDisapproval"
         >
@@ -72,7 +72,7 @@
           class="q-mr-sm"
           color="primary"
           icon="edit"
-          v-if="hasSelection"
+          v-if="hasSelection && isApproved === false"
           @click="requeststore.openEditDialog()"
         >
           <q-tooltip class="bg-accent">Edit</q-tooltip>
@@ -132,6 +132,7 @@ export default defineComponent({
     const requisitiondisapprovalloading = computed(
       () => requeststore.requisitiondisapprovalloading
     );
+    const isApproved = computed(() => requeststore.isApproved);
 
     onMounted(() => requeststore.getAllItems());
 
@@ -147,6 +148,7 @@ export default defineComponent({
       hasSelection,
       requisitionapprovalloading,
       requisitiondisapprovalloading,
+      isApproved,
       requisitionid: null,
     };
   },
@@ -173,12 +175,12 @@ export default defineComponent({
       this.requeststore.approveRequest(_item);
     },
     removeItem() {
-      this.requeststore.removeRequesitionRequestItem(this.selected[0].id)
-    }
+      this.requeststore.removeRequesitionRequestItem(this.selected[0].id);
+    },
   },
   components: {
     RequisitionDetailsPage,
-    EditRequisitionDialog
+    EditRequisitionDialog,
   },
 });
 </script>
