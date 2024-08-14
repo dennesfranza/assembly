@@ -6,6 +6,7 @@ const actionGetAllConsumables = (state) => {
     .get(`consumables/`)
     .then((response) => {
       if (response.status === 200) {
+        console.log(response.data)
         let obj = response.data.map(item => ({
           id: item.id,
           created_at: item.created_at,
