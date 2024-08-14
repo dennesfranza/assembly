@@ -6,7 +6,14 @@ const actionGetAllConsumables = (state) => {
     .get(`consumables/`)
     .then((response) => {
       if (response.status === 200) {
-        state.tableindexrows = response.data;
+        let obj = response.data.map(item => ({
+          id: item.id,
+          created_at: item.created_at,
+          description: item.description,
+          name: item.name,
+          image: item.image.split('/').filter(x => x).join('/')
+        }))
+        state.tableindexrows = obj;
       }
     })
     .catch((error) => {})
