@@ -45,9 +45,7 @@ const actionRetrieveDeliveryItem = (state, id) => {
       console.log(error);
     })
     .finally(() => {
-      setTimeout(() => {
-        state.deliveryreceiptdetailsloadingpage = false;
-      }, 2000);
+      state.deliveryreceiptdetailsloadingpage = false;
     });
 };
 
@@ -109,9 +107,7 @@ const actionPostDeliveryReceiptItem = (state) => {
         delivery_receipt_items: [],
       }
       state.postdeliveryreceiptitemloading = false;
-      setTimeout(() => {
-        state.router.push({ path: "/DeliveryReceipts" });
-      }, 1000);
+      state.router.push({ path: "/DeliveryReceipts" });
     });
 };
 
@@ -150,9 +146,7 @@ const actionSearchRsNumberOrConsumableItem = (state, payload) => {
       console.log(error);
     })
     .finally(() => {
-      setTimeout(() => {
-        state.deliveryreceiptsearchtableloading = false;
-      }, 2000);
+      state.deliveryreceiptsearchtableloading = false;
     });
 };
 

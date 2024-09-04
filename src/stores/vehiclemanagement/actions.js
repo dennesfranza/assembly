@@ -14,9 +14,7 @@ const actionGetAllVehicles = (state) => {
       console.log(error);
     })
     .finally(() => {
-      setTimeout(() => {
-        state.vehicleindextableloading = false;
-      }, 1500);
+      state.vehicleindextableloading = false;
     });
 };
 
@@ -112,28 +110,26 @@ const actionPostVehicleItem = (state) => {
   }).catch(error => {
     console.log(error)
   }).finally(() => {
-    setTimeout(() => {
-      state.vehicleadditemloading = false
-      state.vehicleadditemdialog = false
-      state.createvehicleitem = {
-        mv_file_number: "",
-        series: "",
-        make: "",
-        vehicle_model: "",
-        body_type: "",
-        plate_number: "",
-        engine_number: "",
-        chassis_number: "",
-        year_model: "",
-        or_date: "",
-        cr_number: "",
-        vehicle_registration_date: "",
-        vehicle_registration_expiry_date: "",
-        location: "",
-        image: "",
-        imageurl: ""
-      }
-    }, 1500);
+    state.vehicleadditemloading = false
+    state.vehicleadditemdialog = false
+    state.createvehicleitem = {
+      mv_file_number: "",
+      series: "",
+      make: "",
+      vehicle_model: "",
+      body_type: "",
+      plate_number: "",
+      engine_number: "",
+      chassis_number: "",
+      year_model: "",
+      or_date: "",
+      cr_number: "",
+      vehicle_registration_date: "",
+      vehicle_registration_expiry_date: "",
+      location: "",
+      image: "",
+      imageurl: ""
+    }
   })
 }
 

@@ -19,9 +19,7 @@ const actionGetAllConsumables = (state) => {
     })
     .catch((error) => {})
     .finally(() => {
-      setTimeout(() => {
-        state.listallitemstableloading = false;
-      }, 2000);
+      state.listallitemstableloading = false;
     });
 };
 

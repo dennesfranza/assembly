@@ -19,9 +19,7 @@ const actionGetAllReceivingItems = (state) => {
       });
     })
     .finally(() => {
-      setTimeout(() => {
-        state.listitemsloading = false;
-      }, 1000);
+      state.listitemsloading = false;
     });
 };
 
@@ -62,9 +60,7 @@ const actionRetrieveReceivingItem = (state, id) => {
       });
     })
     .finally(() => {
-      setTimeout(() => {
-        state.retrieveitemloading = false;
-      }, 1000);
+      state.retrieveitemloading = false;
     });
 };
 
@@ -102,9 +98,7 @@ const actionCreateReceivingItem = (state) => {
         receiving_report_items: [],
       };
       state.tablecreaterows = [];
-      setTimeout(() => {
-        state.router.push({ path: "/ReceivingReport" });
-      }, 1000);
+      state.router.push({ path: "/ReceivingReport" });
     });
 };
 
@@ -154,9 +148,7 @@ const actionSearchDeliveryNumber = (state, payload) => {
       console.log(error);
     })
     .finally(() => {
-      setTimeout(() => {
-        state.deliverynumbersearchloading = false;
-      }, 1500);
+      state.deliverynumbersearchloading = false;
     });
 };
 
@@ -225,9 +217,7 @@ const actionUpdateConfirmed = (state, id) => {
       });
     })
     .finally(() => {
-      setTimeout(() => {
-        state.confirmedloading = false;
-      }, 1500);
+      state.confirmedloading = false;
     });
 };
 
@@ -249,9 +239,7 @@ const actionUpdateVerified = (state, id) => {
       });
     })
     .finally(() => {
-      setTimeout(() => {
-        state.verifiedloading = false;
-      }, 1500);
+      state.verifiedloading = false;
     });
 };
 

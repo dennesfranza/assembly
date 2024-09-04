@@ -19,9 +19,7 @@ const actionGetAllRequisitionItems = (state) => {
       });
     })
     .finally(() => {
-      setTimeout(() => {
-        state.listallitemstableloading = false;
-      }, 500);
+      state.listallitemstableloading = false;
     });
 };
 
@@ -52,9 +50,7 @@ const actionRetrieveRequisitionItem = (state, id) => {
       });
     })
     .finally(() => {
-      setTimeout(() => {
-        state.requisitiondetailsloadingpage = false;
-      }, 500);
+      state.requisitiondetailsloadingpage = false;
     });
 };
 
@@ -91,10 +87,8 @@ const postRequisitionItem = (state, payload) => {
         date_needed: "",
         requisition_request_items: [],
       };
-      setTimeout(() => {
-        state.postrequisitionrequestitemloading = false;
-        state.router.push({ path: "/Requisition" });
-      }, 1500);
+      state.postrequisitionrequestitemloading = false;
+      state.router.push({ path: "/Requisition" });
     });
 };
 
@@ -165,9 +159,7 @@ const actionSearchRsNumber = (state, rs_number) => {
       console.log(error);
     })
     .finally(() => {
-      setTimeout(() => {
-        state.requisitionsearchrsnumberloading = false;
-      }, 2000);
+      state.requisitionsearchrsnumberloading = false;
     });
 };
 
@@ -189,11 +181,9 @@ const actionApproveRequest = (state, payload) => {
       console.log(error);
     })
     .finally(() => {
-      setTimeout(() => {
-        state.requisitiondisapprovalloading = false;
-        state.requisitionapprovalloading = false;
-        state.selected = [];
-      }, 1500);
+      state.requisitiondisapprovalloading = false;
+      state.requisitionapprovalloading = false;
+      state.selected = [];
     });
 };
 
@@ -257,9 +247,7 @@ const actionRemoveRequisitionRequestItem = (state, id) => {
       });
     })
     .finally(() => {
-      setTimeout(() => {
-        state.deleterequisitionitemloading = false;
-      }, 500);
+      state.deleterequisitionitemloading = false;
     });
 };
 
@@ -291,9 +279,7 @@ const actionRemoveRequisitionItem = (state, id) => {
       });
     })
     .finally(() => {
-      setTimeout(() => {
-        state.removerequisitionitemloading = false;
-      }, 500);
+      state.removerequisitionitemloading = false;
     });
 };
 

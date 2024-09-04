@@ -11,9 +11,7 @@ const actionGetAllEquipments = (state) => {
     })
     .catch((error) => {})
     .finally(() => {
-      setTimeout(() => {
-        state.listequipmentstableloading = false;
-      }, 1500);
+      state.listequipmentstableloading = false;
     });
 };
 
@@ -138,9 +136,7 @@ const actionDestroyEquipmentItem = (state, id) => {
   }).catch(error => {
     console.log(error)
   }).finally(() => {
-    setTimeout(() => {
-      state.deleteequipmentitemloading = false
-    }, 1500);
+    state.deleteequipmentitemloading = false
   })
 }
 

@@ -19,9 +19,7 @@ const actionGetAllWithdrawalItems = (state) => {
       });
     })
     .finally(() => {
-      setTimeout(() => {
-        state.tableindexloading = false;
-      }, 500);
+      state.tableindexloading = false;
     });
 };
 
@@ -62,9 +60,7 @@ const actionRetrieveWithdrawalItem = (state, id) => {
       message: `Error: ${JSON.stringify(error.response.data)}`,
     });
   }).finally(() => {
-    setTimeout(() => {
-      state.withdrawalslipdetailsloadingpage = false
-    }, 500);
+    state.withdrawalslipdetailsloadingpage = false
   })
 }
 
@@ -87,19 +83,17 @@ const actionPostWithdrawalItem = (state, payload) => {
       message: `Error: ${JSON.stringify(error.response.data)}`,
     });
   }).finally(() => {
-    setTimeout(() => {
-      state.postwithdrawalslipitemloading = false
-      state.createwithdrawalitem = {
-        ws_number: "",
-        date: "",
-        location: null,
-        requested_by: null,
-        noted_by: null,
-        issued_by: null,
-        withdrawal_slip_items: [],
-      }
-      state.router.push({ path: "/WithdrawalSlip" });
-    }, 500);
+    state.postwithdrawalslipitemloading = false
+    state.createwithdrawalitem = {
+      ws_number: "",
+      date: "",
+      location: null,
+      requested_by: null,
+      noted_by: null,
+      issued_by: null,
+      withdrawal_slip_items: [],
+    }
+    state.router.push({ path: "/WithdrawalSlip" });
   })
 }
 
@@ -154,11 +148,9 @@ const actionApproveRequest = (state, payload) => {
       message: `Error: ${JSON.stringify(error.response.data)}`,
     });
   }).finally(() => {
-    setTimeout(() => {
-      state.withdrawalslipapprovalloading = false
-      state.withdrawalslipdisapprovalloading = false
-      state.selected = []
-    }, 500);
+    state.withdrawalslipapprovalloading = false
+    state.withdrawalslipdisapprovalloading = false
+    state.selected = []
   })
 }
 

@@ -13,9 +13,7 @@ const getAllLocations = (state) => {
       console.log(error);
     })
     .finally(() => {
-      setTimeout(() => {
-        state.locationtableindexloading = false;
-      }, 2000);
+      state.locationtableindexloading = false;
     });
 };
 
@@ -49,10 +47,8 @@ const actionPostLocationItem = (state) => {
         name: "",
         location: "",
       };
-      setTimeout(() => {
-        state.locationadddialog = false;
-        state.locationpostrequestitemloading = false;
-      }, 2000);
+      state.locationadddialog = false;
+      state.locationpostrequestitemloading = false;
     });
 };
 
@@ -74,9 +70,7 @@ const actionRemoveLocationItem = (state) => {
       console.log(error);
     })
     .finally(() => {
-      setTimeout(() => {
-        state.locationremoverequestitemloading = false;
-      }, 2000);
+      state.locationremoverequestitemloading = false;
     });
 };
 
@@ -110,16 +104,14 @@ const actionUpdateLocationItem = (state) => {
   }).catch(error => {
     console.log(error)
   }).finally(() => {
-    setTimeout(() => {
-      state.locationupdaterequestitemloading = false
-      state.locationeditdialog = false
-      state.selected = [];
-      state.locationrequestedititem = {
-        id: null,
-        name: "",
-        location: "",
-      }
-    }, 2000);
+    state.locationupdaterequestitemloading = false
+    state.locationeditdialog = false
+    state.selected = [];
+    state.locationrequestedititem = {
+      id: null,
+      name: "",
+      location: "",
+    }
   })
 };
 
