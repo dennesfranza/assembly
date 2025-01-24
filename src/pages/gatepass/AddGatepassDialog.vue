@@ -28,16 +28,6 @@
                 <q-icon :name="item.icon" color="black" />
               </template>
             </q-input>
-            <q-input
-              filled
-              :label="item.label"
-              v-model="gate_pass_items[item.name]"
-              v-else-if="item.name != 'quantity'"
-            >
-              <template v-slot:prepend>
-                <q-icon :name="item.icon" color="black" />
-              </template>
-            </q-input>
             <q-select
               v-if="item.type === 'select'"
               :label="item.label"

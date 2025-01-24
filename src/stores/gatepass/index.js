@@ -2,15 +2,17 @@ import { defineStore } from "pinia";
 import state from "./state";
 import {
   actionGetAllGatePassItems,
+  actionPostGatePassItem,
   actionRetrieveGatePassItem,
   actionUpdateGatePassItem,
   actionRemoveGatePassItem,
   actionOpenAddGatepassDialog,
   actionCloseAddGatepassDialog,
-  actionResetGatepassCreate
+  actionResetGatepassCreate,
+  actionRemoveItemFromCreateRequest,
 } from "./actions";
 
-export const useGatepassStore = defineStore('gatepass', {
+export const useGatepassStore = defineStore("gatepass", {
   state: () => state,
   getters: {
     hasSelection: (state) => {
@@ -22,15 +24,20 @@ export const useGatepassStore = defineStore('gatepass', {
     },
   },
   actions: {
-    //
+    postGatePassItem(payload) {
+      actionPostGatePassItem(this, payload);
+    },
+    removeCreateItem(data) {
+      actionRemoveItemFromCreateRequest(this, data);
+    },
     openAddGatepassDialog() {
-      actionOpenAddGatepassDialog(this)
+      actionOpenAddGatepassDialog(this);
     },
     closeAddGatepassDialog() {
-      actionCloseAddGatepassDialog(this)
+      actionCloseAddGatepassDialog(this);
     },
     reset() {
-      actionResetGatepassCreate(this)
-    }
-  }
-})
+      actionResetGatepassCreate(this);
+    },
+  },
+});

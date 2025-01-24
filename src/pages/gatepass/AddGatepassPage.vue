@@ -6,14 +6,20 @@
     />
     <div class="row items-center">
       <div class="col q-pa-sm">
-        <q-input v-model="gatepasscreateitem.gp_number" label="Gate Pass Number">
+        <q-input
+          v-model="gatepasscreateitem.gp_number"
+          label="Gate Pass Number"
+        >
           <template v-slot:prepend>
             <q-icon name="123" color="black" />
           </template>
         </q-input>
       </div>
       <div class="col q-pa-sm">
-        <q-input v-model="gatepasscreateitem.please_allow" label="Please Allow Mr/Mrs">
+        <q-input
+          v-model="gatepasscreateitem.please_allow"
+          label="Please Allow Mr/Mrs"
+        >
           <template v-slot:prepend>
             <q-icon name="person" color="black" />
           </template>
@@ -41,7 +47,11 @@
                 transition-show="scale"
                 transition-hide="scale"
               >
-                <q-date v-model="gatepasscreateitem.date" :mask="gatepassstore.dateFormat" today-btn>
+                <q-date
+                  v-model="gatepasscreateitem.date"
+                  :mask="gatepassstore.dateFormat"
+                  today-btn
+                >
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="black" flat />
                   </div>
@@ -56,23 +66,46 @@
       <q-table
         :rows="gatepasscreateitem.gate_pass_items"
         :columns="createtablecolumn"
-        row-key="item_number"
         :separator="'vertical'"
+        row-key="description"
+        selection="single"
+        v-model:selected="selected"
         auto-width
         flat
         bordered
       >
         <template v-slot:top-right>
-          <q-btn class="q-mr-sm" color="primary" icon="add" @click="gatepassstore.openAddGatepassDialog()">
+          <q-btn
+            class="q-mr-sm"
+            color="primary"
+            icon="add"
+            @click="gatepassstore.openAddGatepassDialog()"
+          >
             <q-tooltip class="bg-accent">Add Item</q-tooltip>
           </q-btn>
-          <q-btn class="q-mr-sm" color="primary" icon="remove">
+          <q-btn
+            class="q-mr-sm"
+            color="primary"
+            icon="remove"
+            @click="gatepassstore.removeCreateItem(selected[0])"
+          >
             <q-tooltip class="bg-accent">Remove Item</q-tooltip>
           </q-btn>
-          <q-btn class="q-mr-sm" color="primary" icon="restart_alt" @click="gatepassstore.reset()">
+          <q-btn
+            class="q-mr-sm"
+            color="primary"
+            icon="restart_alt"
+            @click="gatepassstore.reset()"
+          >
             <q-tooltip class="bg-accent">Reset</q-tooltip>
           </q-btn>
-          <q-btn class="q-mr-sm" color="primary" icon="save">
+          <q-btn
+            class="q-mr-sm"
+            color="primary"
+            icon="save"
+            :loading="gatepassstore.gatepasspostitemloading"
+            @click="gatepassstore.postGatePassItem(gatepasscreateitem)"
+          >
             <q-tooltip class="bg-accent">Save</q-tooltip>
           </q-btn>
         </template>
@@ -135,7 +168,7 @@ export default defineComponent({
     const createtablecolumn = computed(() => gatepassstore.createtablecolumn);
     const createtablerows = computed(() => gatepassstore.createtablerows);
     const preparedByOptions = computed(() => loginstore.preparedByOptions);
-    const gatepasscreateitem = computed(() => gatepassstore.gatepasscreateitem)
+    const gatepasscreateitem = computed(() => gatepassstore.gatepasscreateitem);
 
     return {
       formheaders,
@@ -147,12 +180,13 @@ export default defineComponent({
       createtablecolumn,
       createtablerows,
       preparedByOptions,
-      gatepasscreateitem
+      gatepasscreateitem,
+      selected: ref([]),
     };
   },
   components: {
     FormHeaderVue,
-    AddGatepassDialog
+    AddGatepassDialog,
   },
 });
 </script>
