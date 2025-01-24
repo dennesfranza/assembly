@@ -10,29 +10,32 @@
           icon="menu"
           aria-label="Menu"
         />
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title v-if="$q.platform.is.desktop">
+          Young Builders Corporation
         </q-toolbar-title>
-        <q-space/>
+        <q-toolbar-title v-if="$q.platform.is.mobile"> YBC </q-toolbar-title>
+        <q-space />
         <div class="q-gutter-sm row items-center no-wrap">
           <q-btn round dense flat color="white" icon="notifications">
-            <q-badge color="red" text-color="white" floating>
-              5
-            </q-badge>
-            <q-menu
-            >
+            <q-badge color="red" text-color="white" floating> 5 </q-badge>
+            <q-menu>
               <q-list style="min-width: 100px">
                 <messages></messages>
                 <q-card class="text-center no-shadow no-border">
-                  <q-btn label="View All" style="max-width: 120px !important;" flat dense
-                         class="text-indigo-8"></q-btn>
+                  <q-btn
+                    label="View All"
+                    style="max-width: 120px !important"
+                    flat
+                    dense
+                    class="text-indigo-8"
+                  ></q-btn>
                 </q-card>
               </q-list>
             </q-menu>
           </q-btn>
-          <q-btn round flat>
+          <q-btn round flat @click="loginstore.userRefreshToken()">
             <q-avatar size="26px">
-              <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+              <img src="https://cdn.quasar.dev/img/boy-avatar.png" />
             </q-avatar>
           </q-btn>
         </div>
@@ -46,9 +49,9 @@
       class="bg-primary text-white"
     >
       <q-list>
-        <q-item to="/" active-class="q-item-no-link-highlighting">
+        <q-item to="/Dashboard" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
-            <q-icon name="dashboard"/>
+            <q-icon name="dashboard" />
           </q-item-section>
           <q-item-section>
             <q-item-label>Dashboard</q-item-label>
@@ -56,259 +59,277 @@
         </q-item>
         <q-item to="/Dashboard2" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
-            <q-icon name="dashboard"/>
+            <q-icon name="dashboard" />
           </q-item-section>
           <q-item-section>
             <q-item-label>CRM Dashboard</q-item-label>
           </q-item-section>
         </q-item>
-        <q-expansion-item
-          icon="pages"
-          label="Pages"
-        >
-          <q-list class="q-pl-lg">
-            <q-item to="/Login-1" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar>
-                <q-icon name="email"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Login-1</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item to="/Lock" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar>
-                <q-icon name="lock"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Lock Screen</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item to="/Lock-2" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar>
-                <q-icon name="lock"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Lock Screen - 2</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item to="/Pricing" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar>
-                <q-icon name="list"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Pricing</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item-label header class="text-weight-bolder text-white">Generic</q-item-label>
-            <q-item to="/Profile" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar>
-                <q-icon name="person"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>User Profile</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item to="/Maintenance" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar>
-                <q-icon name="settings"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Maintenance</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-expansion-item>
-        <q-expansion-item
-          icon="map"
-          label="Maps"
-        >
-          <q-list class="q-pl-lg">
-            <q-item to="/Map" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar>
-                <q-icon name="map"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Map</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item to="/MapMarker" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar>
-                <q-icon name="location_on"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Map Marker</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-item to="/StreetView" active-class="q-item-no-link-highlighting">
-              <q-item-section avatar>
-                <q-icon name="streetview"/>
-              </q-item-section>
-              <q-item-section>
-                <q-item-label>Street View</q-item-label>
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-expansion-item>
-
-        <q-item to="/Mail" active-class="q-item-no-link-highlighting">
+        <q-item to="/Consumables" active-class="q-item-no-link-highlighting">
           <q-item-section avatar>
-            <q-icon name="email"/>
+            <q-icon name="category" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Mail</q-item-label>
+            <q-item-label>Consumables</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item to="/Warehouse" active-class="q-item-no-link-highlighting">
+          <q-item-section avatar>
+            <q-icon name="engineering" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Project/Site</q-item-label>
+          </q-item-section>
+        </q-item>
+        <q-item to="/Vehicles" active-class="q-item-no-link-highlighting">
+          <q-item-section avatar>
+            <q-icon name="garage" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Vehicles</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item to="/directory" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="card_giftcard"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Directory</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item to="/TreeTable" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="list"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>TreeTable</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="/Charts" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="insert_chart"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Charts</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="/Footer" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="info"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Footer</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="/CardHeader" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="card_giftcard"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Card Header</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="/Cards" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="card_giftcard"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Cards</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="/Tables" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="table_chart"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Tables</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="/Contact" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="person"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Contact</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="/Checkout" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="check_circle_outline"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Checkout</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <!--        not completed-->
-        <q-item to="/Calendar" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="date_range"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Calendar</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <!--        not completed-->
-        <!--        <q-item to="/Taskboard" active-class="q-item-no-link-highlighting">-->
-        <!--          <q-item-section avatar>-->
-        <!--            <q-icon name="done"/>-->
-        <!--          </q-item-section>-->
-        <!--          <q-item-section>-->
-        <!--            <q-item-label>Taskboard</q-item-label>-->
-        <!--          </q-item-section>-->
-        <!--        </q-item>-->
-
-        <q-item to="/Pagination" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="date_range"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Pagination</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item to="/Ecommerce" active-class="q-item-no-link-highlighting">
-          <q-item-section avatar>
-            <q-icon name="shopping_cart"/>
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Product Catalogues</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-expansion-item
-          icon="menu_open"
-          label="Menu Levels"
-        >
-          <q-item class="q-ml-xl" active-class="q-item-no-link-highlighting">
+        <q-expansion-item icon="fence" label="Gate Pass">
+          <q-item
+            to="/GatePass"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon name="fence" />
+            </q-item-section>
             <q-item-section>
-              <q-item-label>Level 1</q-item-label>
+              <q-item-label>Gate Pass List</q-item-label>
             </q-item-section>
           </q-item>
-          <q-expansion-item
-            :header-inset-level="0.85"
-            label="Level 2"
+          <q-item
+            to="/AddGatePass"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
           >
-            <q-item class="q-ml-xl" style="margin-left: 55px  !important;" active-class="q-item-no-link-highlighting">
-              <q-item-section>
-                <q-item-label>Level 2.1</q-item-label>
-              </q-item-section>
-            </q-item>
-            <q-expansion-item
-              :header-inset-level="1"
-              label="Level 2.2"
-            >
-              <q-item style="margin-left: 65px  !important;" active-class="q-item-no-link-highlighting">
-                <q-item-section>
-                  <q-item-label>Level 2.2.1</q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item style="margin-left: 65px  !important;" active-class="q-item-no-link-highlighting">
-                <q-item-section>
-                  <q-item-label>Level 2.2.2</q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-expansion-item>
-          </q-expansion-item>
+            <q-item-section avatar>
+              <q-icon name="fence" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Gate Pass</q-item-label>
+            </q-item-section>
+          </q-item>
         </q-expansion-item>
+
+        <q-expansion-item icon="build" label="Equipments">
+          <q-item
+            to="/Equipments"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="list" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Equipments List</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/EquipmentTransferSlip"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="engineering" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Equipments Transfer Slips</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddEquipmentTransferSlip"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="engineering" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Equipments Transfer Slip</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+        <q-expansion-item icon="commute" label="Reports">
+          <q-item
+            to="/RequisitionSlipLogsheet"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="garage" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Requisition Slip Logsheet</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/InventoryReport"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="inventory" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Inventory Report</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/VehicleHistory"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="local_shipping" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Vehicle History</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/EquipmentHistory"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="plumbing" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Equipment History</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+
+        <q-expansion-item icon="task" label="Requisition Slip">
+          <q-item
+            to="/Requisition"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="list" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Requisitions</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddRequisitionPage"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="edit" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Requisition Slip</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+
+        <q-expansion-item icon="local_shipping" label="Delivery Receipts">
+          <q-item
+            to="/DeliveryReceipts"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="list" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Delivery Receipts List</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddDeliveryReceiptPage"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="edit" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Delivery Receipt</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+
+        <q-expansion-item icon="back_hand" label="Withdrawal Slip">
+          <q-item
+            to="/WithdrawalSlip"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="list" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Withdrawal Slip List</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddWithdrawalSlipPage"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="edit" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Withdrawal Slip</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+
+        <q-expansion-item icon="handshake" label="Receiving Report">
+          <q-item
+            to="/ReceivingReport"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="list" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Receiving Report List</q-item-label>
+            </q-item-section>
+          </q-item>
+          <q-item
+            to="/AddReceivingReportPage"
+            class="q-ml-xl"
+            active-class="q-item-no-link-highlighting"
+          >
+            <q-item-section avatar>
+              <q-icon color="white" name="edit" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label>Create Receiving Report</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-expansion-item>
+        <q-item
+          @click="loginstore.userLogout()"
+          :clickable="true"
+          active-class="q-item-no-link-highlighting"
+        >
+          <q-item-section avatar>
+            <q-icon name="logout" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Logout</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
     <q-page-container class="bg-grey-2">
-      <router-view/>
+      <router-view />
     </q-page-container>
   </q-layout>
 </template>
@@ -316,33 +337,35 @@
 <script>
 import Messages from "./Messages.vue";
 
-import {defineComponent, ref} from 'vue'
-import {useQuasar} from "quasar";
+import { defineComponent, ref } from "vue";
+import { useQuasar } from "quasar";
+import { useLoginStore } from "src/stores/login/index";
 
 export default defineComponent({
-  name: 'MainLayout',
+  name: "MainLayout",
 
   components: {
-    Messages
+    Messages,
   },
 
   setup() {
-    const leftDrawerOpen = ref(false)
-    const $q = useQuasar()
+    const loginstore = useLoginStore();
+    const leftDrawerOpen = ref(false);
+    const $q = useQuasar();
 
     return {
       $q,
       leftDrawerOpen,
       toggleLeftDrawer() {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  }
-})
+        leftDrawerOpen.value = !leftDrawerOpen.value;
+      },
+      loginstore,
+    };
+  },
+});
 </script>
 
 <style>
-
 /* FONT AWESOME GENERIC BEAT */
 .fa-beat {
   animation: fa-beat 5s ease infinite;
@@ -374,5 +397,4 @@ export default defineComponent({
     transform: scale(1);
   }
 }
-
 </style>

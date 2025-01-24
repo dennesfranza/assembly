@@ -1,62 +1,192 @@
 const routes = [
   {
-    path: '/',
-    component: () => import('layouts/MainLayout.vue'),
+    name: "MainLayout",
+    path: "/",
+    component: () => import("layouts/MainLayout.vue"),
     children: [
-      {path: '', component: () => import('pages/Dashboard.vue')},
-      {path: '/Dashboard2', component: () => import('pages/Dashboard2.vue')},
-      {path: '/Profile', component: () => import('pages/UserProfile.vue')},
-      {path: '/Map', component: () => import('pages/Map.vue')},
-      {path: '/MapMarker', component: () => import('pages/MapMarker.vue')},
-      {path: '/TreeTable', component: () => import('pages/TreeTable.vue')},
-      {path: '/StreetView', component: () => import('pages/StreetView.vue')},
-      {path: '/Cards', component: () => import('pages/Cards.vue')},
-      {path: '/Tables', component: () => import('pages/Tables.vue')},
-      {path: '/Contact', component: () => import('pages/Contact.vue')},
-      {path: '/Checkout', component: () => import('pages/Checkout.vue')},
-      {path: '/Ecommerce', component: () => import('pages/ProductCatalogues.vue')},
-      {path: '/Pagination', component: () => import('pages/Pagination.vue')},
-      {path: '/Charts', component: () => import('pages/Charts.vue')},
-      {path: '/Calendar', component: () => import('pages/Calendar.vue')},
-      {path: '/Directory', component: () => import('pages/Directory.vue')},
-      {path: '/Footer', component: () => import('pages/Footer.vue')},
-      {path: '/CardHeader', component: () => import('pages/CardHeader.vue')},
+      {
+        name: "Dashboard",
+        path: "/Dashboard",
+        component: () => import("pages/Dashboard.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "Dashboard2",
+        path: "/Dashboard2",
+        component: () => import("pages/Dashboard2.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "Consumables",
+        path: "/Consumables",
+        component: () => import("pages/consumables/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "Warehouse",
+        path: "/Warehouse",
+        component: () => import("pages/warehouse/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "GatePass",
+        path: "/GatePass",
+        component: () => import("pages/gatepass/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "AddGatePass",
+        path: "/AddGatePass",
+        component: () => import("pages/gatepass/AddGatepassPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "Equipments",
+        path: "/Equipments",
+        component: () => import("pages/equipments/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "EquipmentTransferSlip",
+        path: "/EquipmentTransferSlip",
+        component: () => import("pages/equipmenttransfer/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "AddEquipmentTransferSlip",
+        path: "/AddEquipmentTransferSlip",
+        component: () => import("pages/equipmenttransfer/AddEquipmentTransferPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      // Vehicle Management
+      {
+        name: "Vehicles",
+        path: "/Vehicles",
+        component: () => import("pages/vehicles/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "RequisitionSlipLogsheet",
+        path: "/RequisitionSlipLogsheet",
+        component: () => import("pages/reports/RequisitionSlipLogsheet.vue"),
+        meta: { requiresAuth: true },
+      },
+      // YBC Forms
+      {
+        name: "RequisitionForm",
+        path: "/RequisitionForm",
+        component: () => import("pages/ybc/RequisitionForm.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "ReceivingReport",
+        path: "/ReceivingReport",
+        component: () => import("pages/ybc/ReceivingReport.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "WithdrawalSlip2",
+        path: "/WithdrawalSlip2",
+        component: () => import("pages/ybc/WithdrawalSlip.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "StockCard",
+        path: "/StockCard",
+        component: () => import("pages/ybc/StockCard.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "ListToolsEquipmentFacilities",
+        path: "/ListToolsEquipmentFacilities",
+        component: () => import("pages/ybc/ListToolsEquipmentFacilities.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "DeliveryReceipt",
+        path: "/DeliveryReceipt",
+        component: () => import("pages/ybc/DeliveryReceipt.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "ToolsEquipmentTransferSlip",
+        path: "/ToolsEquipmentTransferSlip",
+        component: () => import("pages/ybc/ToolsEquipmentTransferSlip.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "InventoryReport",
+        path: "/InventoryReport",
+        component: () => import("pages/ybc/InventoryReport.vue"),
+        meta: { requiresAuth: true },
+      },
+      // {
+      //   name: "GatePass",
+      //   path: "/GatePass",
+      //   component: () => import("pages/ybc/GatePass.vue"),
+      //   meta: { requiresAuth: true },
+      // },
+      // Requisition
+      {
+        name: "Requisition",
+        path: "/Requisition",
+        component: () => import("pages/requisition/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "AddRequisitionPage",
+        path: "/AddRequisitionPage",
+        component: () => import("pages/requisition/AddRequisitionPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      // Delivery Receipts
+      {
+        name: "DeliveryReceipts",
+        path: "/DeliveryReceipts",
+        component: () => import("pages/deliveryreceipt/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "AddDeliveryReceiptPage",
+        path: "/AddDeliveryReceiptPage",
+        component: () =>
+          import("pages/deliveryreceipt/AddDeliveryReceiptPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      // Withdrawal Slip
+      {
+        name: "WithdrawalSlip",
+        path: "/WithdrawalSlip",
+        component: () => import("pages/withdrawal/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "AddWithdrawalSlipPage",
+        path: "/AddWithdrawalSlipPage",
+        component: () => import("pages/withdrawal/AddWithdrawalSlipPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      // Receiving Report
+      {
+        name: "ReceivingReport",
+        path: "/ReceivingReport",
+        component: () => import("pages/receiving/IndexPage.vue"),
+        meta: { requiresAuth: true },
+      },
+      {
+        name: "AddReceivingReportPage",
+        path: "/AddReceivingReportPage",
+        component: () => import("pages/receiving/AddReceivingReportPage.vue"),
+        meta: { requiresAuth: true },
+      },
+    ],
+    meta: { requiresAuth: true },
+  },
+  {
+    name: "Login",
+    path: "/Login",
+    component: () => import("pages/login/Login.vue"),
+  },
+];
 
-      // Not completed yet
-      // {path: '/Taskboard', component: () => import('pages/TaskBoard.vue')},
-    ]
-  },
-
-  // Always leave this as last one,
-  // but you can also remove it
-  {
-    path: '/:catchAll(.*)*',
-    component: () => import('pages/Error404.vue')
-  },
-  {
-    path: '/Mail',
-    component: () => import('layouts/Mail.vue')
-  },
-  {
-    path: '/Maintenance',
-    component: () => import('pages/Maintenance.vue')
-  },
-  {
-    path: '/Pricing',
-    component: () => import('pages/Pricing.vue')
-  },
-  {
-    path: '/Login-1',
-    component: () => import('pages/Login-1.vue')
-  },
-  {
-    path: '/Lock',
-    component: () => import('pages/LockScreen.vue')
-  },
-  {
-    path: '/Lock-2',
-    component: () => import('pages/LockScreen-2.vue')
-  }
-]
-
-export default routes
+export default routes;
