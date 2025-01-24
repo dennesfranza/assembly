@@ -27,36 +27,78 @@ import axios from "axios";
 import { LocalStorage } from "quasar";
 import baseUrl from "../config/index";
 
-let login_object = JSON.parse(LocalStorage.getItem("login"))
-
-console.log(login_object)
-
-let token =
-    login_object === null
-    ? "X"
-    : login_object.login.token;
-
-console.log(token)
-
+// Create an Axios instance with the base URL
 const axiosInstance = axios.create({
   baseURL: baseUrl.baseUrl,
   headers: {
     Accept: "*/*",
-    Authorization: `Bearer ${token}`,
   },
 });
 
+// Add a request interceptor to dynamically inject the token
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const loginObject = JSON.parse(LocalStorage.getItem("login"));
+    const token = loginObject?.login?.token || null;
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      delete config.headers.Authorization; // Remove the header if no token
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Add a response interceptor to handle 401 errors globally
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // Token is invalid or expired; handle it (e.g., redirect to login)
+      console.error("Unauthorized. Redirecting to login...");
+      window.location.href = "/login"; // Or use your router to navigate
+    }
+    return Promise.reject(error);
+  }
+);
+
+// Create a specialized instance for login (no token required)
 const axiosLogin = axios.create({
   baseURL: baseUrl.baseUrl,
 });
 
+// Create another instance for multipart form data requests
 const axiosFormPost = axios.create({
   baseURL: baseUrl.baseUrl,
   headers: {
     Accept: "*/*",
     "Content-Type": "multipart/form-data",
-    Authorization: `Bearer ${token}`,
   },
 });
 
+// Add the same request interceptor to axiosFormPost
+axiosFormPost.interceptors.request.use(
+  (config) => {
+    const loginObject = JSON.parse(LocalStorage.getItem("login"));
+    const token = loginObject?.login?.token || null;
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    } else {
+      delete config.headers.Authorization;
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export { axiosInstance, axiosLogin, axiosFormPost };
+
